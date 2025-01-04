@@ -1,0 +1,114 @@
+<!-- credits to @alcoolique -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>noirz.site</title>
+    <meta name="theme-color" content="#000001">
+    <link rel="stylesheet" href="public/users/css/cat.css">
+    <link rel="icon" href="public\src\img\1281904753252765717.png" type="image/x-icon">
+    <link rel="shortcut icon" href="public\src\img\1281904753252765717.png" type="image/x-icon"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<script src="snow.js"></script>
+<script src="effects.js"></script>
+<script src="effects2.js"></script>
+<script src="view.js"></script>
+<script src="members.js"></script>
+<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script>
+    
+<body>
+
+    <div id="overlay">
+        <button class="overlaybtn" onclick="removeOverlay()">𝖑𝖚𝖘𝖙</button>
+    </div>
+
+    <div id="members-toggle" onclick="toggleMembersList()" aria-expanded="false" aria-controls="members-list">
+        <i id="members-icon" class="fa fa-users"></i>
+    </div>
+    
+    <div id="members-list">
+        <div class="member">
+            <img src="./r2.wya.lol/noiravatar.jpg" alt="Avatar 1" class="avatar">
+            <span class="member-name" onclick="redirectToMember('Noir')">Noir</span>
+        </div>
+        <div class="member">
+            <img src="./r2.wya.lol/ngtavatar.png" alt="Avatar 2" class="avatar">
+            <span class="member-name" onclick="redirectToMember('Emmanuel')">Emmanuel</span>
+        </div>
+        <div class="member">
+            <img src="./r2.wya.lol/baresiavatar.jpg" alt="Avatar 3" class="avatar">
+            <span class="member-name" onclick="redirectToMember('Baresi')">Baresi</span>
+        </div>
+    </div>    
+    
+    <div id="user-page">
+
+        <video class="background" autoplay loop muted>
+            <source src="./r2.wya.lol/videowallpaper.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="main-container" id="mainDiv">
+
+            <div class="profile-container">
+                <img class="pp" src="./r2.wya.lol/baresiavatar.jpg" draggable="false">
+                <p class="username breathing" data-tooltip="uid: 3">Baresi</p>
+
+                <div class="badges-container">
+                    <div class="badges pic-badge" id="prem" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
+                    <div class="badges pic-badge" id="early "data-tooltip="early user" style="background-image: url('public/src/badges/early.png');"></div>
+                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');" bis_skin_checked="1"></div>
+                </div>
+
+                <div class="bio-container">
+                    <div class="bio typewriter"></div>
+                </div>
+                <div class="pre-container">
+                    <div class="pre">
+                        <div class="cropped">
+                            <img draggable="false" id="rpc">
+                        </div>
+                    </div>
+                </div>
+                <div class="links-container" id="linksDiv">           
+                    <div class="logo steam" id="steam" onclick="window.open('https://steamcommunity.com/id/acorda', '_blank');">
+                        <i class="fab fa-steam"></i>
+                    </div> 
+                    <div class="logo tiktok" id="tiktok" onclick="window.open('https://www.tiktok.com/@baresihvh', '_blank');">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="logo youtube" id="youtube" onclick="window.open('https://www.youtube.com/@baresitda', '_blank');">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="logo spotify" id="spotify" onclick="window.open('https://open.spotify.com/user/amsk3doprw8e2l9w2m343wkgo', '_blank');">
+                        <i class="fab fa-spotify"></i>
+                    </div>
+                    <div class="logo twitch" id="twitch" onclick="window.open('https://www.twitch.tv/3baresi', '_blank');">
+                        <i class="fab fa-twitch"></i>
+                    </div> 
+                </div>
+
+                <div class="linksline"></div>
+
+                <div class="views-container">
+                    <svg viewBox="0 0 24 24" width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0" style="margin-bottom: -3px;"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 14C3 9.02944 7.02944 5 12 5C16.9706 5 21 9.02944 21 14M17 14C17 16.7614 14.7614 19 12 19C9.23858 19 7 16.7614 7 14C7 11.2386 9.23858 9 12 9C14.7614 9 17 11.2386 17 14Z" stroke="#00691a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    <span id="view-count">666</span>
+                </div>
+            </div>
+
+        <div class="mutebutton">
+            <p id="mutetext" onclick="toggleMusic()"><i class="fas fa-volume-up"></i></p>
+        </div>
+
+    </div>
+
+    <audio id="backgroundsong" src="./r2.wya.lol/baresimusic.mp3" loop></audio>
+
+</body>
+
+</html>
+
