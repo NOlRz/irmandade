@@ -64,4 +64,28 @@ document.addEventListener("mousemove", (event) => {
     }
 });
 
+// Monitorar eventos para manter sincronização
+const videoElement = document.querySelector('.background');
+const audioElement = document.getElementById('backgroundsong');
 
+videoElement.addEventListener('play', () => {
+    audioElement.play();
+});
+
+videoElement.addEventListener('pause', () => {
+    audioElement.pause();
+});
+
+videoElement.addEventListener('ended', () => {
+    audioElement.pause();
+});
+
+// Captura o container principal e adiciona evento de clique com delegação
+document.getElementById('mainDiv').addEventListener('click', function(e) {
+    if (e.target && e.target.closest('.profile-container')) {
+        const site = e.target.closest('.profile-container').getAttribute('data-site');
+        if (site) {
+            window.location.href = site; // Redireciona para o site especificado
+        }
+    }
+});
