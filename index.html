@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Irmandade</title>
+    <meta name="theme-color" content="#000001">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="public/src/img/1281904753252765717.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<script src="snow.js"></script>
+<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script>    
+<body>
+
+    <div id="overlay">
+        <button class="overlaybtn" onclick="removeOverlay()">𝔗𝔯𝔬𝔭𝔞 𝔡𝔞 𝔞𝔫𝔤𝔬𝔩𝔞</button>
+    </div>
+
+    <div id="cursor-trail"></div>
+
+    <div id="user-page">
+
+        <video class="background" autoplay loop muted>
+            <source src="https://cdn.discordapp.com/attachments/1325142409226485860/1325142495214047332/OqmE1ph.mp4?ex=677ab69e&is=6779651e&hm=fef3c4c3ed5557416ecafa3c07b3686439c000b92e7ee7f56ce10fa66ce4f601" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+
+        <audio id="backgroundsong" src="https://cdn.discordapp.com/attachments/1325142409226485860/1325142503485079582/Fgv4iUN.mp3?ex=677ab6a0&is=67796520&hm=0e56736e648abe18c68f9b25755a9e3f6de467ce0575aa74927abe27a3375769" loop autoplay></audio>
+
+        <div class="main-container" id="mainDiv">
+
+            <!-- Primeiro perfil -->
+            <div class="profile-container" data-site="https://irmandade.cc/noir">
+                <img class="pp" src="./public/src/img/noiravatar.jpg" draggable="false">
+                <p class="username breathing" data-tooltip="uid: 1">Noir</p>
+
+                <div class="badges-container">
+                    <!-- Badges para o primeiro usuário -->
+                    <div class="badges pic-badge" id="prem1" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
+                    <div class="badges pic-badge" id="own" data-tooltip="site owner" style="background-image: url('public/src/badges/booster.png');"></div>
+                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                </div>
+
+                <div class="bio-container">
+                    <div class="bio typewriter">Best HvH player</div>
+                </div>
+            </div>
+
+            <!-- Segundo perfil -->
+            <div class="profile-container" data-site="https:/irmandade.cc/emmanuel">
+                <img class="pp" src="./public/src/img/ngt.png" draggable="false">
+                <p class="username breathing" data-tooltip="uid: 2">Emmanuel</p>
+
+                <div class="badges-container">
+                    <!-- Badges para o segundo usuário -->
+                    <div class="badges pic-badge" id="prem2" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
+                    <div class="badges pic-badge" id="early2" data-tooltip="early user" style="background-image: url('public/src/badges/early.png');"></div>
+                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                </div>
+
+                <div class="bio-container">
+                    <div class="bio typewriter">Biggest gay on the server</div>
+                </div>
+            </div>
+
+            <!-- Terceiro perfil -->
+            <div class="profile-container" data-site="https://irmandade.cc/baresi">
+                <img class="pp" src="./public/src/img/baresiavatar.jpg" draggable="false">
+                <p class="username breathing" data-tooltip="uid: 3">Baresi</p>
+
+                <div class="badges-container">
+                    <!-- Badges para o terceiro usuário -->
+                    <div class="badges pic-badge" id="prem3" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
+                    <div class="badges pic-badge" id="early3" data-tooltip="early user" style="background-image: url('public/src/badges/early.png');"></div>
+                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                </div>
+
+                <div class="bio-container">
+                    <div class="bio typewriter">Somente Higão</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="efeitos.js"></script>
+
+</body>
+
+</html>
