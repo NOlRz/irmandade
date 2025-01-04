@@ -15,11 +15,11 @@ function toggleMembersList() {
 function redirectToMember(memberName) {
     let url;
     if (memberName === 'Noir') {
-        url = 'https://irmandade.cc/noir';
+        url = 'https://irmandade.cc/noir/';
     } else if (memberName === 'Emmanuel') {
-        url = 'https://irmandade.cc/emmanuel';
+        url = 'https://irmandade.cc/emmanuel/';
     } else if (memberName === 'Baresi') {
-        url = 'https://irmandade.cc/baresi';
+        url = 'https://irmandade.cc/baresi/';
     }
 
     if (url) {
