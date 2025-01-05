@@ -62,7 +62,7 @@ typeWriter();
 
 document.addEventListener("DOMContentLoaded", function () {
 const elements = document.querySelectorAll('.typewriter');
-const texts = ["Higao pretao."];
+const texts = ["If your dreams don't scare you, they are not big enough."];
 const typingSpeed = 100;
 const pauseDuration = 1000;
 let currentIndex = 0;
