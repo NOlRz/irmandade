@@ -25,10 +25,9 @@
 
         <video class="background" autoplay loop muted>
             <source src="https://cdn.discordapp.com/attachments/1325142409226485860/1325142495214047332/OqmE1ph.mp4?ex=677ab69e&is=6779651e&hm=fef3c4c3ed5557416ecafa3c07b3686439c000b92e7ee7f56ce10fa66ce4f601" type="video/mp4">
-            Seu navegador não suporta a tag de vídeo.
+            Your browser does not support the video tag.
         </video>
 
-        <audio id="backgroundsong" src="https://cdn.discordapp.com/attachments/1325142409226485860/1325142503485079582/Fgv4iUN.mp3?ex=677ab6a0&is=67796520&hm=0e56736e648abe18c68f9b25755a9e3f6de467ce0575aa74927abe27a3375769" loop autoplay></audio>
 
         <div class="main-container" id="mainDiv">
 
@@ -50,7 +49,7 @@
             </div>
 
             <!-- Segundo perfil -->
-            <div class="profile-container" data-site="/emmanuel">
+            <div class="profile-container" data-site="https:/irmandade.cc/emmanuel">
                 <img class="pp" src="./public/src/img/ngt.png" draggable="false">
                 <p class="username breathing" data-tooltip="uid: 2">Emmanuel</p>
 
@@ -87,6 +86,34 @@
 
     </div>
 
+    <script>
+        // Script para ativar o vídeo e o som ao clicar no botão 'Close'
+        function removeOverlay() {
+            const overlay = document.getElementById('overlay');
+            const backgroundVideo = document.querySelector('.background');
+            const backgroundAudio = document.getElementById('backgroundsong');
+
+            overlay.style.opacity = 0;
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                backgroundVideo.play(); // Iniciar o vídeo
+                backgroundAudio.play(); // Iniciar o áudio
+                backgroundVideo.style.display = 'block'; // Garantindo que o vídeo seja exibido após remover o overlay
+            }, 500);
+        }
+
+        // Captura o container principal e adiciona evento de clique com delegação
+        document.getElementById('mainDiv').addEventListener('click', function(e) {
+            if (e.target && e.target.closest('.profile-container')) {
+                const site = e.target.closest('.profile-container').getAttribute('data-site');
+                if (site) {
+                    window.location.href = site; // Redireciona para o site especificado
+                }
+            }
+        });
+    </script>
+
+    <audio id="backgroundsong" src="https://cdn.discordapp.com/attachments/1325142409226485860/1325142503485079582/Fgv4iUN.mp3?ex=677ab6a0&is=67796520&hm=0e56736e648abe18c68f9b25755a9e3f6de467ce0575aa74927abe27a3375769" loop autoplay></audio>
     <script src="efeitos.js"></script>
 
 </body>
