@@ -13,12 +13,16 @@ function removeOverlay() {
         video.addEventListener('canplay', function() {
             video.style.display = 'block'; // Garanta que o vídeo esteja visível
             video.play(); // Iniciar o vídeo
+
+            // Iniciar o áudio após o vídeo estar completamente carregado
+            video.addEventListener('ended', function() {
+                audio.play(); // Iniciar o áudio apenas após o vídeo terminar
+            });
         });
 
-        // Iniciar o áudio após o vídeo estar pronto
-        audio.play(); // Iniciar o áudio
-    }, 2000); // Tempo suficiente para o overlay desaparecer antes de iniciar o vídeo e o áudio
+    }, 500); // Tempo suficiente para o overlay desaparecer antes de iniciar o vídeo e o áudio
 }
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
