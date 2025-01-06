@@ -10,7 +10,7 @@ function removeOverlay() {
                 backgroundAudio.play(); // Iniciar o áudio
                 backgroundVideo.style.display = 'block'; // Garantindo que o vídeo seja exibido após remover o overlay
             }, 500);
-        }
+ }
 
 
 document.addEventListener("DOMContentLoaded", () => {
