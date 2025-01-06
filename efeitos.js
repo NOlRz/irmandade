@@ -1,27 +1,16 @@
 function removeOverlay() {
     var overlay = document.getElementById('overlay');
     var userpage = document.getElementById('user-page');
-    var audio = document.getElementById('backgroundsong');
-    var video = document.getElementById('backgroundVideo'); // Certifique-se de que tem o ID correto do vídeo
+    var audio = document.getElementById('backgroundsong')
 
-    // Reduz a opacidade do overlay
     overlay.style.opacity = '0';
-    
-    // Mostra a página de usuário
     userpage.style.display = 'flex';
-    
-    // Configura o volume do áudio e reproduz
     audio.volume = 0.3;
     audio.play();
 
-    // Aguarda o vídeo começar antes de esconder o overlay
-    video.onplay = function() {
-        setTimeout(function() {
-            overlay.style.display = 'none';
-        }, 2000); // Aguarda 2 segundos após o início do vídeo
-    };
-
-    video.play(); // Toca o vídeo
+    setTimeout(function() { 
+        overlay.style.display = 'none';
+    }, 2000);
 }
 
 
