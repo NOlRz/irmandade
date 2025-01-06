@@ -3,6 +3,7 @@ function removeOverlay() {
     var userpage = document.getElementById('user-page');
     var video = document.querySelector('.background');
     var audio = document.getElementById('backgroundsong');
+    var closeButton = document.querySelector('.overlaybtn');
 
     overlay.style.opacity = '0'; // Reduzindo a opacidade gradualmente
     setTimeout(function() { 
@@ -10,12 +11,14 @@ function removeOverlay() {
         userpage.style.display = 'flex'; // Mostra o conteúdo principal
     }, 2000); // Tempo suficiente para o overlay desaparecer
 
-    setTimeout(function() {
+    // Evento de clique no botão do overlay
+    closeButton.addEventListener('click', function() {
         video.style.display = 'block'; // Garanta que o vídeo esteja visível
         video.play(); // Iniciar o vídeo
         audio.play(); // Iniciar o áudio
-    }, 2100); // Iniciar vídeo e áudio após overlay desaparecer completamente
+    });
 }
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
