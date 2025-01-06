@@ -1,22 +1,17 @@
 function removeOverlay() {
     var overlay = document.getElementById('overlay');
     var userpage = document.getElementById('user-page');
-    var audio = document.getElementById('backgroundsong');
-    var video = document.getElementById('backgroundVideo');
+    var audio = document.getElementById('backgroundsong')
 
-    // Verifica se o vídeo foi carregado completamente antes de continuar
-    video.onloadeddata = function() {
-        overlay.style.opacity = '0';
-        userpage.style.display = 'flex';
-        audio.volume = 0.3;
-        audio.play();
+    overlay.style.opacity = '0';
+    userpage.style.display = 'flex';
+    audio.volume = 0.3;
+    audio.play();
 
-        setTimeout(function() { 
-            overlay.style.display = 'none';
-        }, 1000); // Reduzindo o tempo para 1 segundo
-    };
+    setTimeout(function() { 
+        overlay.style.display = 'none';
+    }, 2000);
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const prefix = "⠐ ";
