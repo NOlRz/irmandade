@@ -2,11 +2,13 @@ function removeOverlay() {
     var overlay = document.getElementById('overlay');
     var userpage = document.getElementById('user-page');
     var audio = document.getElementById('backgroundsong')
+    var video = document.getElementById('backgroundvideo')
 
     overlay.style.opacity = '0';
     userpage.style.display = 'flex';
     audio.volume = 0.3;
     audio.play();
+    video.play();
 
     setTimeout(function() { 
         overlay.style.display = 'none';
