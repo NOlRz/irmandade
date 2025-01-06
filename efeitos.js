@@ -1,25 +1,17 @@
 function removeOverlay() {
     var overlay = document.getElementById('overlay');
     var userpage = document.getElementById('user-page');
-    var video = document.querySelector('.background');
-    var audio = document.getElementById('backgroundsong');
-    var closeButton = document.querySelector('.overlaybtn');
+    var audio = document.getElementById('backgroundsong')
 
-    overlay.style.opacity = '0'; // Reduzindo a opacidade gradualmente
+    overlay.style.opacity = '0';
+    userpage.style.display = 'flex';
+    audio.volume = 0.3;
+    audio.play();
+
     setTimeout(function() { 
-        overlay.style.display = 'none'; // Garanta que o overlay desapareça completamente
-        userpage.style.display = 'flex'; // Mostra o conteúdo principal
-    }, 2000); // Tempo suficiente para o overlay desaparecer
-
-    // Evento de clique no botão do overlay
-    closeButton.addEventListener('click', function() {
-        video.style.display = 'block'; // Garanta que o vídeo esteja visível
-        video.play(); // Iniciar o vídeo
-        audio.play(); // Iniciar o áudio
-    });
+        overlay.style.display = 'none';
+    }, 2000);
 }
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const prefix = "⠐ ";
@@ -71,5 +63,19 @@ document.addEventListener("mousemove", (event) => {
     }
 });
 
+// Monitorar eventos para manter sincronização
+const videoElement = document.querySelector('.background');
+const audioElement = document.getElementById('backgroundsong');
 
+videoElement.addEventListener('play', () => {
+    audioElement.play();
+});
+
+videoElement.addEventListener('pause', () => {
+    audioElement.pause();
+});
+
+videoElement.addEventListener('ended', () => {
+    audioElement.pause();
+});
 
