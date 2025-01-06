@@ -1,28 +1,17 @@
 function removeOverlay() {
     var overlay = document.getElementById('overlay');
     var userpage = document.getElementById('user-page');
-    var video = document.querySelector('.background');
-    var audio = document.getElementById('backgroundsong');
+    var audio = document.getElementById('backgroundsong')
 
     overlay.style.opacity = '0';
+    userpage.style.display = 'flex';
+    audio.volume = 0.3;
+    audio.play();
+
     setTimeout(function() { 
-        overlay.style.display = 'none'; // Garanta que o overlay desapareça completamente
-        userpage.style.display = 'flex'; // Mostra o conteúdo principal
-
-        // Aguarde até que o vídeo esteja pronto para tocar
-        video.addEventListener('canplay', function() {
-            video.style.display = 'block'; // Garanta que o vídeo esteja visível
-            video.play(); // Iniciar o vídeo
-
-            // Iniciar o áudio após o vídeo estar completamente carregado
-            video.addEventListener('ended', function() {
-                audio.play(); // Iniciar o áudio apenas após o vídeo terminar
-            });
-        });
-
-    }, 500); // Tempo suficiente para o overlay desaparecer antes de iniciar o vídeo e o áudio
+        overlay.style.display = 'none';
+    }, 2000);
 }
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -74,3 +63,30 @@ document.addEventListener("mousemove", (event) => {
         }, 600); // Tempo correspondente à duração da animação
     }
 });
+
+// Monitorar eventos para manter sincronização
+const videoElement = document.querySelector('.background');
+const audioElement = document.getElementById('backgroundsong');
+
+videoElement.addEventListener('play', () => {
+    audioElement.play();
+});
+
+videoElement.addEventListener('pause', () => {
+    audioElement.pause();
+});
+
+videoElement.addEventListener('ended', () => {
+    audioElement.pause();
+});
+
+// Captura o container principal e adiciona evento de clique com delegação
+document.getElementById('mainDiv').addEventListener('click', function(e) {
+    if (e.target && e.target.closest('.profile-container')) {
+        const site = e.target.closest('.profile-container').getAttribute('data-site');
+        if (site) {
+            window.location.href = site; // Redireciona para o site especificado
+        }
+    }
+});
+
