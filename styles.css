@@ -543,3 +543,83 @@ canvas {
         opacity: 0;
     }
 }
+
+/* volume */
+
+#volume-control {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none; 
+}
+  
+  
+#volume-control:hover {
+    background: rgba(50, 50, 50, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+  
+ 
+#volume-icon {
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+  
+#volume-icon:hover {
+    color: #ccc;
+}
+  
+
+#volume-slider {
+    width: 0;
+    height: 4px;
+    border-radius: 2px;
+    background: #aaa;
+    outline: none;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    appearance: none;
+}
+  
+
+#volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+  
+#volume-slider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+  
+#volume-control:hover #volume-slider {
+    width: 100px;
+    opacity: 1;
+}
+
+#volume-control.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+  
