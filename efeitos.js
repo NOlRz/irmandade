@@ -1,17 +1,16 @@
 function removeOverlay() {
-    var overlay = document.getElementById('overlay');
-    var userpage = document.getElementById('user-page');
-    var audio = document.getElementById('backgroundsong')
+    const overlay = document.getElementById('overlay');
+    const backgroundVideo = document.querySelector('.background');
+    const backgroundAudio = document.getElementById('backgroundsong');
 
-    overlay.style.opacity = '0';
-    userpage.style.display = 'flex';
-    audio.volume = 0.3;
-    audio.play();
-
-    setTimeout(function() { 
+    overlay.style.opacity = 0;
+    setTimeout(() => {
         overlay.style.display = 'none';
-    }, 2000);
+        backgroundVideo.play(); // Iniciar o vídeo
+        backgroundAudio.play(); // Iniciar o áudio
+    }, 500); // Tempo adequado para esperar o overlay ser removido antes de iniciar o vídeo e áudio
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const prefix = "⠐ ";
