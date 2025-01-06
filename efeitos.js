@@ -63,21 +63,3 @@ document.addEventListener("mousemove", (event) => {
         }, 600); // Tempo correspondente à duração da animação
     }
 });
-
-// Monitorar eventos para manter sincronização
-function removeOverlay() {
-    const overlay = document.getElementById('overlay');
-    const backgroundVideo = document.querySelector('.background');
-    const backgroundAudio = document.getElementById('backgroundsong');
-
-    overlay.style.opacity = 0;
-    setTimeout(() => {
-        overlay.style.display = 'none';
-        
-        backgroundAudio.play(); // Iniciar o áudio primeiro
-        backgroundVideo.style.display = 'block'; // Garantindo que o vídeo seja exibido
-        backgroundVideo.play(); // Iniciar o vídeo após o áudio
-    }, 500); // Pequeno atraso para remover o overlay e começar a tocar
-}
-
-
