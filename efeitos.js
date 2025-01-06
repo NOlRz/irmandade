@@ -63,3 +63,21 @@ document.addEventListener("mousemove", (event) => {
         }, 600); // Tempo correspondente à duração da animação
     }
 });
+
+
+// tentar arrumar a desync
+function removeOverlay() {
+    const overlay = document.getElementById('overlay');
+    const backgroundVideo = document.querySelector('.background');
+    const backgroundAudio = document.getElementById('backgroundsong');
+
+    overlay.style.opacity = 0;
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        backgroundAudio.play(); // Iniciar o áudio primeiro
+        backgroundAudio.oncanplaythrough = () => {
+            backgroundVideo.play(); // Iniciar o vídeo após o áudio
+            backgroundVideo.style.display = 'block'; // Garantindo que o vídeo seja exibido
+        };
+    }, 500); // Pequeno atraso para remover o overlay e começar a tocar
+}
