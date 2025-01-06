@@ -3,12 +3,14 @@ function removeOverlay() {
     var userpage = document.getElementById('user-page');
     var audio = document.getElementById('backgroundsong')
     var video = document.getElementById('backgroundvideo')
+    var volumeControl = document.getElementById('volume-control');
 
     overlay.style.opacity = '0';
     userpage.style.display = 'flex';
     audio.volume = 0.3;
     audio.play();
     video.play();
+    volumeControl.classList.add('visible');
 
     setTimeout(function() { 
         overlay.style.display = 'none';
@@ -91,5 +93,33 @@ document.getElementById('mainDiv').addEventListener('click', function(e) {
     }
 });
 
+// volume
 
+const audio = document.getElementById('backgroundsong');
+const volumeSlider = document.getElementById('volume-slider');
+const volumeIcon = document.getElementById('volume-icon');
 
+audio.volume = 0.5;
+updateVolumeIcon(audio.volume);
+
+volumeSlider.addEventListener('input', (event) => {
+  const volume = event.target.value / 100;
+  audio.volume = volume;
+  audio.muted = false;
+  updateVolumeIcon(volume);
+});
+
+volumeIcon.addEventListener('click', () => {
+  audio.muted = !audio.muted;
+  updateVolumeIcon(audio.muted ? 0 : audio.volume);
+});
+
+function updateVolumeIcon(volume) {
+  if (volume === 0 || audio.muted) {
+    volumeIcon.className = 'fas fa-volume-mute';
+  } else if (volume < 0.5) {
+    volumeIcon.className = 'fas fa-volume-down';
+  } else {
+    volumeIcon.className = 'fas fa-volume-up';
+  }
+}
