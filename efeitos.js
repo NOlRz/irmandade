@@ -64,20 +64,29 @@ document.addEventListener("mousemove", (event) => {
     }
 });
 
+// Monitorar eventos para manter sincronização
+const videoElement = document.querySelector('.background');
+const audioElement = document.getElementById('backgroundsong');
 
-// tentar arrumar a desync
-function removeOverlay() {
-    const overlay = document.getElementById('overlay');
-    const backgroundVideo = document.querySelector('.background');
-    const backgroundAudio = document.getElementById('backgroundsong');
+videoElement.addEventListener('play', () => {
+    audioElement.play();
+});
 
-    overlay.style.opacity = 0;
-    setTimeout(() => {
-        overlay.style.display = 'none';
-        backgroundAudio.play(); // Iniciar o áudio primeiro
-        backgroundAudio.oncanplaythrough = () => {
-            backgroundVideo.play(); // Iniciar o vídeo após o áudio
-            backgroundVideo.style.display = 'block'; // Garantindo que o vídeo seja exibido
-        };
-    }, 500); // Pequeno atraso para remover o overlay e começar a tocar
-}
+videoElement.addEventListener('pause', () => {
+    audioElement.pause();
+});
+
+videoElement.addEventListener('ended', () => {
+    audioElement.pause();
+});
+
+// Captura o container principal e adiciona evento de clique com delegação
+document.getElementById('mainDiv').addEventListener('click', function(e) {
+    if (e.target && e.target.closest('.profile-container')) {
+        const site = e.target.closest('.profile-container').getAttribute('data-site');
+        if (site) {
+            window.location.href = site; // Redireciona para o site especificado
+        }
+    }
+});
+
