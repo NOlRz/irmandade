@@ -8,8 +8,14 @@ function removeOverlay() {
     setTimeout(function() { 
         overlay.style.display = 'none'; // Garanta que o overlay desapareça completamente
         userpage.style.display = 'flex'; // Mostra o conteúdo principal
-        video.style.display = 'block'; // Garanta que o vídeo esteja visível
-        video.play(); // Iniciar o vídeo
+
+        // Aguarde até que o vídeo esteja pronto para tocar
+        video.addEventListener('canplay', function() {
+            video.style.display = 'block'; // Garanta que o vídeo esteja visível
+            video.play(); // Iniciar o vídeo
+        });
+
+        // Iniciar o áudio após o vídeo estar pronto
         audio.play(); // Iniciar o áudio
     }, 2000); // Tempo suficiente para o overlay desaparecer antes de iniciar o vídeo e o áudio
 }
