@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>YourSiteName</title>
+    <meta name="theme-color" content="#000001">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="public\src\img\1281904753252765717.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+    <div id="overlay">
+        <button class="overlaybtn" onclick="removeOverlay()">Close</button>
+    </div>
+
+    <div id="user-page">
+
+        <video class="background" autoplay loop muted>
+            <source src="public/videos/background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="main-container" id="mainDiv">
+
+            <div class="profile-container">
+                <img class="pp" src="public/img/avatar.jpg" draggable="false">
+                <p class="username breathing" data-tooltip="uid: 1">Username</p>
+
+                <div class="badges-container">
+                    <!-- Example badges -->
+                    <div class="badges pic-badge" id="prem" data-tooltip="premium user" style="background-image: url('public/img/badges/premium.png');"></div>
+                    <div class="badges pic-badge" id="early" data-tooltip="early user" style="background-image: url('public/img/badges/early.png');"></div>
+                </div>
+
+                <div class="bio-container">
+                    <div class="bio typewriter">Your bio text here</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <audio id="backgroundsong" src="public/audio/background.mp3" loop></audio>
+
+    <script src="efeitos.js"></script> <!-- Incluindo o novo script -->
+
+</body>
+
+</html>
