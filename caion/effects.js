@@ -36,7 +36,7 @@ function toggleMusic() {
 
 document.addEventListener("DOMContentLoaded", () => {
     const prefix = "⠐ ";
-    const titleText = "Baresi";
+    const titleText = "Caion";
     let index = 0;
     let isDeleting = false;
 
