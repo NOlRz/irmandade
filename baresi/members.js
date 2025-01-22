@@ -20,7 +20,7 @@ function redirectToMember(memberName) {
         url = 'https://irmandade.cc/emmanuel/';
     } else if (memberName === 'Baresi') {
         url = 'https://irmandade.cc/baresi/';
-    } else if (memberName === 'Baresi') {
+    } else if (memberName === 'Caion') {
         url = 'https://irmandade.cc/caion/';
     }
 
