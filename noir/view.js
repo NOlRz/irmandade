@@ -1,3 +1,4 @@
+/* Are you seriously going to force me to create a backend? RETARD */
     const blobId = "1330722938583965696";
     const apiUrl = `https://jsonblob.com/api/jsonBlob/${blobId}`;
 
