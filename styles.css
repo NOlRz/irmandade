@@ -1,0 +1,625 @@
+@font-face {
+    font-family: 'Bold';
+    src: url('../../src/fonts/mainfont.ttf');
+}
+
+@font-face {
+    font-family: 'Light';
+    src: url('../../src/fonts/miscfont.ttf');
+}
+
+.highlight {
+    color: #C18be0;
+    text-shadow:
+    0 0 42px #C18be0,
+    0 0 82px #C18be0;
+}
+
+/* font setup */
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* fadeIn & fadeOut setup */
+
+#overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    background-color: ##00000054;
+}
+
+.overlaybtn {
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    border: transparent;
+    font-family: 'Light';
+    font-size: 6vh;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #fff,
+    0 0 82px #fff;
+}
+
+/* overlay setup */
+
+body {
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* basic setup */
+
+#user-page {
+    display: none; /* none = click to enter | flex = no click to enter */
+    animation: fadeIn 0.5s ease-in-out; /* fadeIn 0.5s ease-in-out = click to enter | none = no click to enter */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 98vh;
+}
+
+/* will show when clicking on overlay */
+
+.background {
+    z-index: -1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    object-fit: cover; /*- |si cover n'est pas actif, sur tel ca va resize a la taille de l'ecran, donc c'est mieux de le laisser perma | optional, ca devrait etre un choix de faire en sorte que si y'a des black bar (imaginons un background en 4/3), qu'on force la video a cover toute la page sans resize (donc cet exemple on perdra un peu du haut et du bas de la video)*/
+}
+
+/* background image / gif / video setup */
+
+.profile-container {
+    cursor: pointer; /* Muda o cursor para uma mão ao passar sobre os perfis */
+}
+
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Inicia centralizado e expande para os lados */
+    gap: 20px; /* Espaço entre os containers */
+    width: 100%; /* Pode ser ajustado conforme necessário */
+    padding: 20px;
+    overflow: visible;
+}
+
+.profile-container {
+    flex: 1; /* Faz com que cada profile-container ocupe uma parte igual de espaço */
+    border-radius: 25px;
+    background-color: rgba(17, 17, 17, 0.65);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Aumentando o box-shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2vh;
+    max-width: 300px; /* Ajuste conforme o tamanho desejado */
+    padding: 20px;
+}
+
+.profile-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+}
+
+.pp {
+    object-fit: cover;
+    height: 150px; /* Aumentando o tamanho da imagem do perfil */
+    width: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #000; /* Aumentando o box-shadow */
+}
+
+.username {
+    font-family: 'Bold';
+    font-size: 24px; /* Aumentando o tamanho da fonte */
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    filter: drop-shadow(#C18be0 1px 0 7px)!important;
+}
+
+.badges-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px; /* Aumentando o espaçamento entre badges */
+    background-color: #00000070;
+    border-radius: 50px;
+    padding: 16px 35px; /* Ajuste conforme necessário */
+    margin-bottom: 2vh;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Aumentando o box-shadow */
+}
+
+.bio-container {
+    text-align: center;
+    width: 90%; /* Ajuste conforme necessário */
+    padding: 20px; /* Ajuste conforme necessário */
+    background-color: rgba(22, 22, 22, 0.178);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Aumentando o box-shadow */
+    border-radius: 15px;
+    backdrop-filter: blur(3px);
+    max-width: 100%;
+    overflow-wrap: break-word;
+    margin-bottom: 2vh;
+}
+
+.bio {
+    font-family: 'Light';
+    font-size: 2.5vh; /* Aumentando o tamanho da fonte */
+    color: #fff;
+    line-height: 1.5;
+    text-align: center;
+    filter: drop-shadow(#ffffff 1px 0 7px)!important;
+}
+
+
+
+/* pp display setup */
+
+.username-container {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+/* Aplicando o sparkle.gif nos usernames */
+.username::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./public/src/img/white-lightning.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1; /* Mantém o gif atrás do texto */
+    opacity: 0.8; /* Ajuste conforme necessário */
+    pointer-events: none; /* Evita interferir na interação com o username */
+}
+
+.username {
+    position: relative;
+    font-family: 'Bold';
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 0 0 7px #C18be0;
+}
+
+
+/* user uid */
+
+.username {
+    font-family: 'Bold';
+    font-size: 22px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    filter: drop-shadow(#C18be0 1px 0 7px)!important;
+}
+
+.username::after {
+    content: attr(data-tooltip);
+    font-family: 'Light';
+    font-size: 17px;
+    position: absolute;
+    bottom: 3vh;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    padding: 5px;
+    background-color: rgba(17, 17, 17, 0.6);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    color: #fff;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    -webkit-text-fill-color: #fff;
+}
+
+.username:hover::after {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 1;
+}
+
+/* username display setup */
+
+.badges-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: default;
+    position: relative;
+    gap: 15px;
+    background-color: #00000070;
+    border-radius: 50px;
+    padding: 14px 30px;
+    margin-bottom: 2vh;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: default;
+    position: relative;
+}
+
+.badges {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    background-size: 100%;
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(#C18be0 1px 0 7px)!important;
+}
+
+.badges::after {
+    content: attr(data-tooltip);
+    font-family: 'Light';
+    position: absolute;
+    bottom: 3vh;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    padding: 6px;
+    background-color: rgba(17, 17, 17, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    color: #fff;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.badges:hover::after {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 1;
+}
+
+/* badge display setup */
+
+.bio-container {
+    text-align: center;
+    width: 80%;
+    padding: 15px;
+    background-color: rgba(22, 22, 22, 0.178);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    backdrop-filter: blur(3px);
+    max-width: 100%;
+    overflow-wrap: break-word;
+    margin-bottom: 1.5vh;
+    min-height: 29px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.bio {
+    font-family: 'Light';
+    font-size: 2vh;
+    color: #fff;
+    line-height: 1.5;
+    text-align: center;
+    filter: drop-shadow(#ffffff 1px 0 7px)!important;
+}
+
+/* bio setup */
+
+.bioline {
+    background-color: rgba(10, 10, 10, 0.61);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    height: 2px;
+    border-radius: 10px;
+}
+
+
+/* views container setup */
+
+.pic-badge {
+    background-size: 100%;
+    background-repeat: no-repeat; 
+    background-position: center center;
+}
+
+/* breath effect setup */
+
+.pulsing {
+    color: #fff;
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite alternate;
+    backface-visibility: hidden;
+}
+    
+@keyframes pulse {
+    from {
+    text-shadow: 0 0 10px #fff,
+           0 0 20px #fff,
+           0 0 30px #fff,
+           0 0 40px #C18be0,
+    }
+    to {
+    text-shadow: 0 0 5px #fff,
+           0 0 10px #fff,
+           0 0 15px #fff,
+           0 0 20px #C18be0,
+           0 0 35px #C18be0,
+           0 0 40px #C18be0;
+    }
+}
+
+/* pulsing effect setup */
+
+.sparkles::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../r2.wya.lol/sparkle.gif');
+    z-index: 1;
+    pointer-events: none;
+}
+
+.sparkles {
+    position: relative;
+    z-index: 1;
+}
+
+/* sparkles effect setup */
+
+.leaves::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../r2.wya.lol/leaves1.gif');
+    background-size: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.leaves {
+    position: relative;
+    z-index: 1;
+}
+
+/* leaves effect setup */
+
+.sakura::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../r2.wya.lol/sakura2.gif');
+    background-size: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.sakura {
+    position: relative;
+    z-index: 1;
+}
+
+/* sakura effect setup */
+
+.comet::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../r2.wya.lol/blue-comet.gif');
+    background-size: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.comet {
+    position: relative;
+    z-index: 1;
+}
+
+/* comet effect setup */
+
+.thunder::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../r2.wya.lol/white-lightning.gif');
+    background-size: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.thunder {
+    position: relative;
+    z-index: 1;
+}
+
+/* thunder effect setup */
+
+canvas {
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: -1;
+}
+
+/* extras */
+/* Main div */
+#mainDiv{
+    width:375px;
+   }
+   
+   /* Image */
+   #mainDiv .bio img{
+    padding-top:14px;
+   }
+   
+   @media (max-width:576px){
+   
+    /* Main div */
+    #mainDiv{
+     width:275px;
+    }
+    .pre-container img {
+        transform: scale(0.725); 
+        height: auto; 
+        display: block;
+    }
+}
+/* pre div */
+.pre-container {
+    text-align: center;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-wrap: break-word;
+}
+
+.pre {
+    font-family: 'Light';
+    font-size: 2vh;
+    color: #fff;
+    line-height: 1.5;
+}
+
+/* cursor */
+
+.cursor-explosion {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #C18be0;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: explode 0.6s ease forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) translate(var(--dx), var(--dy));
+        opacity: 0;
+    }
+}
+
+/* volume */
+
+#volume-control {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none; 
+}
+  
+  
+#volume-control:hover {
+    background: rgba(50, 50, 50, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+  
+ 
+#volume-icon {
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+  
+#volume-icon:hover {
+    color: #ccc;
+}
+  
+
+#volume-slider {
+    width: 0;
+    height: 4px;
+    border-radius: 2px;
+    background: #aaa;
+    outline: none;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    appearance: none;
+}
+  
+
+#volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+  
+#volume-slider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+  
+#volume-control:hover #volume-slider {
+    width: 100px;
+    opacity: 1;
+}
+
+#volume-control.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+  
