@@ -27,12 +27,46 @@ function removeOverlay() {
 function toggleMusic() {
     const mutebtn = document.getElementById("mutetext");
     const audio = document.getElementById("backgroundsong");
+    const volumeSlider = document.getElementById("volumeSlider");
 
     if (audio) {
         audio.muted = !audio.muted;
-        mutebtn.innerHTML = `<i class="${audio.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up'}"></i>`;
+        updateVolumeIcon();
     }
 }
+
+function updateVolumeIcon() {
+    const audio = document.getElementById("backgroundsong");
+    const mutebtn = document.getElementById("mutetext");
+    
+    if (audio.muted || audio.volume === 0) {
+        mutebtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    } else if (audio.volume < 0.5) {
+        mutebtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+    } else {
+        mutebtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
+}
+
+// Inicializar controle de volume quando o DOM carregar
+document.addEventListener('DOMContentLoaded', function() {
+    const volumeSlider = document.getElementById('volumeSlider');
+    const audio = document.getElementById('backgroundsong');
+    
+    if (volumeSlider && audio) {
+        // Atualizar volume quando o slider mudar
+        volumeSlider.addEventListener('input', function() {
+            audio.volume = this.value / 100;
+            if (audio.muted && this.value > 0) {
+                audio.muted = false;
+            }
+            updateVolumeIcon();
+        });
+        
+        // Sincronizar slider com volume inicial
+        volumeSlider.value = audio.volume * 100;
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const prefix = "⠐ ";

@@ -6,11 +6,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Emmanuel - Perfil oficial | Irmandade T.D.A">
+    <meta name="keywords" content="emmanuel, irmandade, tda, perfil">
+    <meta name="author" content="Emmanuel">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Emmanuel - noirz.site">
+    <meta property="og:description" content="Perfil oficial de Emmanuel">
+    
+    <!-- Mobile Optimization -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <title>noirz.site</title>
     <meta name="theme-color" content="#000001">
     <link rel="stylesheet" href="public/users/css/cat.css">
+    <link rel="stylesheet" href="public/users/css/responsive.css">
     <link rel="icon" href="public\src\img\1281904753252765717.png" type="image/x-icon">
-    <link rel="shortcut icon" href="public\src\img\1281904753252765717.png" type="image/x-icon"> 
+    <link rel="shortcut icon" href="public\src\img\1281904753252765717.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="public\src\img\1281904753252765717.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <script src="snow.js"></script>
@@ -19,12 +37,21 @@
 <script src="view.js"></script>
 <script src="members.js"></script>
 <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script>
-    
+
 <body>
 
     <div id="overlay">
         <button class="overlaybtn" onclick="removeOverlay()">𝖑𝖚𝖘𝖙</button>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script>
+    <script>
+        const devtool = new DisableDevtool();
+        devtool.on('detect', () => {
+            alert('Ferramentas de desenvolvedor detectadas!');
+            // Você pode redirecionar, bloquear ou fazer outras ações aqui.
+        });
+    </script>
 
     <div id="members-toggle" onclick="toggleMembersList()" aria-expanded="false" aria-controls="members-list">
         <i id="members-icon" class="fa fa-users"></i>
@@ -104,7 +131,8 @@
                 </div>
             </div>
 
-        <div class="mutebutton">
+        <div class="volume-control">
+            <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
             <p id="mutetext" onclick="toggleMusic()"><i class="fas fa-volume-up"></i></p>
         </div>
 
