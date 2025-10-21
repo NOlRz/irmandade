@@ -1,0 +1,599 @@
+/* ==========================================
+   CSS RESPONSIVO PARA PERFIL NOIR
+   ========================================== */
+
+/* Variáveis CSS para fácil customização */
+:root {
+    --primary-color: #C18be0;
+    --primary-glow: rgba(193, 139, 224, 0.3);
+    --bg-dark: rgba(17, 17, 17, 0.75);
+}
+
+/* ==========================================
+   TABLETS E TELAS MÉDIAS (768px - 1024px)
+   ========================================== */
+@media (max-width: 1024px) {
+    .main-container {
+        width: 290px;
+        padding: 22px 18px;
+    }
+
+    .pp {
+        height: 115px;
+        width: 115px;
+    }
+
+    .username {
+        font-size: 20px;
+    }
+
+    .badges {
+        width: 21px;
+        height: 21px;
+    }
+
+    .badges-container {
+        gap: 14px;
+        padding: 13px 28px;
+    }
+
+    .logo {
+        height: 58px;
+        width: 58px;
+    }
+
+    #steam, #github, #youtube, #apple-music, #twitch {
+        font-size: 26px;
+    }
+
+    .bio {
+        font-size: 1.9vh;
+    }
+}
+
+/* ==========================================
+   SMARTPHONES LANDSCAPE (576px - 768px)
+   ========================================== */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #user-page {
+        min-height: auto;
+        padding: 20px 0;
+    }
+
+    .main-container {
+        width: 280px;
+        max-width: 95%;
+        padding: 25px 20px;
+    }
+
+    .pp {
+        height: 110px;
+        width: 110px;
+    }
+
+    .username {
+        font-size: 20px;
+        margin-top: 1.5vh;
+    }
+
+    .badges {
+        width: 20px;
+        height: 20px;
+    }
+
+    .badges-container {
+        gap: 14px;
+        padding: 12px 25px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .bio-container {
+        width: 90%;
+        padding: 16px;
+    }
+
+    .bio {
+        font-size: 1.8vh;
+    }
+
+    .links-container {
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .logo {
+        height: 60px;
+        width: 60px;
+    }
+
+    #steam, #github, #youtube, #apple-music, #twitch {
+        font-size: 26px;
+    }
+
+    /* Membro toggle para mobile */
+    #members-toggle {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    #members-icon {
+        font-size: 20px;
+    }
+
+    #members-list {
+        width: 220px;
+        bottom: 70px;
+        right: 15px;
+    }
+
+    /* Volume control */
+    .volume-control {
+        right: 1.5vh;
+        bottom: 1.5vh;
+    }
+
+    #mutetext {
+        font-size: 16px;
+        padding: 5px;
+    }
+    
+    .volume-control:hover .volume-slider {
+        width: 70px;
+    }
+
+    /* Overlay button */
+    .overlaybtn {
+        font-size: 4.5vh;
+        padding: 15px 30px;
+    }
+
+    /* Tooltips ajustados */
+    .username::after,
+    .badges::after {
+        font-size: 14px;
+        padding: 4px 8px;
+        bottom: 2.5vh;
+    }
+
+    /* Views container */
+    .views-container {
+        font-size: 18px;
+        margin-top: 1.5vh;
+    }
+
+    .views-container svg {
+        height: 22px;
+        width: 22px;
+    }
+}
+
+/* ==========================================
+   SMARTPHONES PORTRAIT (< 576px)
+   ========================================== */
+@media (max-width: 576px) {
+    .main-container {
+        width: 260px;
+        max-width: 90%;
+        padding: 25px 18px;
+    }
+
+    .pp {
+        height: 100px;
+        width: 100px;
+    }
+
+    .username {
+        font-size: 19px;
+        margin-top: 1.5vh;
+        margin-bottom: 1vh;
+    }
+
+    .badges {
+        width: 19px;
+        height: 19px;
+    }
+
+    .badges-container {
+        gap: 12px;
+        padding: 12px 22px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .bio-container {
+        width: 92%;
+        padding: 15px;
+    }
+
+    .bio {
+        font-size: 1.7vh;
+    }
+
+    .links-container {
+        gap: 6px;
+        padding: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .logo {
+        height: 55px;
+        width: 55px;
+    }
+
+    #steam, #github, #youtube, #apple-music, #twitch {
+        font-size: 24px;
+    }
+
+    .linksline {
+        width: 85%;
+    }
+
+    /* Pre container para RPC */
+    .pre-container {
+        padding: 12px 10px;
+    }
+
+    .pre-container img {
+        transform: scale(0.8);
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Member list */
+    #members-toggle {
+        width: 42px;
+        height: 42px;
+        bottom: 12px;
+        right: 12px;
+    }
+
+    #members-icon {
+        font-size: 18px;
+    }
+
+    #members-list {
+        width: 200px;
+        bottom: 65px;
+        right: 12px;
+    }
+
+    .member {
+        padding: 8px;
+    }
+
+    .avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .member-name {
+        font-size: 13px;
+    }
+
+    /* Volume control */
+    .volume-control {
+        right: 1vh;
+        bottom: 1vh;
+    }
+
+    #mutetext {
+        font-size: 15px;
+        padding: 5px;
+    }
+    
+    .volume-control:hover .volume-slider {
+        width: 60px;
+    }
+
+    /* Overlay button */
+    .overlaybtn {
+        font-size: 4vh;
+        padding: 12px 25px;
+    }
+
+    /* Views */
+    .views-container {
+        font-size: 17px;
+        margin-top: 1.5vh;
+    }
+
+    .views-container svg {
+        height: 20px;
+        width: 20px;
+    }
+
+    /* Ajuste tooltips */
+    .username::after,
+    .badges::after {
+        font-size: 13px;
+        padding: 3px 6px;
+    }
+}
+
+/* ==========================================
+   SMARTPHONES PEQUENOS (< 375px)
+   ========================================== */
+@media (max-width: 375px) {
+    .main-container {
+        width: 240px;
+        padding: 20px 15px;
+    }
+
+    .pp {
+        height: 90px;
+        width: 90px;
+    }
+
+    .username {
+        font-size: 18px;
+    }
+
+    .badges {
+        width: 18px;
+        height: 18px;
+    }
+
+    .badges-container {
+        gap: 10px;
+        padding: 10px 18px;
+    }
+
+    .bio-container {
+        width: 95%;
+        padding: 12px;
+    }
+
+    .bio {
+        font-size: 1.6vh;
+    }
+
+    .logo {
+        height: 50px;
+        width: 50px;
+    }
+
+    #steam, #github, #youtube, #apple-music, #twitch {
+        font-size: 22px;
+    }
+
+    .overlaybtn {
+        font-size: 3.5vh;
+        padding: 10px 20px;
+    }
+
+    .views-container {
+        font-size: 16px;
+    }
+
+    .views-container svg {
+        height: 18px;
+        width: 18px;
+    }
+}
+
+/* ==========================================
+   LANDSCAPE MODE (altura < 500px)
+   ========================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    #user-page {
+        padding: 10px 0;
+    }
+
+    .main-container {
+        width: 260px;
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .pp {
+        height: 80px;
+        width: 80px;
+    }
+
+    .username {
+        font-size: 17px;
+        margin-top: 1vh;
+        margin-bottom: 0.5vh;
+    }
+
+    .badges-container {
+        padding: 8px 18px;
+        margin-bottom: 1vh;
+    }
+
+    .badges {
+        width: 16px;
+        height: 16px;
+    }
+
+    .bio-container {
+        padding: 10px;
+        margin-bottom: 1vh;
+    }
+
+    .bio {
+        font-size: 1.5vh;
+    }
+
+    .logo {
+        height: 45px;
+        width: 45px;
+    }
+
+    #steam, #github, #youtube, #apple-music, #twitch {
+        font-size: 20px;
+    }
+
+    .links-container {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .views-container {
+        font-size: 15px;
+        margin-top: 1vh;
+    }
+
+    .pre-container {
+        padding: 8px;
+    }
+
+    .pre-container img {
+        transform: scale(0.7);
+    }
+
+    #members-toggle {
+        width: 38px;
+        height: 38px;
+    }
+
+    #members-icon {
+        font-size: 16px;
+    }
+}
+
+/* ==========================================
+   ANIMAÇÕES MOBILE
+   ========================================== */
+
+/* Animação de entrada */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-container {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Smooth scroll */
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ==========================================
+   TOUCH IMPROVEMENTS
+   ========================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects em dispositivos touch */
+    .logo:hover {
+        transform: scale(1);
+    }
+
+    /* Adiciona feedback visual ao touch */
+    .logo:active {
+        transform: scale(0.95);
+        background: rgba(193, 139, 224, 0.2);
+    }
+
+    .badges:active {
+        transform: scale(1.1);
+    }
+
+    /* Aumentar área de toque */
+    .logo {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    #members-toggle {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .volume-control {
+        gap: 6px;
+        bottom: 1vh;
+    }
+    
+    #mutetext {
+        padding: 8px;
+        font-size: 16px;
+    }
+    
+    .volume-control:hover .volume-slider {
+        width: 55px;
+    }
+}
+
+/* ==========================================
+   ACESSIBILIDADE
+   ========================================== */
+
+/* Reduzir movimento para usuários sensíveis */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .main-container {
+        animation: none;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .main-container {
+        border: 2px solid rgba(193, 139, 224, 0.8);
+    }
+
+    .logo {
+        border: 2px solid rgba(193, 139, 224, 0.5);
+    }
+}
+
+/* ==========================================
+   OTIMIZAÇÕES DE PERFORMANCE
+   ========================================== */
+
+/* Força aceleração por hardware */
+.main-container,
+.pp,
+.logo,
+.badges {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Prevenir zoom acidental em iOS */
+@media (max-width: 768px) {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Fix para viewport height em mobile */
+@supports (-webkit-touch-callout: none) {
+    #user-page {
+        min-height: -webkit-fill-available;
+    }
+}
