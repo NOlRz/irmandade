@@ -40,22 +40,22 @@
     align-items: center;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
-    background-color: ##00000054;
+    background-color: rgba(0, 0, 0, 0.54);
 }
 
 .overlaybtn {
-    background-color: transparent;
+    background: transparent;
     color: #fff;
     cursor: pointer;
-    border: transparent;
+    border: none;
     font-family: 'Light';
     font-size: 6vh;
-    text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #fff,
-    0 0 82px #fff;
+    padding: 20px 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
 }
 
 /* overlay setup */
@@ -103,38 +103,80 @@ body {
 .main-container {
     display: flex;
     flex-direction: row;
-    justify-content: center; /* Inicia centralizado e expande para os lados */
-    gap: 20px; /* Espaço entre os containers */
-    width: 100%; /* Pode ser ajustado conforme necessário */
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
     padding: 20px;
     overflow: visible;
+    flex-wrap: wrap; /* Permite quebra de linha em telas menores */
 }
 
 .profile-container {
-    flex: 1; /* Faz com que cada profile-container ocupe uma parte igual de espaço */
-    border-radius: 25px;
-    background-color: rgba(17, 17, 17, 0.65);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Aumentando o box-shadow */
+    flex: 1;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(193, 139, 224, 0.1) 0%, rgba(17, 17, 17, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(193, 139, 224, 0.2);
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.37),
+        0 0 20px rgba(193, 139, 224, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 2vh;
-    max-width: 300px; /* Ajuste conforme o tamanho desejado */
-    padding: 20px;
+    max-width: 300px;
+    min-width: 250px;
+    padding: 30px 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(193, 139, 224, 0.15), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.profile-container:hover::before {
+    opacity: 1;
 }
 
 .profile-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 12px 40px 0 rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(193, 139, 224, 0.3);
+    border-color: rgba(193, 139, 224, 0.4);
 }
 
 .pp {
     object-fit: cover;
-    height: 150px; /* Aumentando o tamanho da imagem do perfil */
+    height: 150px;
     width: 150px;
     border-radius: 50%;
-    box-shadow: 0 0 20px #000; /* Aumentando o box-shadow */
+    box-shadow: 
+        0 0 30px rgba(193, 139, 224, 0.5),
+        0 8px 20px rgba(0, 0, 0, 0.7);
+    border: 3px solid rgba(193, 139, 224, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.profile-container:hover .pp {
+    box-shadow: 
+        0 0 40px rgba(193, 139, 224, 0.8),
+        0 12px 30px rgba(0, 0, 0, 0.8);
+    border-color: rgba(193, 139, 224, 0.6);
+    transform: scale(1.05);
 }
 
 .username {
@@ -152,25 +194,48 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px; /* Aumentando o espaçamento entre badges */
-    background-color: #00000070;
+    gap: 22px;
+    background: linear-gradient(135deg, rgba(193, 139, 224, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(193, 139, 224, 0.2);
     border-radius: 50px;
-    padding: 16px 35px; /* Ajuste conforme necessário */
+    padding: 16px 35px;
     margin-bottom: 2vh;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Aumentando o box-shadow */
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.profile-container:hover .badges-container {
+    background: linear-gradient(135deg, rgba(193, 139, 224, 0.25) 0%, rgba(0, 0, 0, 0.8) 100%);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .bio-container {
     text-align: center;
-    width: 90%; /* Ajuste conforme necessário */
-    padding: 20px; /* Ajuste conforme necessário */
-    background-color: rgba(22, 22, 22, 0.178);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Aumentando o box-shadow */
+    width: 90%;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(193, 139, 224, 0.08) 0%, rgba(22, 22, 22, 0.3) 100%);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(193, 139, 224, 0.15);
+    box-shadow: 
+        0 0 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
     border-radius: 15px;
-    backdrop-filter: blur(3px);
     max-width: 100%;
     overflow-wrap: break-word;
     margin-bottom: 2vh;
+    transition: all 0.3s ease;
+}
+
+.profile-container:hover .bio-container {
+    background: linear-gradient(135deg, rgba(193, 139, 224, 0.12) 0%, rgba(22, 22, 22, 0.4) 100%);
+    border-color: rgba(193, 139, 224, 0.25);
 }
 
 .bio {
@@ -485,24 +550,317 @@ canvas {
 /* extras */
 /* Main div */
 #mainDiv{
-    width:375px;
-   }
+    width: 100%;
+    max-width: 1400px;
+}
    
-   /* Image */
-   #mainDiv .bio img{
+/* Image */
+#mainDiv .bio img{
     padding-top:14px;
-   }
-   
-   @media (max-width:576px){
-   
-    /* Main div */
-    #mainDiv{
-     width:275px;
+}
+
+/* RESPONSIVIDADE MOBILE */
+
+/* Tablets e telas médias */
+@media (max-width: 1024px) {
+    .main-container {
+        gap: 20px;
+        padding: 15px;
     }
+
+    .profile-container {
+        max-width: 280px;
+        min-width: 220px;
+        padding: 25px 15px;
+    }
+
+    .pp {
+        height: 130px;
+        width: 130px;
+    }
+
+    .username {
+        font-size: 22px;
+    }
+
+    .bio {
+        font-size: 2.2vh;
+    }
+
+    .badges {
+        width: 20px;
+        height: 20px;
+    }
+
+    .badges-container {
+        gap: 18px;
+        padding: 14px 28px;
+    }
+}
+
+/* Smartphones em landscape */
+@media (max-width: 768px) {
+    .main-container {
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .profile-container {
+        max-width: 240px;
+        min-width: 200px;
+        padding: 20px 15px;
+        margin-bottom: 1.5vh;
+    }
+
+    .pp {
+        height: 110px;
+        width: 110px;
+    }
+
+    .username {
+        font-size: 20px;
+        margin-top: 1.5vh;
+    }
+
+    .bio {
+        font-size: 2vh;
+    }
+
+    .bio-container {
+        padding: 15px;
+    }
+
+    .badges {
+        width: 18px;
+        height: 18px;
+    }
+
+    .badges-container {
+        gap: 15px;
+        padding: 12px 24px;
+    }
+
+    .overlaybtn {
+        font-size: 4.5vh;
+        padding: 15px 30px;
+    }
+
+    #volume-control {
+        top: 10px;
+        left: 10px;
+        padding: 6px;
+    }
+
+    #volume-icon {
+        font-size: 16px;
+    }
+}
+
+/* Smartphones em portrait */
+@media (max-width: 576px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #user-page {
+        min-height: auto;
+        padding: 20px 0;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .profile-container {
+        width: 90%;
+        max-width: 100%;
+        min-width: auto;
+        padding: 25px 20px;
+        margin-bottom: 0;
+    }
+
+    .pp {
+        height: 120px;
+        width: 120px;
+    }
+
+    .username {
+        font-size: 22px;
+        margin-top: 2vh;
+        margin-bottom: 1vh;
+    }
+
+    .bio {
+        font-size: 2.3vh;
+    }
+
+    .bio-container {
+        width: 85%;
+        padding: 18px;
+    }
+
+    .badges {
+        width: 20px;
+        height: 20px;
+    }
+
+    .badges-container {
+        gap: 18px;
+        padding: 14px 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .overlaybtn {
+        font-size: 4vh;
+        padding: 12px 25px;
+        text-align: center;
+    }
+
+    #volume-control {
+        top: 8px;
+        left: 8px;
+        padding: 5px;
+        background: rgba(50, 50, 50, 0.7);
+    }
+
+    #volume-icon {
+        font-size: 14px;
+    }
+
+    #volume-control:hover #volume-slider {
+        width: 80px;
+    }
+
+    /* Ajuste do tooltip para mobile */
+    .username::after,
+    .badges::after {
+        font-size: 14px;
+        padding: 4px 8px;
+        bottom: 2.5vh;
+    }
+
+    /* Melhor espaçamento dos efeitos de cursor em mobile */
+    .cursor-explosion {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* Smartphones pequenos */
+@media (max-width: 375px) {
+    .profile-container {
+        width: 95%;
+        padding: 20px 15px;
+    }
+
+    .pp {
+        height: 100px;
+        width: 100px;
+    }
+
+    .username {
+        font-size: 20px;
+    }
+
+    .bio {
+        font-size: 2vh;
+    }
+
+    .bio-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .badges {
+        width: 18px;
+        height: 18px;
+    }
+
+    .badges-container {
+        gap: 15px;
+        padding: 12px 25px;
+    }
+
+    .overlaybtn {
+        font-size: 3.5vh;
+        padding: 10px 20px;
+    }
+}
+
+/* Landscape mode para smartphones */
+@media (max-height: 500px) and (orientation: landscape) {
+    #user-page {
+        padding: 10px 0;
+    }
+
+    .main-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .profile-container {
+        width: calc(50% - 15px);
+        max-width: 280px;
+        padding: 15px;
+    }
+
+    .pp {
+        height: 80px;
+        width: 80px;
+    }
+
+    .username {
+        font-size: 18px;
+        margin-top: 1vh;
+        margin-bottom: 0.5vh;
+    }
+
+    .bio {
+        font-size: 1.8vh;
+    }
+
+    .bio-container {
+        padding: 10px;
+        margin-bottom: 1vh;
+    }
+
+    .badges {
+        width: 16px;
+        height: 16px;
+    }
+
+    .badges-container {
+        gap: 12px;
+        padding: 10px 20px;
+        margin-bottom: 1vh;
+    }
+}
+
+/* Pre-container responsivo */
+@media (max-width: 576px) {
+    #mainDiv {
+        width: 100%;
+    }
+
+    .pre-container {
+        padding: 10px;
+    }
+
     .pre-container img {
-        transform: scale(0.725); 
-        height: auto; 
+        transform: scale(0.8);
+        max-width: 100%;
+        height: auto;
         display: block;
+    }
+
+    .pre {
+        font-size: 1.8vh;
     }
 }
 /* pre div */

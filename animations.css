@@ -1,0 +1,326 @@
+/* ==========================================
+   ANIMAÇÕES E EFEITOS VISUAIS MODERNOS
+   ========================================== */
+
+/* Animação de entrada suave para os perfis */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animação de pulso melhorada */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 20px rgba(193, 139, 224, 0.3),
+            0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 
+            0 0 30px rgba(193, 139, 224, 0.6),
+            0 12px 25px rgba(0, 0, 0, 0.6);
+    }
+}
+
+/* Efeito de brilho nas bordas */
+@keyframes borderGlow {
+    0%, 100% {
+        border-color: rgba(193, 139, 224, 0.2);
+    }
+    50% {
+        border-color: rgba(193, 139, 224, 0.5);
+    }
+}
+
+/* Efeito de flutuação */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Gradiente animado de fundo */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Efeito de ondulação no hover */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Animação de rotação suave */
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-200deg) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+/* Efeito de tremor sutil */
+@keyframes subtleShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+/* Aplicar animações aos elementos */
+.profile-container {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.profile-container:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.profile-container:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.profile-container:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.profile-container:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Efeito hover melhorado para badges */
+.badges {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.badges:hover {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 15px #C18be0);
+}
+
+/* Efeito de brilho contínuo nos usernames */
+.username.breathing {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Efeito hover no avatar */
+.pp {
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.profile-container:hover .pp {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* Efeito de loading para o overlay */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.overlaybtn {
+    animation: fadeInScale 0.8s ease-out;
+}
+
+/* Partículas de cursor melhoradas */
+.cursor-explosion {
+    animation: explode 0.6s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+}
+
+/* Efeito de texto digitando melhorado */
+@keyframes blink {
+    0%, 49% { border-color: transparent; }
+    50%, 100% { border-color: #C18be0; }
+}
+
+.typewriter::after {
+    content: '|';
+    animation: blink 1s infinite;
+    margin-left: 2px;
+}
+
+/* Animação de entrada do volume control */
+#volume-control.visible {
+    animation: slideInLeft 0.4s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Efeito de onda no background ao passar mouse */
+.profile-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(193, 139, 224, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.8s, height 0.8s;
+    pointer-events: none;
+}
+
+.profile-container:hover::after {
+    width: 500px;
+    height: 500px;
+}
+
+/* Efeito de scan line (linha retrô) */
+@keyframes scanline {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+.profile-container.retro-effect::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(transparent, rgba(193, 139, 224, 0.5), transparent);
+    animation: scanline 4s linear infinite;
+    pointer-events: none;
+}
+
+/* Efeito de glitch para o título */
+@keyframes glitch {
+    0% {
+        text-shadow: 
+            0.05em 0 0 rgba(255, 0, 0, 0.75),
+            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    14% {
+        text-shadow: 
+            0.05em 0 0 rgba(255, 0, 0, 0.75),
+            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    15% {
+        text-shadow: 
+            -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    49% {
+        text-shadow: 
+            -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    50% {
+        text-shadow: 
+            0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+            0.05em 0 0 rgba(0, 255, 0, 0.75),
+            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    99% {
+        text-shadow: 
+            0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+            0.05em 0 0 rgba(0, 255, 0, 0.75),
+            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    100% {
+        text-shadow: 
+            -0.025em 0 0 rgba(255, 0, 0, 0.75),
+            -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+            -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+}
+
+/* Classe opcional para aplicar efeito glitch */
+.glitch-effect {
+    animation: glitch 1s infinite;
+}
+
+/* Shimmer effect para badges premium */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.badges.premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: shimmer 3s infinite;
+}
+
+/* Smooth scroll para mobile */
+@media (max-width: 576px) {
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Reduzir animações para usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
