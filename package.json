@@ -1,0 +1,26 @@
+{
+  "name": "v0-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "efeitos.js",
+  "scripts": {
+    "dev": "serve -l 3000 .",
+    "start": "serve -l 3000 .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NOlRz/irmandade.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NOlRz/irmandade/issues"
+  },
+  "homepage": "https://github.com/NOlRz/irmandade#readme",
+  "dependencies": {
+    "serve": "^14.2.6"
+  }
+}
