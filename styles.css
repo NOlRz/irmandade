@@ -324,18 +324,8 @@ body {
 
 /* username display setup */
 
+/* mantém apenas o necessário para tooltips; o visual "glass" vem da definição principal acima */
 .badges-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: default;
-    position: relative;
-    gap: 15px;
-    background-color: #00000070;
-    border-radius: 50px;
-    padding: 14px 30px;
-    margin-bottom: 2vh;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: default;
     position: relative;
 }
@@ -378,21 +368,12 @@ body {
 
 /* badge display setup */
 
+/* apenas ajustes de centralização; o visual "glass" vem da definição principal acima */
 .bio-container {
-    text-align: center;
-    width: 80%;
-    padding: 15px;
-    background-color: rgba(22, 22, 22, 0.178);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    backdrop-filter: blur(3px);
-    max-width: 100%;
-    overflow-wrap: break-word;
-    margin-bottom: 1.5vh;
+    display: flex;
     min-height: 29px;
     justify-content: center;
     align-items: center;
-    height: 100%;
 }
 
 .bio {
