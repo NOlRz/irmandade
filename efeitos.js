@@ -91,27 +91,19 @@ function createParticle(x, y, count, spread) {
     }
 }
 
-// Desktop - cursor com mouse (com throttle para não sobrecarregar o DOM)
+// Desktop - cursor com mouse
 if (!isMobileDevice) {
-    let lastParticleTime = 0;
     document.addEventListener("mousemove", (event) => {
-        const now = performance.now();
-        if (now - lastParticleTime < 40) return; // ~25 emissões/seg no máximo
-        lastParticleTime = now;
-        createParticle(event.pageX, event.pageY, 3, 50);
-    }, { passive: true });
+        createParticle(event.pageX, event.pageY, 5, 50);
+    });
 }
 
-// Mobile - cursor com touch (throttle mais agressivo para poupar bateria)
+// Mobile - cursor com touch
 if (isTouchDevice) {
-    let lastTouchParticleTime = 0;
     document.addEventListener("touchmove", (event) => {
-        const now = performance.now();
-        if (now - lastTouchParticleTime < 80) return;
-        lastTouchParticleTime = now;
         const touch = event.touches[0];
         createParticle(touch.pageX, touch.pageY, 2, 30);
-    }, { passive: true });
+    });
 }
 
 // ==========================================

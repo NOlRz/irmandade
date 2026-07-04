@@ -1,28 +1,18 @@
-    const blobId = "1330724776263737344";
-    const apiUrl = `https://jsonblob.com/api/jsonBlob/${blobId}`;
-
+    const firebaseUrl = "https://projeto-44d28.firebaseio.com/baresi_views.json";
 
     async function updateViewCounter() {
       try {
-
-        let response = await fetch(apiUrl);
+        let response = await fetch(firebaseUrl);
         if (!response.ok) throw new Error("Failed to fetch view count");
-        let data = await response.json();
+        let currentCount = await response.json() || 0;
 
-
-        let currentCount = data.views || 0;
         currentCount += 1;
 
-
-        await fetch(apiUrl, {
+        await fetch(firebaseUrl, {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-          body: JSON.stringify({ views: currentCount }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(currentCount),
         });
-
 
         document.getElementById("view-count").textContent = currentCount;
       } catch (error) {

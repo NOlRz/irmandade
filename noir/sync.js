@@ -22,4 +22,4 @@ setInterval(() => {
 
     // sync times
     syncMedia();
-}, 100);
+}, 500);

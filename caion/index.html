@@ -4,23 +4,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>irmandade.cc</title>
     <meta name="theme-color" content="#000001">
     <link rel="stylesheet" href="public/users/css/cat.css">
-    <link rel="icon" href="public\src\img\1281904753252765717.png" type="image/x-icon">
-    <link rel="shortcut icon" href="public\src\img\1281904753252765717.png" type="image/x-icon"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="public/src/img/1281904753252765717.png" type="image/x-icon">
+    <link rel="shortcut icon" href="public/src/img/1281904753252765717.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-<script src="snow.js"></script>
-<script src="effects.js"></script>
-<script src="effects2.js"></script>
-<script src="view.js"></script>
-<script src="members.js"></script>
-<script src="sync.js" defer></script>
-<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script>
-    
+
 <body>
 
     <div id="overlay">
@@ -52,7 +44,7 @@
     
     <div id="user-page">
 
-        <video class="background" autoplay loop muted>
+        <video class="background" autoplay loop muted playsinline webkit-playsinline>
             <source src="./r2.wya.lol/kalidade.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -88,7 +80,8 @@
                 </div>
             </div>
 
-        <div class="mutebutton">
+        <div class="volume-control">
+            <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
             <p id="mutetext" onclick="toggleMusic()"><i class="fas fa-volume-up"></i></p>
         </div>
 
@@ -96,7 +89,22 @@
 
     <audio id="backgroundsong" src="./r2.wya.lol/kalidade.mp3" loop></audio>
 
+    <script src="snow.js" defer></script>
+    <script src="effects.js" defer></script>
+    <script src="effects2.js" defer></script>
+    <script src="view.js" defer></script>
+    <script src="members.js" defer></script>
+    <script src="sync.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js" defer></script>
+    <script>
+        window.addEventListener('load', () => {
+            const devtool = new DisableDevtool();
+        });
+    </script>
+
 </body>
+
+</html>
 
 </html>
 

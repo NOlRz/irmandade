@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const userId = "375863531343446020";
+    const userId = "1395261726022307960";
     
     function createDiscordCard(data) {
         const user = data.discord_user;
@@ -37,15 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
             'active_developer': '<img src="https://cdn.discordapp.com/badge-icons/6bdc42827a38498929a4920da12695d9.png" style="width:18px;height:18px;" title="Active Developer">',
             'certified_moderator': '<img src="https://cdn.discordapp.com/badge-icons/fee1624003e2fee35cb398e125dc479b.png" style="width:18px;height:18px;" title="Discord Certified Moderator">',
             'nitro': '<img src="https://cdn.discordapp.com/badge-icons/2ba85e8026a8614b640c2837bcdfe21b.png" style="width:18px;height:18px;" title="Nitro">',
-            'server_boost': '<img src="https://cdn.discordapp.com/badge-icons/ec92202290b48d0879b7413d2dde3bab.png" style="width:18px;height:18px;" title="Server Booster">'
+            'server_boost': '<img src="https://cdn.discordapp.com/badge-icons/51040c70d4f20a921ad6674ff86fc95c.png" style="width:18px;height:18px;" title="Server Booster">', 
+            'quest': '<img src="https://cdn.discordapp.com/badge-icons/7d9ae358c8c5e118768335dbe68b4fb8.png" style="width:18px;height:18px;" title="Completou uma Miss\u00e3o">',
+            'quest_lastmeadow': '<img src="https://cdn.discordapp.com/badge-icons/ca105ad9cfc8580c765101d17bbb2323.png" style="width:18px;height:18px;" title="Last Meadow Online">'
         };
         
         // Gera badges HTML
         let badgesHTML = '';
         const userBadges = [];
-        
-        console.log('🎖️ Public flags do usuário:', user.public_flags);
-        console.log('💎 Premium type:', user.premium_type);
         
         // Adiciona badges do public_flags
         if (user.public_flags !== undefined && user.public_flags !== null) {
@@ -67,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             for (const [flag, name] of Object.entries(flagMapping)) {
                 if (flags & parseInt(flag)) {
-                    console.log(`✅ Badge encontrada: ${name} (flag: ${flag})`);
                     if (badgeIcons[name]) {
                         userBadges.push(badgeIcons[name]);
                     }
@@ -75,23 +73,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Adiciona badge do Nitro (premium_type: 1 = Nitro Classic, 2 = Nitro, 3 = Nitro Basic)
-        // Nota: A API do Lanyard pode não retornar premium_type, então forçamos a exibição
-        if (user.premium_type && user.premium_type > 0) {
-            console.log('✅ Badge encontrada: Nitro (detectado automaticamente)');
-            userBadges.push(badgeIcons['nitro']);
-        } else {
-            console.log('⚠️ Premium type não detectado ou = 0, adicionando Nitro manualmente');
-            console.log('Dados do user:', user);
-            // Força exibição do Nitro
+        // Detecta Nitro via avatar_decoration ou collectibles (Lanyard não expõe premium_type)
+        const hasNitro = user.avatar_decoration_data != null
+            || (data.collectibles && data.collectibles.nameplate != null)
+            || (user.premium_type && user.premium_type > 0);
+
+        // Ordem igual ao Discord: nitro → server boost → quest genérico → quest específico
+        if (hasNitro) {
             userBadges.push(badgeIcons['nitro']);
         }
-        
-        // Adiciona badge de Server Boost (você sempre tem)
-        console.log('✅ Badge encontrada: Server Booster');
         userBadges.push(badgeIcons['server_boost']);
-        
-        console.log('📋 Total de badges:', userBadges.length);
+        userBadges.push(badgeIcons['quest']);
+        userBadges.push(badgeIcons['quest_lastmeadow']);
         
         if (userBadges.length > 0) {
             badgesHTML = `<div style="display: flex; gap: 4px; flex-wrap: wrap; align-items: center; justify-content: flex-end;">${userBadges.join('')}</div>`;
@@ -203,25 +196,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return cardHTML;
     }
     
-    // Conecta com Lanyard
-    console.log('🔄 Conectando com Lanyard...');
     fetch(`https://api.lanyard.rest/v1/users/${userId}`)
         .then(response => {
             if (!response.ok) throw new Error('Erro na resposta');
             return response.json();
         })
         .then(data => {
-            console.log('� Dados recebidos:', data);
-            
             if (data.success && data.data) {
-                console.log('✅ Discord conectado!');
-                console.log('👤 Username:', data.data.discord_user.username);
-                console.log('🟢 Status:', data.data.discord_status);
-                
                 const croppedDiv = document.querySelector('.cropped');
                 if (croppedDiv) {
                     croppedDiv.innerHTML = createDiscordCard(data.data);
-                    console.log('✅ Card do Discord criado!');
                 }
             } else {
                 console.error('❌ Entre no servidor: https://discord.gg/lanyard');

@@ -1,18 +1,40 @@
+function showToast(message) {
+    const existing = document.getElementById('toast-notification');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'toast-notification';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed; bottom: 5vh; left: 50%; transform: translateX(-50%);
+        background: rgba(17,17,17,0.9); color: #fff; padding: 10px 20px;
+        border-radius: 20px; font-family: 'Light', sans-serif; font-size: 14px;
+        border: 1px solid rgba(193,139,224,0.4); backdrop-filter: blur(10px);
+        z-index: 9999; opacity: 0; transition: opacity 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.style.opacity = '1');
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+}
+
 function copyAddress(id) {
     const svgElement = document.getElementById(id + 'Input');
     const title = svgElement.getAttribute('title');
 
     navigator.clipboard.writeText(title).then(() => {
-        alert('copied the discord to clipboard: @' + title);
+        showToast('copiado: @' + title);
     }).catch(err => {
         console.error('Failed to copy: ', err);
     });
 }
 
 function removeOverlay() {
-    var overlay = document.getElementById('overlay');
-    var userpage = document.getElementById('user-page');
-    var audio = document.getElementById('backgroundsong')
+    const overlay = document.getElementById('overlay');
+    const userpage = document.getElementById('user-page');
+    const audio = document.getElementById('backgroundsong')
 
     overlay.style.opacity = '0';
     userpage.style.display = 'flex';
@@ -63,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
             updateVolumeIcon();
         });
         
-        // Sincronizar slider com volume inicial
-        volumeSlider.value = audio.volume * 100;
+        // Sincronizar audio com o valor inicial do slider
+        audio.volume = volumeSlider.value / 100;
     }
 });
 

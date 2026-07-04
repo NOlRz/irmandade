@@ -342,23 +342,74 @@ body {
 
 /* badge setup */
 
-.mutebutton {
+.volume-control {
     font-family: 'Light';
     color: #fff;
     position: fixed;
-    bottom: 0;
+    bottom: 1.5vh;
     right: 2vh;
-    text-align: center;
-    cursor: pointer;
-    transition: text-shadow 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-direction: row-reverse;
 }
 
-.mutebutton:hover {
-    text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #fff;
+#mutetext {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 6px;
+    z-index: 10;
+    font-size: 18px;
+}
+
+#mutetext:hover {
+    text-shadow: 0 0 10px #00691a;
+    transform: scale(1.1);
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(0, 105, 26, 0.3), #00691a);
+    border-radius: 5px;
+    outline: none;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.volume-control:hover .volume-slider {
+    width: 80px;
+    opacity: 1;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 105, 26, 0.8);
+    transition: transform 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 105, 26, 0.8);
+    transition: transform 0.2s ease;
 }
 
 /* mute button setup */

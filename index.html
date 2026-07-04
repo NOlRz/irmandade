@@ -24,29 +24,14 @@
     
     <title>irmandade.cc</title>
     <meta name="theme-color" content="#000001">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./animations.css">
     <link rel="icon" href="public/src/img/1281904753252765717.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="public/src/img/1281904753252765717.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script defer src="snow.js"></script>
-    <script>
-        // Só ativa a proteção anti-inspeção no site publicado.
-        // Pula localhost e ambientes de preview (dentro de iframe) para permitir visualização.
-        (function () {
-            var host = location.hostname;
-            var isLocal = host === "localhost" || host === "127.0.0.1" || host === "" || host.endsWith(".local");
-            var inIframe = window.self !== window.top;
-            if (isLocal || inIframe) return;
-            var s = document.createElement("script");
-            s.src = "https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js";
-            s.setAttribute("disable-devtool-auto", "");
-            document.head.appendChild(s);
-        })();
-    </script>
 </head>
+<script src="snow.js"></script>
+<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script>
 <body>
 
     <div id="overlay">
