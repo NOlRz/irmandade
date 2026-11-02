@@ -1,133 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<!-- gerado pelo build.js a partir do membros.json — não edite este arquivo na mão -->
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    
-    <!-- SEO Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>irmandade.cc</title>
     <meta name="description" content="Tropa da Angola - Irmandade oficial">
-    <meta name="keywords" content="irmandade, tropa, angola, tda">
-    <meta name="author" content="Noir">
-    
-    <!-- Open Graph / Social Media -->
+    <meta name="theme-color" content="#c18be0">
+    <link rel="canonical" href="https://irmandade.cc/">
+
+    <!-- prévia ao colar o link no Discord / WhatsApp / Twitter -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="irmandade.cc">
     <meta property="og:title" content="irmandade.cc">
     <meta property="og:description" content="Tropa da Angola - Irmandade oficial">
-    <meta property="og:image" content="public/src/img/1281904753252765717.png">
-    
-    <!-- Mobile Optimization -->
+    <meta property="og:url" content="https://irmandade.cc/">
+    <meta property="og:image" content="https://irmandade.cc/assets/og/hub.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://irmandade.cc/assets/og/hub.jpg">
+
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <title>irmandade.cc</title>
-    <meta name="theme-color" content="#000001">
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./animations.css">
-    <link rel="icon" href="public/src/img/1281904753252765717.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="public/src/img/1281904753252765717.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="./assets/img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="./assets/img/favicon.png">
+
+    <link rel="preload" href="./assets/fonts/mainfont.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/hub.css">
+    <link rel="stylesheet" href="./fx/fx.css">
+    <link rel="stylesheet" href="./fx/extra.css">
 </head>
-<script src="snow.js"></script>
-<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script>
 <body>
 
     <div id="overlay">
         <button class="overlaybtn" onclick="removeOverlay()">𝔗𝔯𝔬𝔭𝔞 𝔡𝔞 𝔞𝔫𝔤𝔬𝔩𝔞</button>
     </div>
 
-    <div id="cursor-trail"></div>
-
     <div id="user-page">
 
-        <video class="background" id="backgroundvideo" muted loop playsinline webkit-playsinline x5-playsinline>
-            <source src="grounds/background.mp4" type="video/mp4">
-            Your browser does not support the video tag.
+        <video class="background" id="backgroundvideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="media/hub/capa.jpg">
+            <source src="media/hub/fundo.mp4" type="video/mp4">
         </video>
 
-        <div class="main-container" id="mainDiv">
+        <main class="main-container" id="mainDiv">
 
-            <!-- Primeiro perfil -->
-            <div class="profile-container" data-site="https://irmandade.cc/noir">
-                <img class="pp" src="./public/src/img/noiravatar.jpg" draggable="false">
+            <a class="profile-container" href="noir/" data-site="noir/">
+                <img class="pp" src="assets/img/noir.jpg" alt="avatar de Noir" draggable="false">
                 <p class="username breathing" data-tooltip="uid: 1">Noir</p>
 
                 <div class="badges-container">
-                    <!-- Badges para o primeiro usuário -->
-                    <div class="badges pic-badge" id="prem1" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
-                    <div class="badges pic-badge" id="own" data-tooltip="site owner" style="background-image: url('public/src/badges/booster.png');"></div>
-                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="premium user" style="background-image: url('./assets/badges/noir/premium.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="site owner" style="background-image: url('./assets/badges/noir/booster.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="T.D.A member" style="background-image: url('./assets/badges/tda.png');"></div>
                 </div>
 
                 <div class="bio-container">
                     <div class="bio typewriter">click to see profile</div>
                 </div>
-            </div>
+            </a>
 
-            <!-- Segundo perfil -->
-            <div class="profile-container" data-site="https://irmandade.cc/emmanuel">
-                <img class="pp" src="./public/src/img/ngt.png" draggable="false">
+            <a class="profile-container" href="emmanuel/" data-site="emmanuel/">
+                <img class="pp" src="assets/img/emmanuel.jpg" alt="avatar de Emmanuel" draggable="false">
                 <p class="username breathing" data-tooltip="uid: 2">Emmanuel</p>
 
                 <div class="badges-container">
-                    <!-- Badges para o segundo usuário -->
-                    <div class="badges pic-badge" id="prem2" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
-                    <div class="badges pic-badge" id="early2" data-tooltip="early user" style="background-image: url('public/src/badges/early.png');"></div>
-                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="premium user" style="background-image: url('./assets/badges/noir/premium.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="early user" style="background-image: url('./assets/badges/noir/early.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="T.D.A member" style="background-image: url('./assets/badges/tda.png');"></div>
                 </div>
 
                 <div class="bio-container">
                     <div class="bio typewriter">click to see profile</div>
                 </div>
-            </div>
+            </a>
 
-            <!-- Terceiro perfil -->
-            <div class="profile-container" data-site="https://irmandade.cc/baresi">
-                <img class="pp" src="./public/src/img/baresiavatar.jpg" draggable="false">
+            <a class="profile-container" href="baresi/" data-site="baresi/">
+                <img class="pp" src="assets/img/baresi.jpg" alt="avatar de Baresi" draggable="false">
                 <p class="username breathing" data-tooltip="uid: 3">Baresi</p>
 
                 <div class="badges-container">
-                    <!-- Badges para o terceiro usuário -->
-                    <div class="badges pic-badge" id="prem3" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
-                    <div class="badges pic-badge" id="early3" data-tooltip="early user" style="background-image: url('public/src/badges/early.png');"></div>
-                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="premium user" style="background-image: url('./assets/badges/noir/premium.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="early user" style="background-image: url('./assets/badges/noir/early.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="T.D.A member" style="background-image: url('./assets/badges/tda.png');"></div>
                 </div>
 
                 <div class="bio-container">
                     <div class="bio typewriter">click to see profile</div>
                 </div>
-            </div>
+            </a>
 
-            <!-- Quarto perfil -->
-            <div class="profile-container" data-site="https://irmandade.cc/caion">
-                <img class="pp" src="./public/src/img/caion.png" draggable="false">
+            <a class="profile-container" href="caion/" data-site="caion/">
+                <img class="pp" src="assets/img/caion.png" alt="avatar de Caion" draggable="false">
                 <p class="username breathing" data-tooltip="uid: 4">Caion</p>
 
                 <div class="badges-container">
-                    <div class="badges pic-badge" id="prem3" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
-                    <div class="badges pic-badge" id="early3" data-tooltip="early user" style="background-image: url('public/src/badges/early.png');"></div>
-                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="premium user" style="background-image: url('./assets/badges/noir/premium.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="early user" style="background-image: url('./assets/badges/noir/early.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="T.D.A member" style="background-image: url('./assets/badges/tda.png');"></div>
                 </div>
 
                 <div class="bio-container">
                     <div class="bio typewriter">click to see profile</div>
                 </div>
-            </div>
-
-        </div>
+            </a>
+        </main>
 
     </div>
 
     <div id="volume-control">
-        <i id="volume-icon" class="fas fa-volume-up"></i>
-        <input type="range" id="volume-slider" min="0" max="100" value="50">
+        <i id="volume-icon" class="fas fa-volume-up" role="button" tabindex="0" aria-label="silenciar"></i>
+        <input type="range" id="volume-slider" min="0" max="100" value="30" aria-label="volume">
     </div>
-    
-    <audio id="backgroundsong" src="grounds/background.mp3" loop></audio>
-    <script src="efeitos.js"></script>
 
+    <audio id="backgroundsong" src="media/hub/musica.mp3" loop preload="auto"></audio>
+
+    <script>window.SITE = {"dominio":"https://irmandade.cc","nome":"irmandade.cc","titulo":"Irmandade","descricao":"Tropa da Angola - Irmandade oficial","entrada":"𝔗𝔯𝔬𝔭𝔞 𝔡𝔞 𝔞𝔫𝔤𝔬𝔩𝔞","cor":"#c18be0","fundo":"media/hub/fundo.mp4","capa":"media/hub/capa.jpg","musica":"media/hub/musica.mp3","firebase":"https://projeto-44d28.firebaseio.com"}; window.MEMBROS = [{"id":"noir","nome":"Noir","discord":"1395261726022307960","cor":"#c18be0"},{"id":"emmanuel","nome":"Emmanuel","discord":"556152345885671467","cor":"#00a2ff"},{"id":"baresi","nome":"Baresi","discord":"726952230476972162","cor":"#00691a"},{"id":"caion","nome":"Caion","discord":"589184396222005260","cor":"#00691a"}];</script>
+    <script src="./assets/js/snow.js" defer></script>
+    <script src="./assets/js/hub.js" defer></script>
+    <script src="./fx/fx.js" data-accent="#c18be0" defer></script>
+    <script src="./fx/extra.js" defer></script>
 </body>
-
 </html>

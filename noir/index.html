@@ -1,145 +1,134 @@
-<!-- credits to @alcoolique -->
 <!DOCTYPE html>
-<html lang="en">
-
+<!-- gerado pelo build.js a partir do membros.json — não edite este arquivo na mão -->
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Noir - Perfil oficial | Irmandade T.D.A">
-    <meta name="keywords" content="noir, irmandade, tda, perfil">
-    <meta name="author" content="Noir">
-    
-    <!-- Open Graph / Social Media -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Noir · irmandade.cc</title>
+    <meta name="description" content="evil will never win">
+    <meta name="theme-color" content="#c18be0">
+    <link rel="canonical" href="https://irmandade.cc/noir/">
+
+    <!-- prévia ao colar o link no Discord / WhatsApp / Twitter -->
     <meta property="og:type" content="profile">
-    <meta property="og:title" content="Noir - irmandade.cc">
-    <meta property="og:description" content="Perfil oficial de Noir">
-    
-    <!-- Mobile Optimization -->
+    <meta property="og:site_name" content="irmandade.cc">
+    <meta property="og:title" content="Noir · irmandade.cc">
+    <meta property="og:description" content="evil will never win">
+    <meta property="og:url" content="https://irmandade.cc/noir/">
+    <meta property="og:image" content="https://irmandade.cc/assets/og/noir.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://irmandade.cc/assets/og/noir.jpg">
+
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <title>irmandade.cc</title>
-    <meta name="theme-color" content="#000001">
-    <link rel="stylesheet" href="public/users/css/cat.css">
-    <link rel="stylesheet" href="public/users/css/responsive.css">
-    <link rel="icon" href="public/src/img/1281904753252765717.png" type="image/x-icon">
-    <link rel="shortcut icon" href="public/src/img/1281904753252765717.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="public/src/img/1281904753252765717.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-</head>
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../assets/img/favicon.png">
 
+    <link rel="preload" href="../assets/fonts/mainfont.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/perfil.css">
+    <link rel="stylesheet" href="../fx/fx.css">
+    <style>:root { --accent-rgb: 193, 139, 224; }</style>
+    <link rel="stylesheet" href="../fx/extra.css">
+</head>
 <body>
 
     <div id="overlay">
         <button class="overlaybtn" onclick="removeOverlay()">𝖑𝖚𝖘𝖙</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js" defer></script>
-    <script>
-        window.addEventListener('load', () => {
-            const devtool = new DisableDevtool();
-        });
-    </script>
-
-    <div id="members-toggle" onclick="toggleMembersList()" aria-expanded="false" aria-controls="members-list">
+    <button id="members-toggle" onclick="toggleMembersList()" aria-expanded="false" aria-controls="members-list" aria-label="membros">
         <i id="members-icon" class="fa fa-users"></i>
-    </div>
-    
-    <div id="members-list">
+    </button>
+
+    <nav id="members-list">
         <div class="member">
-            <img src="./r2.wya.lol/noiravatar.jpg" alt="Avatar 1" class="avatar">
-            <span class="member-name" onclick="redirectToMember('Noir')">Noir</span>
+            <a href="../noir/"><img src="../assets/img/noir.jpg" alt="" class="avatar"><span class="member-name">Noir</span></a>
         </div>
         <div class="member">
-            <img src="./r2.wya.lol/ngt.png" alt="Avatar 2" class="avatar">
-            <span class="member-name" onclick="redirectToMember('Emmanuel')">Emmanuel</span>
+            <a href="../emmanuel/"><img src="../assets/img/emmanuel.jpg" alt="" class="avatar"><span class="member-name">Emmanuel</span></a>
         </div>
         <div class="member">
-            <img src="./r2.wya.lol/baresiavatar.jpg" alt="Avatar 3" class="avatar">
-            <span class="member-name" onclick="redirectToMember('Baresi')">Baresi</span>
+            <a href="../baresi/"><img src="../assets/img/baresi.jpg" alt="" class="avatar"><span class="member-name">Baresi</span></a>
         </div>
         <div class="member">
-            <img src="./r2.wya.lol/caion.png" alt="Avatar 3" class="avatar">
-            <span class="member-name" onclick="redirectToMember('Caion')">Caion</span>
+            <a href="../caion/"><img src="../assets/img/caion.png" alt="" class="avatar"><span class="member-name">Caion</span></a>
         </div>
-    </div>
-    
+    </nav>
+
     <div id="user-page">
 
-        <video class="background" autoplay loop muted playsinline webkit-playsinline>
-            <source src="./r2.wya.lol/allnight.mp4" type="video/mp4">
+        <video class="background" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="../media/noir/capa.jpg">
+            <source src="../media/noir/fundo.mp4" type="video/mp4">
         </video>
 
-        <div class="main-container" id="mainDiv">
+        <main class="main-container" id="mainDiv">
 
             <div class="profile-container">
-                <img class="pp" src="./r2.wya.lol/noiravatar.jpg" draggable="false">
-                <p class="username breathing" data-tooltip="uid: 1">Noir</p>
+                <img class="pp" src="../assets/img/noir.jpg" alt="avatar de Noir" draggable="false">
+                <h1 class="username breathing" data-tooltip="uid: 1">Noir</h1>
 
                 <div class="badges-container">
-                    <div class="badges pic-badge" id="prem" data-tooltip="premium user" style="background-image: url('public/src/badges/premium.png');"></div>
-                    <div class="badges pic-badge" id="own" data-tooltip="site owner" style="background-image: url('public/src/badges/booster.png');" bis_skin_checked="1"></div>
-                    <div class="badges pic-badge" id="early "data-tooltip="early user" style="background-image: url('public/src/badges/early.png');"></div>
-                    <div class="badges pic-badge" id="tda" data-tooltip="T.D.A member" style="background-image: url('public/src/badges/tda.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="premium user" style="background-image: url('../assets/badges/noir/premium.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="site owner" style="background-image: url('../assets/badges/noir/booster.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="early user" style="background-image: url('../assets/badges/noir/early.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="T.D.A member" style="background-image: url('../assets/badges/tda.png');"></div>
                 </div>
 
                 <div class="bio-container">
                     <div class="bio typewriter"></div>
                 </div>
+
                 <div class="pre-container">
                     <div class="pre">
-                        <div class="cropped">
-                            <img draggable="false" id="rpc">
-                        </div>
+                        <div class="cropped"></div>
                     </div>
                 </div>
-                <div class="links-container" id="linksDiv">           
-                    <div class="logo steam" id="steam" onclick="window.open('https://steamcommunity.com/id/cc_rajada', '_blank');">
-                        <i class="fab fa-steam"></i>
-                    </div> 
-                    <div class="logo github" id="github" onclick="window.open('https://github.com//noir157', '_blank');">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <div class="logo youtube" id="youtube" onclick="window.open('https://www.youtube.com/@Guizindz', '_blank');">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <div class="logo roblox" id="roblox" onclick="window.open('https://www.roblox.com/pt/users/4508428068/profile', '_blank');">
-                        <i class="fab fa-roblox"></i>
-                    </div>
-                    <div class="logo steam" id="steam" onclick="window.open('https://steamcommunity.com/profiles/76561198054003686/', '_blank');">
-                        <i class="fab fa-steam"></i>
-                    </div> 
+
+                <div class="links-container" id="linksDiv">
+                    <a class="logo" href="https://steamcommunity.com/id/cc_rajada" target="_blank" rel="noopener" aria-label="steam"><i class="fab fa-steam" aria-hidden="true"></i></a>
+                    <a class="logo" href="https://github.com/noir157" target="_blank" rel="noopener" aria-label="github"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    <a class="logo" href="https://www.youtube.com/@Guizindz" target="_blank" rel="noopener" aria-label="youtube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    <a class="logo" href="https://www.roblox.com/pt/users/4508428068/profile" target="_blank" rel="noopener" aria-label="roblox"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M5.16 1 1 18.84 18.84 23 23 5.16 5.16 1Zm8.47 14.06-4.69-1.1 1.1-4.69 4.69 1.1-1.1 4.69Z"/></svg></a>
+                    <a class="logo" href="https://steamcommunity.com/profiles/76561198054003686/" target="_blank" rel="noopener" aria-label="steam 2"><i class="fab fa-steam" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="linksline"></div>
 
-                <div class="views-container">
-                    <svg viewBox="0 0 24 24" width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0" style="margin-bottom: -3px;"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 14C3 9.02944 7.02944 5 12 5C16.9706 5 21 9.02944 21 14M17 14C17 16.7614 14.7614 19 12 19C9.23858 19 7 16.7614 7 14C7 11.2386 9.23858 9 12 9C14.7614 9 17 11.2386 17 14Z" stroke="#c18be0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                    <span id="view-count">666</span>
+                <div class="card-footer">
+                    <div class="np" role="group" aria-label="música">
+                        <button id="playbtn" class="np-btn" aria-label="tocar"><i class="fas fa-play"></i></button>
+                        <div class="np-info">
+                            <div class="np-title"><span>Mishlawi – All Night</span></div>
+                            <input type="range" id="np-seek" min="0" max="1000" value="0" aria-label="posição da música">
+                        </div>
+                        <span id="np-time" class="np-time">0:00</span>
+                        <div class="np-vol">
+                            <button id="mutetext" class="np-btn" onclick="toggleMusic()" aria-label="silenciar"><i class="fas fa-volume-up"></i></button>
+                            <input type="range" id="volumeSlider" min="0" max="100" value="30" class="np-volume" aria-label="volume">
+                        </div>
+                    </div>
+                    <div class="views-container" title="visitas">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M3 14C3 9.03 7.03 5 12 5s9 4.03 9 9m-4 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span id="view-count" data-slide>…</span>
+                    </div>
                 </div>
             </div>
 
-        <div class="volume-control">
-            <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
-            <p id="mutetext" onclick="toggleMusic()"><i class="fas fa-volume-up"></i></p>
-        </div>
-            
+        </main>
+
 
     </div>
 
-    <audio id="backgroundsong" src="./r2.wya.lol/all night.mp3" loop></audio>
+    <audio id="backgroundsong" src="../media/noir/musica.mp3" loop preload="auto"></audio>
 
-    <script src="snow.js" defer></script>
-    <script src="effects.js" defer></script>
-    <script src="effects2.js" defer></script>
-    <script src="view.js" defer></script>
-    <script src="members.js" defer></script>
-    <script src="sync.js" defer></script>
-
+    <script>window.SITE = {"dominio":"https://irmandade.cc","nome":"irmandade.cc","titulo":"Irmandade","descricao":"Tropa da Angola - Irmandade oficial","entrada":"𝔗𝔯𝔬𝔭𝔞 𝔡𝔞 𝔞𝔫𝔤𝔬𝔩𝔞","cor":"#c18be0","fundo":"media/hub/fundo.mp4","capa":"media/hub/capa.jpg","musica":"media/hub/musica.mp3","firebase":"https://projeto-44d28.firebaseio.com"}; window.MEMBRO = {"id":"noir","nome":"Noir","uid":1,"cor":"#c18be0","avatar":"assets/img/noir.jpg","entrada":"𝖑𝖚𝖘𝖙","frases":["evil will never win"],"badges":["premium","dono","early","tda"],"badgesHub":["premium","dono","tda"],"discord":"1395261726022307960","badgesDiscordExtras":["nitro","server_boost","gifting-luminary"],"fundo":"media/noir/fundo.mp4","capa":"media/noir/capa.jpg","musica":"media/noir/musica.mp3","nomeMusica":"Mishlawi – All Night","sincronizar":true,"contador":"views","links":[{"tipo":"steam","url":"https://steamcommunity.com/id/cc_rajada"},{"tipo":"github","url":"https://github.com/noir157"},{"tipo":"youtube","url":"https://www.youtube.com/@Guizindz"},{"tipo":"roblox","url":"https://www.roblox.com/pt/users/4508428068/profile"},{"tipo":"steam","url":"https://steamcommunity.com/profiles/76561198054003686/","nome":"steam 2"}]}; window.MEMBROS = [{"id":"noir","nome":"Noir","discord":"1395261726022307960","cor":"#c18be0"},{"id":"emmanuel","nome":"Emmanuel","discord":"556152345885671467","cor":"#00a2ff"},{"id":"baresi","nome":"Baresi","discord":"726952230476972162","cor":"#00691a"},{"id":"caion","nome":"Caion","discord":"589184396222005260","cor":"#00691a"}];</script>
+    <script src="../assets/js/snow.js" defer></script>
+    <script src="../assets/js/perfil.js" defer></script>
+    <script src="../fx/fx.js" data-accent="#c18be0" data-discord="1395261726022307960" defer></script>
+    <script src="../fx/extra.js" defer></script>
 </body>
-
 </html>
-

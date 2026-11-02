@@ -1,12 +1,12 @@
 {
-  "name": "v0-project",
+  "name": "irmandade",
   "version": "1.0.0",
   "description": "",
-  "main": "efeitos.js",
+  "main": "build.js",
   "scripts": {
-    "dev": "serve -l 3000 .",
-    "start": "serve -l 3000 .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node build.js",
+    "dev": "node build.js && serve -l 3000 .",
+    "start": "serve -l 3000 ."
   },
   "repository": {
     "type": "git",
