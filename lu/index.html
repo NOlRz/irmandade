@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- gerado pelo build.js a partir do membros.json — não edite este arquivo na mão -->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lu · irmandade.cc</title>
+    <meta name="description" content="maybe loneliness isnt so bad">
+    <meta name="theme-color" content="#c9ccd6">
+    <link rel="canonical" href="https://irmandade.cc/lu/">
+
+    <!-- prévia ao colar o link no Discord / WhatsApp / Twitter -->
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="irmandade.cc">
+    <meta property="og:title" content="Lu · irmandade.cc">
+    <meta property="og:description" content="maybe loneliness isnt so bad">
+    <meta property="og:url" content="https://irmandade.cc/lu/">
+    <meta property="og:image" content="https://irmandade.cc/assets/og/lu.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://irmandade.cc/assets/og/lu.jpg">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../assets/img/favicon.png">
+
+    <link rel="preload" href="../assets/fonts/mainfont.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/perfil.css">
+    <link rel="stylesheet" href="../fx/fx.css">
+    <style>:root { --accent-rgb: 201, 204, 214; }</style>
+    <link rel="stylesheet" href="../fx/extra.css">
+</head>
+<body>
+
+    <div id="overlay">
+        <button class="overlaybtn" onclick="removeOverlay()">𝖑𝖚𝖘𝖙</button>
+    </div>
+
+    <button id="members-toggle" onclick="toggleMembersList()" aria-expanded="false" aria-controls="members-list" aria-label="membros">
+        <i id="members-icon" class="fa fa-users"></i>
+    </button>
+
+    <nav id="members-list">
+        <div class="member">
+            <a href="../noir/"><img src="../assets/img/noir.jpg" alt="" class="avatar"><span class="member-name">Noir</span></a>
+        </div>
+        <div class="member">
+            <a href="../emmanuel/"><img src="../assets/img/emmanuel.jpg" alt="" class="avatar"><span class="member-name">Emmanuel</span></a>
+        </div>
+        <div class="member">
+            <a href="../baresi/"><img src="../assets/img/baresi.jpg" alt="" class="avatar"><span class="member-name">Baresi</span></a>
+        </div>
+        <div class="member">
+            <a href="../caion/"><img src="../assets/img/caion.png" alt="" class="avatar"><span class="member-name">Caion</span></a>
+        </div>
+        <div class="member">
+            <a href="../lu/"><img src="../assets/img/lu.jpg" alt="" class="avatar"><span class="member-name">Lu</span></a>
+        </div>
+    </nav>
+
+    <div id="user-page">
+
+        <video class="background" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="../media/lu/capa.jpg">
+            <source src="../media/lu/fundo.mp4" type="video/mp4">
+        </video>
+
+        <main class="main-container" id="mainDiv">
+
+            <div class="profile-container">
+                <img class="pp" src="../assets/img/lu.jpg" alt="avatar de Lu" draggable="false">
+                <h1 class="username breathing" data-tooltip="uid: 5">Lu</h1>
+
+                <div class="badges-container">
+                    <div class="badges pic-badge" data-tooltip="premium user" style="background-image: url('../assets/badges/lu/premium.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="early user" style="background-image: url('../assets/badges/lu/early.png');"></div>
+                    <div class="badges pic-badge" data-tooltip="T.D.A member" style="background-image: url('../assets/badges/tda.png');"></div>
+                </div>
+
+                <div class="bio-container">
+                    <div class="bio typewriter"></div>
+                </div>
+
+                <div class="pre-container">
+                    <div class="pre">
+                        <div class="cropped"></div>
+                    </div>
+                </div>
+
+                <div class="links-container" id="linksDiv">
+                    <a class="logo" href="https://steamcommunity.com/id/ikiul/" target="_blank" rel="noopener" aria-label="steam"><i class="fab fa-steam" aria-hidden="true"></i></a>
+                    <a class="logo" href="https://open.spotify.com/user/31kisorafbv5z32cibqop3j4prta" target="_blank" rel="noopener" aria-label="spotify"><i class="fab fa-spotify" aria-hidden="true"></i></a>
+                    <a class="logo" href="https://boxd.it/gJkbj" target="_blank" rel="noopener" aria-label="letterboxd"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><g fill="currentColor"><circle cx="5" cy="12" r="3.3"/><circle cx="12" cy="12" r="3.3"/><circle cx="19" cy="12" r="3.3"/></g></svg></a>
+                    <a class="logo" href="https://www.instagram.com/ikiul_" target="_blank" rel="noopener" aria-label="instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a class="logo" href="https://x.com/_ikiul" target="_blank" rel="noopener" aria-label="x"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+                </div>
+
+                <div class="linksline"></div>
+
+                <div class="card-footer">
+                    <div class="np" role="group" aria-label="música">
+                        <button id="playbtn" class="np-btn" aria-label="tocar"><i class="fas fa-play"></i></button>
+                        <div class="np-info">
+                            <div class="np-title"><span>Travis Scott – I KNOW ?</span></div>
+                            <input type="range" id="np-seek" min="0" max="1000" value="0" aria-label="posição da música">
+                        </div>
+                        <span id="np-time" class="np-time">0:00</span>
+                        <div class="np-vol">
+                            <button id="mutetext" class="np-btn" onclick="toggleMusic()" aria-label="silenciar"><i class="fas fa-volume-up"></i></button>
+                            <input type="range" id="volumeSlider" min="0" max="100" value="30" class="np-volume" aria-label="volume">
+                        </div>
+                    </div>
+                    <div class="views-container" title="visitas">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M3 14C3 9.03 7.03 5 12 5s9 4.03 9 9m-4 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span id="view-count" data-slide>…</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+
+    </div>
+
+    <audio id="backgroundsong" src="../media/lu/musica.mp3" loop preload="auto"></audio>
+
+    <script>window.SITE = {"dominio":"https://irmandade.cc","nome":"irmandade.cc","titulo":"Irmandade","descricao":"Tropa da Angola - Irmandade oficial","entrada":"𝔗𝔯𝔬𝔭𝔞 𝔡𝔞 𝔞𝔫𝔤𝔬𝔩𝔞","cor":"#c18be0","fundo":"media/hub/fundo.mp4","capa":"media/hub/capa.jpg","musica":"media/hub/musica.mp3","firebase":"https://projeto-44d28.firebaseio.com"}; window.MEMBRO = {"id":"lu","nome":"Lu","uid":5,"cor":"#c9ccd6","avatar":"assets/img/lu.jpg","entrada":"𝖑𝖚𝖘𝖙","frases":["maybe loneliness isnt so bad"],"badges":["premium","early","tda"],"discord":"368516265653960715","badgesDiscordExtras":[],"fundo":"media/lu/fundo.mp4","capa":"media/lu/capa.jpg","musica":"media/lu/musica.mp3","nomeMusica":"Travis Scott – I KNOW ?","sincronizar":true,"contador":"lu_views","links":[{"tipo":"steam","url":"https://steamcommunity.com/id/ikiul/"},{"tipo":"spotify","url":"https://open.spotify.com/user/31kisorafbv5z32cibqop3j4prta"},{"tipo":"letterboxd","url":"https://boxd.it/gJkbj"},{"tipo":"instagram","url":"https://www.instagram.com/ikiul_"},{"tipo":"x","url":"https://x.com/_ikiul"}]}; window.MEMBROS = [{"id":"noir","nome":"Noir","discord":"1395261726022307960","cor":"#c18be0"},{"id":"emmanuel","nome":"Emmanuel","discord":"556152345885671467","cor":"#00a2ff"},{"id":"baresi","nome":"Baresi","discord":"726952230476972162","cor":"#00691a"},{"id":"caion","nome":"Caion","discord":"589184396222005260","cor":"#00691a"},{"id":"lu","nome":"Lu","discord":"368516265653960715","cor":"#c9ccd6"}];</script>
+    <script src="../assets/js/snow.js" defer></script>
+    <script src="../assets/js/perfil.js" defer></script>
+    <script src="../fx/fx.js" data-accent="#c9ccd6" data-discord="368516265653960715" defer></script>
+    <script src="../fx/extra.js" defer></script>
+</body>
+</html>

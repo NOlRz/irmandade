@@ -310,3 +310,24 @@ body .username.breathing {
     .fx-spark { display: none; }
     .hub-hero::before, .hub-hero::after { animation: none; opacity: 1; transform: translateX(-50%); }
 }
+
+/* ==========================================================
+   hub: manter os cards alinhados lado a lado (5+ membros)
+   5 por linha no desktop → 3 → 2 → 1, sempre centralizados
+   ========================================================== */
+#mainDiv { gap: 18px; align-items: stretch; }
+.profile-container[data-site] {
+    box-sizing: border-box;
+    flex: 1 1 calc(20% - 15px);
+    min-width: 0;
+    max-width: 320px;
+}
+@media (max-width: 1150px) {
+    .profile-container[data-site] { flex-basis: calc(33.333% - 12px); max-width: 360px; }
+}
+@media (max-width: 760px) {
+    .profile-container[data-site] { flex-basis: calc(50% - 9px); }
+}
+@media (max-width: 480px) {
+    .profile-container[data-site] { flex-basis: 100%; max-width: 360px; }
+}

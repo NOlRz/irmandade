@@ -185,6 +185,52 @@
       "sincronizar": true,
       "contador": "caion_views",
       "links": []
+    },
+    {
+      "id": "lu",
+      "nome": "Lu",
+      "uid": 5,
+      "cor": "#c9ccd6",
+      "avatar": "assets/img/lu.jpg",
+      "entrada": "𝖑𝖚𝖘𝖙",
+      "frases": [
+        "maybe loneliness isnt so bad"
+      ],
+      "badges": [
+        "premium",
+        "early",
+        "tda"
+      ],
+      "discord": "368516265653960715",
+      "badgesDiscordExtras": [],
+      "fundo": "media/lu/fundo.mp4",
+      "capa": "media/lu/capa.jpg",
+      "musica": "media/lu/musica.mp3",
+      "nomeMusica": "Travis Scott – I KNOW ?",
+      "sincronizar": true,
+      "contador": "lu_views",
+      "links": [
+        {
+          "tipo": "steam",
+          "url": "https://steamcommunity.com/id/ikiul/"
+        },
+        {
+          "tipo": "spotify",
+          "url": "https://open.spotify.com/user/31kisorafbv5z32cibqop3j4prta"
+        },
+        {
+          "tipo": "letterboxd",
+          "url": "https://boxd.it/gJkbj"
+        },
+        {
+          "tipo": "instagram",
+          "url": "https://www.instagram.com/ikiul_"
+        },
+        {
+          "tipo": "x",
+          "url": "https://x.com/_ikiul"
+        }
+      ]
     }
   ]
 }
