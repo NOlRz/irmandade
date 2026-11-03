@@ -310,7 +310,7 @@
         512: 'early_supporter', 16384: 'bug_hunter_level_2', 131072: 'verified_bot_developer',
         262144: 'certified_moderator', 4194304: 'active_developer'
     };
-    const STATUS = { online: ['#43b581', 'online'], idle: ['#faa61a', 'idle'], dnd: ['#f04747', 'do not disturb'], offline: ['#747f8d', 'offline'] };
+    const STATUS = { online: ['#43b581', 'online'], idle: ['#faa61a', 'idle'], dnd: ['#f04747', 'dnd'], offline: ['#747f8d', 'offline'] };
 
     const EXTRA_LABELS = {
         'streaming-breakout': 'Badge de transmissão',

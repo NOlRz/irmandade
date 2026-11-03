@@ -125,7 +125,7 @@
     const STATUS = {
         online:  ['#43b581', 'online'],
         idle:    ['#faa61a', 'idle'],
-        dnd:     ['#f04747', 'do not disturb'],
+        dnd:     ['#f04747', 'dnd'],
         offline: ['#747f8d', 'offline']
     };
 
