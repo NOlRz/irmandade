@@ -6,6 +6,8 @@
     const audio = $('#backgroundsong');
     const video = $('#backgroundvideo');
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // no iPhone/iPad o site não consegue mudar o volume (só o mudo funciona): esconde a barrinha
+    if (/iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) document.documentElement.classList.add('is-ios');
 
     const store = {
         get(k, d) { try { const v = localStorage.getItem('irmandade:' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },

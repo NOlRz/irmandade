@@ -11,6 +11,10 @@
     const audio = $('#backgroundsong');
     const video = $('.background');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // iPhone/iPad: o Safari ignora mudo/volume e pode travar ao despausar quando o
+    // áudio passa pela Web Audio (efeito do avatar no ritmo). Lá o áudio fica "normal".
+    const IOS = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (IOS) document.documentElement.classList.add('is-ios');
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -23,12 +27,28 @@
     if ($('#volumeSlider')) $('#volumeSlider').value = savedVol;
     if (audio) audio.muted = store.get('mudo', false);
 
+    // volume e mudo passam por aqui: com o efeito do avatar ligado (Web Audio) quem
+    // controla o som é o gainNode; sem ele, o próprio <audio>
+    let audioCtx = null, gainNode = null, curVol = 0;
+    function setVol(v) {
+        curVol = Math.min(1, Math.max(0, v));
+        if (gainNode) gainNode.gain.value = audio.muted ? 0 : curVol;
+        else if (audio) audio.volume = curVol;
+    }
+    function setMuted(m) {
+        audio.muted = m;
+        if (gainNode) gainNode.gain.value = m ? 0 : curVol;
+        store.set('mudo', m);
+    }
+
+    let fadeId = 0;
     function fadeTo(target, ms = 1200) {
         if (!audio) return;
-        const from = audio.volume, start = performance.now();
+        const id = ++fadeId, from = curVol, start = performance.now();
         const step = now => {
+            if (id !== fadeId) return; // outro fade começou: este para
             const t = Math.min(1, (now - start) / ms);
-            audio.volume = Math.min(1, Math.max(0, from + (target - from) * t));
+            setVol(from + (target - from) * t);
             if (t < 1) requestAnimationFrame(step);
         };
         requestAnimationFrame(step);
@@ -45,7 +65,7 @@
         if (video && M.sincronizar) video.currentTime = 0;
         if (video) video.play().catch(() => {});
         if (audio) {
-            audio.volume = 0;
+            setVol(0);
             audio.play().then(() => { fadeTo(($('#volumeSlider')?.value ?? 30) / 100); startVisualizer(); })
                 .catch(() => updateVolumeIcon());
         }
@@ -63,15 +83,15 @@
     window.toggleMusic = function () {
         if (!audio) return;
         if (audio.paused) audio.play().catch(() => {});
-        audio.muted = !audio.muted;
-        store.set('mudo', audio.muted);
+        setMuted(!audio.muted);
         updateVolumeIcon();
     };
 
     function updateVolumeIcon() {
         const btn = $('#mutetext');
         if (!btn || !audio) return;
-        const v = +($('#volumeSlider')?.value ?? audio.volume * 100) / 100;
+        // no iPhone quem manda no volume são os botões do aparelho: o ícone só mostra mudo ou não
+        const v = IOS ? 1 : +($("#volumeSlider")?.value ?? curVol * 100) / 100;
         const icon = audio.muted || v === 0 ? 'fa-volume-mute'
             : v < .5 ? 'fa-volume-down' : 'fa-volume-up';
         btn.innerHTML = `<i class="fas ${icon}"></i>`;
@@ -83,8 +103,9 @@
         slider.style.setProperty('--p', slider.value + '%');
         slider.addEventListener('input', () => {
             slider.style.setProperty('--p', slider.value + '%');
-            audio.volume = slider.value / 100;
-            if (audio.muted && slider.value > 0) { audio.muted = false; store.set('mudo', false); }
+            fadeId++; // para qualquer fade em andamento
+            setVol(slider.value / 100);
+            if (audio.muted && slider.value > 0) setMuted(false);
             store.set('volume', +slider.value);
             updateVolumeIcon();
         });
@@ -103,6 +124,7 @@
     if (audio && playBtn) {
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
+                if (audioCtx && audioCtx.state !== 'running') audioCtx.resume().catch(() => {});
                 if (M.sincronizar && video) video.currentTime = audio.currentTime;
                 audio.play().then(startVisualizer).catch(() => {});
                 video?.play().catch(() => {});
@@ -161,7 +183,8 @@
         } else if (wasPlaying) {
             if (M.sincronizar && video) video.currentTime = audio.currentTime;
             const v = ($('#volumeSlider')?.value ?? 30) / 100;
-            audio.volume = 0;
+            if (audioCtx && audioCtx.state !== 'running') audioCtx.resume().catch(() => {});
+            setVol(0);
             audio.play().then(() => fadeTo(v, 600)).catch(() => {});
             video?.play().catch(() => {});
         }
@@ -462,60 +485,65 @@
 
         const device = d.active_on_discord_mobile && !d.active_on_discord_desktop ? '<i class="fas fa-mobile-alt"></i>' : '';
 
-        let extra = '';
-        if (sp) {
-            extra += `
-            <div class="dc-section">
-                <div class="dc-section-title"><i class="fab fa-spotify"></i> ouvindo Spotify</div>
-                <div class="dc-act">
-                    <img class="dc-cover" src="${esc(sp.album_art_url)}" alt="">
-                    <div class="dc-act-info">
-                        <a class="dc-act-name" href="https://open.spotify.com/track/${esc(sp.track_id)}" target="_blank" rel="noopener">${esc(sp.song)}</a>
-                        <div class="dc-act-sub">${esc(sp.artist)}</div>
-                        ${barHTML(sp.timestamps)}
-                    </div>
-                </div>
-            </div>`;
-        }
+        // cada atividade vira um item: a primeira aparece grande, as outras compactas
+        // (assim o cartão não cresce demais quando tem Spotify + jogo + ...)
+        const items = [];
+        if (sp) items.push({
+            icon: 'fab fa-spotify', title: 'ouvindo Spotify',
+            cover: `<div class="dc-cover-wrap"><img class="dc-cover" src="${esc(sp.album_art_url)}" alt=""></div>`,
+            name: `<a class="dc-act-name" href="https://open.spotify.com/track/${esc(sp.track_id)}" target="_blank" rel="noopener">${esc(sp.song)}</a>`,
+            subs: [[sp.artist, '']], mini: sp.artist, ts: sp.timestamps
+        });
         if (music) {
             const icon = musicIcon(music.name);
             const song = music.details || music.name;
             const artist = (music.state || '').replace(/^(by|de|por)\s+/i, '');
             const album = music.assets?.large_text && music.assets.large_text !== song && music.assets.large_text !== music.state ? music.assets.large_text : '';
-            const isApple = icon === 'fab fa-apple';
-            const songHTML = isApple
-                ? `<a class="dc-act-name" href="https://music.apple.com/br/search?term=${encodeURIComponent(song + ' ' + artist)}" target="_blank" rel="noopener">${esc(song)}</a>`
-                : `<div class="dc-act-name">${esc(song)}</div>`;
-            extra += `
-            <div class="dc-section">
-                <div class="dc-section-title"><i class="${icon}"></i> ouvindo ${esc(music.name)}</div>
-                <div class="dc-act">
-                    ${coverHTML(music, 'fas fa-music')}
-                    <div class="dc-act-info">
-                        ${songHTML}
-                        ${artist ? `<div class="dc-act-sub">${esc(artist)}</div>` : ''}
-                        ${album ? `<div class="dc-act-sub dc-act-album">${esc(album)}</div>` : ''}
-                        ${barHTML(music.timestamps)}
-                    </div>
-                </div>
-            </div>`;
+            items.push({
+                icon, title: 'ouvindo ' + esc(music.name),
+                cover: coverHTML(music, 'fas fa-music'),
+                name: icon === 'fab fa-apple'
+                    ? `<a class="dc-act-name" href="https://music.apple.com/br/search?term=${encodeURIComponent(song + ' ' + artist)}" target="_blank" rel="noopener">${esc(song)}</a>`
+                    : `<div class="dc-act-name">${esc(song)}</div>`,
+                subs: [[artist, ''], [album, 'dc-act-album']], mini: artist, ts: music.timestamps
+            });
         }
         if (game) {
             const verb = { 0: 'jogando', 1: 'transmitindo', 3: 'assistindo', 5: 'competindo em' }[game.type];
-            extra += `
+            items.push({
+                icon: 'fas fa-gamepad', title: verb,
+                cover: coverHTML(game, 'fas fa-gamepad'),
+                name: `<div class="dc-act-name">${esc(game.name)}</div>`,
+                subs: [[game.details, ''], [game.state, '']],
+                mini: verb + (game.details || game.state ? ' · ' + (game.details || game.state) : ''),
+                start: game.timestamps?.start
+            });
+        }
+        const full = it => `
             <div class="dc-section">
-                <div class="dc-section-title"><i class="fas fa-gamepad"></i> ${verb}</div>
+                <div class="dc-section-title"><i class="${it.icon}"></i> ${it.title}</div>
                 <div class="dc-act">
-                    ${coverHTML(game, 'fas fa-gamepad')}
+                    ${it.cover}
                     <div class="dc-act-info">
-                        <div class="dc-act-name">${esc(game.name)}</div>
-                        ${game.details ? `<div class="dc-act-sub">${esc(game.details)}</div>` : ''}
-                        ${game.state ? `<div class="dc-act-sub">${esc(game.state)}</div>` : ''}
-                        ${game.timestamps?.start ? `<div class="dc-act-sub dc-elapsed" data-start="${game.timestamps.start}"></div>` : ''}
+                        ${it.name}
+                        ${it.subs.filter(([t]) => t).map(([t, c]) => `<div class="dc-act-sub ${c}">${esc(t)}</div>`).join('')}
+                        ${it.start ? `<div class="dc-act-sub dc-elapsed" data-start="${it.start}"></div>` : ''}
+                        ${barHTML(it.ts)}
                     </div>
                 </div>
             </div>`;
-        }
+        const mini = it => `
+            <div class="dc-section dc-mini">
+                <div class="dc-act">
+                    ${it.cover}
+                    <div class="dc-act-info">
+                        ${it.name}
+                        <div class="dc-act-sub"><i class="${it.icon}"></i>${it.mini ? esc(it.mini) : ''}</div>
+                        ${barHTML(it.ts, false)}
+                    </div>
+                </div>
+            </div>`;
+        const extra = items.slice(0, 3).map((it, i) => i === 0 ? full(it) : mini(it)).join('');
 
         return `
         <div class="dc-card" style="--st:${color}">
@@ -567,10 +595,10 @@
     }, 1000);
 
     // barra de progresso da música (Spotify, Apple Music...) — só se o app mandar início e fim
-    function barHTML(ts) {
+    function barHTML(ts, times = true) {
         if (!ts || !ts.start || !ts.end || ts.end <= ts.start) return '';
-        return `<div class="dc-bar" data-start="${+ts.start}" data-end="${+ts.end}"><span></span></div>
-                        <div class="dc-times"><span class="dc-now">0:00</span><span>${fmt(ts.end - ts.start)}</span></div>`;
+        return `<div class="dc-bar" data-start="${+ts.start}" data-end="${+ts.end}"><span></span></div>` +
+            (times ? `<div class="dc-times"><span class="dc-now">0:00</span><span>${fmt(ts.end - ts.start)}</span></div>` : '');
     }
 
     function tickBars() {
@@ -652,15 +680,21 @@
     // ---------- avatar pulsando no ritmo da música ----------
     let vizStarted = false;
     function startVisualizer() {
-        if (vizStarted || reduce || !audio || !window.AudioContext) return;
+        if (vizStarted || reduce || IOS || !audio || !window.AudioContext) return;
         vizStarted = true;
         try {
             const ctx = new AudioContext();
+            const gain = ctx.createGain();
+            gain.gain.value = audio.muted ? 0 : curVol;
             const src = ctx.createMediaElementSource(audio);
             const an = ctx.createAnalyser();
             an.fftSize = 256;
             src.connect(an);
-            an.connect(ctx.destination);
+            an.connect(gain);
+            gain.connect(ctx.destination);
+            audioCtx = ctx;
+            gainNode = gain;
+            audio.volume = 1; // daqui pra frente o volume é o do gain
             const data = new Uint8Array(an.frequencyBinCount);
             const target = $('.main-container');
             let smooth = 0;

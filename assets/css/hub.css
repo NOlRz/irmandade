@@ -1232,3 +1232,6 @@ canvas {
 /* ---------- cores por membro no hub ---------- */
 .profile-container .badges-container { cursor: pointer; }
 a.profile-container { text-decoration: none; color: inherit; }
+
+/* iPhone/iPad: o volume só muda pelos botões do aparelho, então fica só o botão de mudo */
+.is-ios #volume-slider { display: none !important; }
