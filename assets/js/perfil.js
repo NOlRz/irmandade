@@ -379,9 +379,13 @@
         const name = u.display_name || u.global_name || u.username;
 
         // nome com as cores/gradiente que a pessoa usa no Discord (se tiver)
-        const cols = u.display_name_styles?.colors?.length ? u.display_name_styles.colors.map(intToHex) : null;
+        // cor 0 = cor padrão do Discord (não é preto): ignora
+        const rawCols = (u.display_name_styles?.colors || []).filter(c => c);
+        const cols = rawCols.length > 1 ? rawCols.map(intToHex) : null;
+        const solid = rawCols.length === 1 ? intToHex(rawCols[0]) : null;
         const nameStyle = cols
-            ? `style="background:linear-gradient(90deg, ${cols.join(', ')});-webkit-background-clip:text;background-clip:text;color:transparent"` : '';
+            ? `style="background:linear-gradient(90deg, ${cols.join(', ')});-webkit-background-clip:text;background-clip:text;color:transparent"`
+            : solid ? `style="color:${solid}"` : '';
 
         let badgesHTML = '';
         if (dprofile && Array.isArray(dprofile.badges)) {
