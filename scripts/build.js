@@ -1,13 +1,14 @@
 /* ==========================================================
    irmandade.cc — gerador das páginas
-   Edite o membros.json e rode:   npm run build
+   Edite o membros.json e rode:   npm run build   (ou: node scripts/build.js)
    Isso recria o index.html do hub e o index.html de cada membro.
    (não edite esses index.html na mão: eles são sobrescritos)
    ========================================================== */
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
-const ROOT = __dirname;
+const ROOT = path.join(__dirname, '..');
 const { site, membros } = JSON.parse(fs.readFileSync(path.join(ROOT, 'membros.json'), 'utf8'));
 
 const FA = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css';
@@ -15,6 +16,8 @@ const FA = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.mi
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const rgb = hex => { const n = parseInt(hex.replace('#', ''), 16); return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`; };
 const json = o => JSON.stringify(o).replace(/</g, '\\u003c');
+// ?v=… muda sempre que a imagem muda: assim o Discord não fica mostrando a miniatura antiga
+const ver = p => { try { return '?v=' + crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, p))).digest('hex').slice(0, 8); } catch { return ''; } };
 
 const BADGES = {
     premium: (m, p) => [`${p}assets/badges/${m.id}/premium.png`, 'premium user'],
@@ -24,9 +27,11 @@ const BADGES = {
 };
 
 const ROBLOX_SVG = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M5.16 1 1 18.84 18.84 23 23 5.16 5.16 1Zm8.47 14.06-4.69-1.1 1.1-4.69 4.69 1.1-1.1 4.69Z"/></svg>';
+const LETTERBOXD_SVG = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><g fill="currentColor"><circle cx="5" cy="12" r="3.3"/><circle cx="12" cy="12" r="3.3"/><circle cx="19" cy="12" r="3.3"/></g></svg>';
 
 function linkIcon(tipo) {
     if (tipo === 'roblox') return ROBLOX_SVG;
+    if (tipo === 'letterboxd') return LETTERBOXD_SVG;
     const map = { twitter: 'x-twitter', x: 'x-twitter' };
     return `<i class="fab fa-${map[tipo] || tipo}" aria-hidden="true"></i>`;
 }
@@ -59,6 +64,7 @@ function head({ title, desc, url, image, color, p, css, ogType = 'website' }) {
     <meta property="og:description" content="${esc(desc)}">
     <meta property="og:url" content="${url}">
     <meta property="og:image" content="${image}">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -73,8 +79,8 @@ function head({ title, desc, url, image, color, p, css, ogType = 'website' }) {
     <link rel="preload" href="${p}assets/fonts/mainfont.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="${FA}">
     <link rel="stylesheet" href="${p}assets/css/${css}">
-    <link rel="stylesheet" href="${p}fx/fx.css">
-    <link rel="stylesheet" href="${p}fx/extra.css">
+    <link rel="stylesheet" href="${p}assets/css/fx.css">
+    <link rel="stylesheet" href="${p}assets/css/extra.css">
 </head>`;
 }
 
@@ -99,10 +105,10 @@ function hubPage() {
         title: site.nome,
         desc: site.descricao,
         url: site.dominio + '/',
-        image: `${site.dominio}/assets/og/hub.jpg`,
+        image: `${site.dominio}/assets/og/hub.jpg${ver('assets/og/hub.jpg')}`,
         color: site.cor, p, css: 'hub.css'
     })}
-<body>
+<body class="hub">
 
     <div id="overlay">
         <button class="overlaybtn" onclick="removeOverlay()">${esc(site.entrada)}</button>
@@ -130,8 +136,8 @@ ${cards}
     <script>window.SITE = ${json(site)}; window.MEMBROS = ${json(membros.map(({ id, nome, discord, cor }) => ({ id, nome, discord, cor })))};</script>
     <script src="${p}assets/js/snow.js" defer></script>
     <script src="${p}assets/js/hub.js" defer></script>
-    <script src="${p}fx/fx.js" data-accent="${site.cor}" defer></script>
-    <script src="${p}fx/extra.js" defer></script>
+    <script src="${p}assets/js/fx.js" data-accent="${site.cor}" defer></script>
+    <script src="${p}assets/js/extra.js" defer></script>
 </body>
 </html>
 `;
@@ -157,9 +163,9 @@ function profilePage(m) {
         title: `${m.nome} · ${site.nome}`,
         desc: m.frases[0] || site.descricao,
         url: `${site.dominio}/${m.id}/`,
-        image: `${site.dominio}/assets/og/${m.id}.jpg`,
+        image: `${site.dominio}/assets/og/${m.id}.jpg${ver(`assets/og/${m.id}.jpg`)}`,
         color: m.cor, p, css: 'perfil.css', ogType: 'profile'
-    }).replace('<link rel="stylesheet" href="../fx/fx.css">', `<link rel="stylesheet" href="../fx/fx.css">\n    <style>:root { --accent-rgb: ${rgb(m.cor)}; }</style>`)}
+    }).replace('<link rel="stylesheet" href="../assets/css/fx.css">', `<link rel="stylesheet" href="../assets/css/fx.css">\n    <style>:root { --accent-rgb: ${rgb(m.cor)}; }</style>`)}
 <body>
 
     <div id="overlay">
@@ -231,8 +237,8 @@ ${links}
     <script>window.SITE = ${json(site)}; window.MEMBRO = ${json(m)}; window.MEMBROS = ${json(membros.map(({ id, nome, discord, cor }) => ({ id, nome, discord, cor })))};</script>
     <script src="${p}assets/js/snow.js" defer></script>
     <script src="${p}assets/js/perfil.js" defer></script>
-    <script src="${p}fx/fx.js" data-accent="${m.cor}" data-discord="${m.discord || ''}" defer></script>
-    <script src="${p}fx/extra.js" defer></script>
+    <script src="${p}assets/js/fx.js" data-accent="${m.cor}" data-discord="${m.discord || ''}" defer></script>
+    <script src="${p}assets/js/extra.js" defer></script>
 </body>
 </html>
 `;

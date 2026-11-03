@@ -262,6 +262,21 @@
     document.addEventListener('click', e => { if (!e.target.closest('#members-list, #members-toggle')) closeMembers(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMembers(); });
 
+    // celular: o botão de membros some enquanto desce a página (não fica por cima do cartão)
+    // e volta ao subir ou ao chegar no fim
+    {
+        let lastY = scrollY;
+        addEventListener('scroll', () => {
+            const y = scrollY, btn = $('#members-toggle');
+            if (!btn) return;
+            const atEnd = innerHeight + y >= document.documentElement.scrollHeight - 30;
+            const open = $('#members-list')?.classList.contains('expand');
+            if (Math.abs(y - lastY) < 6 && !atEnd) return;
+            btn.classList.toggle('fx-hide', y > lastY && y > 60 && !atEnd && !open);
+            lastY = y;
+        }, { passive: true });
+    }
+
     // pré-carrega a página de um membro ao passar o mouse (abre mais rápido)
     const prefetched = new Set();
     document.addEventListener('pointerover', e => {
@@ -353,13 +368,50 @@
     }
 
     const intToHex = n => '#' + (n >>> 0).toString(16).padStart(6, '0').slice(-6);
+    // cor do nome que dá pra ler no fundo escuro do card (cor escura vira a mesma cor, só que clara)
+    function readable(hex) {
+        const n = parseInt(hex.slice(1), 16);
+        const r = (n >> 16 & 255) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2;
+        if (l >= .55) return hex;
+        let h = 0, s = 0;
+        if (max !== min) {
+            const d = max - min;
+            s = l > .5 ? d / (2 - max - min) : d / (max + min);
+            h = (max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4) * 60;
+        }
+        return s < .15 ? `hsl(0 0% 88%)` : `hsl(${Math.round(h)} ${Math.round(s * 100)}% 64%)`;
+    }
 
-    function activityImage(a) {
-        const img = a.assets && a.assets.large_image;
-        if (!img) return '';
+    function activityImage(a, key = 'large_image') {
+        const img = a.assets && a.assets[key];
+        // jogo sem imagem (ex: Fortnite detectado pelo Discord): tenta o ícone do app
+        if (!img) return key === 'large_image' && a.application_id ? `https://dcdn.dstn.to/app-icons/${a.application_id}` : '';
         if (img.startsWith('mp:')) return 'https://media.discordapp.net/' + img.slice(3);
         if (img.startsWith('spotify:')) return 'https://i.scdn.co/image/' + img.slice(8);
+        if (/^https?:\/\//.test(img)) return img;
         return a.application_id ? `https://cdn.discordapp.com/app-assets/${a.application_id}/${img}.png` : '';
+    }
+
+    // ícone do app de música (Apple Music, YouTube Music, Deezer...)
+    function musicIcon(name) {
+        const n = (name || '').toLowerCase();
+        if (n.includes('apple') || n.includes('itunes') || n.includes('cider')) return 'fab fa-apple';
+        if (n.includes('youtube')) return 'fab fa-youtube';
+        if (n.includes('deezer')) return 'fab fa-deezer';
+        if (n.includes('soundcloud')) return 'fab fa-soundcloud';
+        if (n.includes('spotify')) return 'fab fa-spotify';
+        return 'fas fa-headphones';
+    }
+
+    function coverHTML(a, icon) {
+        const big = activityImage(a);
+        const small = activityImage(a, 'small_image');
+        const fb = `<div class="dc-cover dc-cover-fallback"><i class="${icon}"></i></div>`;
+        const img = big
+            ? `<img class="dc-cover" src="${esc(big)}" alt="" onerror="this.outerHTML=this.dataset.fb" data-fb="${esc(fb)}">`
+            : fb;
+        return `<div class="dc-cover-wrap">${img}${small && big ? `<img class="dc-cover-small" src="${esc(small)}" alt="" onerror="this.remove()">` : ''}</div>`;
     }
 
     function emojiHTML(e) {
@@ -381,8 +433,8 @@
         // nome com as cores/gradiente que a pessoa usa no Discord (se tiver)
         // cor 0 = cor padrão do Discord (não é preto): ignora
         const rawCols = (u.display_name_styles?.colors || []).filter(c => c);
-        const cols = rawCols.length > 1 ? rawCols.map(intToHex) : null;
-        const solid = rawCols.length === 1 ? intToHex(rawCols[0]) : null;
+        const cols = rawCols.length > 1 ? rawCols.map(c => readable(intToHex(c))) : null;
+        const solid = rawCols.length === 1 ? readable(intToHex(rawCols[0])) : null;
         const nameStyle = cols
             ? `style="background:linear-gradient(90deg, ${cols.join(', ')});-webkit-background-clip:text;background-clip:text;color:transparent"`
             : solid ? `style="color:${solid}"` : '';
@@ -405,6 +457,8 @@
         const custom = acts.find(a => a.type === 4);
         const game = acts.find(a => a.type === 0 || a.type === 1 || a.type === 3 || a.type === 5);
         const sp = d.listening_to_spotify && d.spotify;
+        // "Ouvindo" de outros apps (Apple Music etc). O do Spotify já vem pronto em d.spotify
+        const music = acts.find(a => a.type === 2 && !(sp && (a.id === 'spotify:1' || a.name === 'Spotify')));
 
         const device = d.active_on_discord_mobile && !d.active_on_discord_desktop ? '<i class="fas fa-mobile-alt"></i>' : '';
 
@@ -418,20 +472,41 @@
                     <div class="dc-act-info">
                         <a class="dc-act-name" href="https://open.spotify.com/track/${esc(sp.track_id)}" target="_blank" rel="noopener">${esc(sp.song)}</a>
                         <div class="dc-act-sub">${esc(sp.artist)}</div>
-                        <div class="dc-bar"><span></span></div>
-                        <div class="dc-times"><span class="dc-now">0:00</span><span>${fmt(sp.timestamps.end - sp.timestamps.start)}</span></div>
+                        ${barHTML(sp.timestamps)}
+                    </div>
+                </div>
+            </div>`;
+        }
+        if (music) {
+            const icon = musicIcon(music.name);
+            const song = music.details || music.name;
+            const artist = (music.state || '').replace(/^(by|de|por)\s+/i, '');
+            const album = music.assets?.large_text && music.assets.large_text !== song && music.assets.large_text !== music.state ? music.assets.large_text : '';
+            const isApple = icon === 'fab fa-apple';
+            const songHTML = isApple
+                ? `<a class="dc-act-name" href="https://music.apple.com/br/search?term=${encodeURIComponent(song + ' ' + artist)}" target="_blank" rel="noopener">${esc(song)}</a>`
+                : `<div class="dc-act-name">${esc(song)}</div>`;
+            extra += `
+            <div class="dc-section">
+                <div class="dc-section-title"><i class="${icon}"></i> ouvindo ${esc(music.name)}</div>
+                <div class="dc-act">
+                    ${coverHTML(music, 'fas fa-music')}
+                    <div class="dc-act-info">
+                        ${songHTML}
+                        ${artist ? `<div class="dc-act-sub">${esc(artist)}</div>` : ''}
+                        ${album ? `<div class="dc-act-sub dc-act-album">${esc(album)}</div>` : ''}
+                        ${barHTML(music.timestamps)}
                     </div>
                 </div>
             </div>`;
         }
         if (game) {
-            const img = activityImage(game);
             const verb = { 0: 'jogando', 1: 'transmitindo', 3: 'assistindo', 5: 'competindo em' }[game.type];
             extra += `
             <div class="dc-section">
                 <div class="dc-section-title"><i class="fas fa-gamepad"></i> ${verb}</div>
                 <div class="dc-act">
-                    ${img ? `<img class="dc-cover" src="${esc(img)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'dc-cover dc-cover-fallback',innerHTML:'<i class=\\'fas fa-gamepad\\'></i>'}))">` : `<div class="dc-cover dc-cover-fallback"><i class="fas fa-gamepad"></i></div>`}
+                    ${coverHTML(game, 'fas fa-gamepad')}
                     <div class="dc-act-info">
                         <div class="dc-act-name">${esc(game.name)}</div>
                         ${game.details ? `<div class="dc-act-sub">${esc(game.details)}</div>` : ''}
@@ -491,20 +566,23 @@
         });
     }, 1000);
 
-    function tickSpotify(sp) {
-        clearInterval(spotifyTimer);
-        if (!sp) return;
-        const total = sp.timestamps.end - sp.timestamps.start;
-        const step = () => {
-            const now = Math.min(total, Date.now() - sp.timestamps.start);
-            const bar = $('.dc-bar span');
-            const t = $('.dc-now');
-            if (bar) bar.style.width = (now / total * 100) + '%';
-            if (t) t.textContent = fmt(now);
-        };
-        step();
-        spotifyTimer = setInterval(step, 1000);
+    // barra de progresso da música (Spotify, Apple Music...) — só se o app mandar início e fim
+    function barHTML(ts) {
+        if (!ts || !ts.start || !ts.end || ts.end <= ts.start) return '';
+        return `<div class="dc-bar" data-start="${+ts.start}" data-end="${+ts.end}"><span></span></div>
+                        <div class="dc-times"><span class="dc-now">0:00</span><span>${fmt(ts.end - ts.start)}</span></div>`;
     }
+
+    function tickBars() {
+        document.querySelectorAll('.dc-bar[data-end]').forEach(bar => {
+            const start = +bar.dataset.start, total = +bar.dataset.end - start;
+            const now = Math.min(total, Math.max(0, Date.now() - start));
+            bar.firstElementChild.style.width = (now / total * 100) + '%';
+            const t = bar.parentElement.querySelector('.dc-now');
+            if (t) t.textContent = fmt(now);
+        });
+    }
+    setInterval(tickBars, 1000);
 
     let lastKey = '';
     let lastPresence = null;
@@ -530,11 +608,11 @@
         $('.pre-container').style.display = '';
         window.dispatchEvent(new CustomEvent('lanyard', { detail: d }));
         // só redesenha se algo mudou (evita piscar)
-        const key = JSON.stringify([d.discord_status, d.discord_user.avatar, d.discord_user.avatar_decoration_data?.asset, d.discord_user.global_name, d.spotify?.track_id, d.spotify?.timestamps?.start, (d.activities || []).map(a => a.name + a.details + a.state)]);
+        const key = JSON.stringify([d.discord_status, d.discord_user.avatar, d.discord_user.avatar_decoration_data?.asset, d.discord_user.global_name, d.spotify?.track_id, d.spotify?.timestamps?.start, (d.activities || []).map(a => [a.type, a.name, a.details, a.state, a.timestamps?.start, a.timestamps?.end, a.assets?.large_image].join('|'))]);
         if (key === lastKey) return;
         lastKey = key;
         box.innerHTML = renderCard(d);
-        tickSpotify(d.listening_to_spotify && d.spotify);
+        tickBars();
     }
 
     // Conecta no Lanyard por WebSocket: status, jogo e Spotify mudam na hora,

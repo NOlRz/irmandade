@@ -1,25 +1,23 @@
 {
   "name": "irmandade",
   "version": "1.0.0",
-  "description": "",
-  "main": "build.js",
+  "private": true,
+  "description": "Site de bio da Tropa da Angola — irmandade.cc",
   "scripts": {
-    "build": "node build.js",
-    "dev": "node build.js && serve -l 3000 .",
+    "build": "node scripts/build.js",
+    "og": "node scripts/og.js && node scripts/build.js",
+    "dev": "node scripts/build.js && serve -l 3000 .",
     "start": "serve -l 3000 ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NOlRz/irmandade.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/NOlRz/irmandade/issues"
   },
   "homepage": "https://github.com/NOlRz/irmandade#readme",
+  "license": "ISC",
   "dependencies": {
     "serve": "^14.2.6"
   }

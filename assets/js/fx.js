@@ -1,6 +1,6 @@
 /* ==========================================================
    irmandade fx — camada de interação compartilhada (JS puro)
-   Uso: <script src="fx/fx.js" data-accent="#c18be0" data-discord="ID" defer></script>
+   Uso: <script src="assets/js/fx.js" data-accent="#c18be0" data-discord="ID" defer></script>
    ========================================================== */
 (() => {
     const script = document.currentScript;
@@ -136,17 +136,47 @@
     }
 
     if (isHub) {
-        avatars.forEach(({ id, dot, card }) => {
+        const byId = {};
+        avatars.forEach(a => { byId[a.id] = a; });
+        const apply = data => {
+            if (data && !data.discord_user && data.user_id) data.discord_user = { id: data.user_id };
+            const id = data && data.discord_user && data.discord_user.id;
+            const a = id && byId[id];
+            if (!a) return;
+            setStatus(a.dot, data);
+            showActivity(a.card, data);
+            dispatchEvent(new CustomEvent('lanyard', { detail: data }));
+        };
+
+        // primeira carga rápida (REST)
+        avatars.forEach(({ id }) => {
             fetch('https://api.lanyard.rest/v1/users/' + id)
                 .then(r => r.json())
-                .then(({ success, data }) => {
-                    if (!success || !data) return;
-                    setStatus(dot, data);
-                    showActivity(card, data);
-                    dispatchEvent(new CustomEvent('lanyard', { detail: data }));
-                })
+                .then(({ success, data }) => { if (success && data) apply(data); })
                 .catch(() => { /* lanyard fora do ar: só não mostra o status */ });
         });
+
+        // depois, tempo real: um WebSocket só, inscrito em todos os membros.
+        // status, jogo e Spotify mudam na hora, sem recarregar a página.
+        const ids = Object.keys(byId);
+        const connect = () => {
+            if (!ids.length) return;
+            let hb = 0, ws;
+            try { ws = new WebSocket('wss://api.lanyard.rest/socket'); } catch { return; }
+            ws.onmessage = e => {
+                let msg; try { msg = JSON.parse(e.data); } catch { return; }
+                if (msg.op === 1) {
+                    hb = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ op: 3 })), msg.d.heartbeat_interval);
+                    ws.send(JSON.stringify({ op: 2, d: { subscribe_to_ids: ids } }));
+                } else if (msg.op === 0 && msg.t === 'INIT_STATE') {
+                    Object.values(msg.d || {}).forEach(apply);
+                } else if (msg.op === 0 && msg.t === 'PRESENCE_UPDATE') {
+                    apply(msg.d);
+                }
+            };
+            ws.onclose = () => { clearInterval(hb); setTimeout(connect, 5000); };
+        };
+        connect();
     } else if (avatars[0]) {
         // no perfil, o perfil.js já está conectado ao Lanyard em tempo real
         addEventListener('lanyard', e => setStatus(avatars[0].dot, e.detail));
@@ -155,15 +185,33 @@
     function showActivity(card, data) {
         const bio = card.querySelector('.bio');
         if (!bio) return;
+        if (bio.dataset.fxOrig === undefined) bio.dataset.fxOrig = bio.innerHTML;
         let html = '';
+        const acts = data.activities || [];
+        // "Ouvindo" de outros apps (Apple Music, YouTube Music, Deezer...)
+        const music = acts.find(a => a.type === 2 && a.name !== 'Spotify' && a.id !== 'spotify:1');
+        const line = (icon, main, sub) => '<i class="' + icon + '"></i><span class="fx-act-txt"><span class="fx-act-main">' + esc(main) + '</span>' + (sub ? '<span class="fx-act-sub">' + esc(sub) + '</span>' : '') + '</span>';
         if (data.listening_to_spotify && data.spotify) {
-            html = '<i class="fab fa-spotify"></i>' + esc(data.spotify.song) + ' — ' + esc(data.spotify.artist);
+            html = line('fab fa-spotify', data.spotify.song, data.spotify.artist);
+        } else if (music) {
+            const n = (music.name || '').toLowerCase();
+            const icon = /apple|itunes|cider/.test(n) ? 'fab fa-apple' : n.includes('youtube') ? 'fab fa-youtube' : n.includes('deezer') ? 'fab fa-deezer' : n.includes('soundcloud') ? 'fab fa-soundcloud' : 'fas fa-headphones';
+            const artist = (music.state || '').replace(/^(by|de|por)\s+/i, '');
+            html = line(icon, music.details || music.name, artist);
         } else {
-            const game = (data.activities || []).find(a => a.type === 0);
-            if (game) html = '<i class="fas fa-gamepad"></i>jogando ' + esc(game.name);
+            const game = acts.find(a => a.type === 0);
+            if (game) html = line('fas fa-gamepad', 'jogando ' + game.name);
         }
-        if (!html) return;
+        if (!html) {
+            if (bio.classList.contains('fx-has-activity')) {
+                bio.innerHTML = bio.dataset.fxOrig;
+                bio.classList.remove('fx-has-activity');
+                bio.classList.add('typewriter');
+            }
+            return;
+        }
         bio.classList.remove('typewriter');
+        bio.classList.add('fx-has-activity');
         bio.innerHTML = '<span class="fx-activity">' + html + '</span>';
     }
 

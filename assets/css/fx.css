@@ -273,6 +273,12 @@ body #mainDiv.fx-card.fx-ready:hover {
 .fx-activity i {
     color: rgb(var(--fx-accent-rgb));
 }
+.fx-activity .fa-spotify { color: #1db954; }
+.fx-activity .fa-apple { color: #fa2d48; }
+.fx-activity > i { flex-shrink: 0; font-size: 16px; }
+.fx-act-txt { display: flex; flex-direction: column; min-width: 0; text-align: left; line-height: 1.3; }
+.fx-act-main, .fx-act-sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fx-act-sub { font-size: 12px; color: rgba(255, 255, 255, .55); text-shadow: none; }
 
 /* ---------- texto decifrado ---------- */
 .fx-scramble {

@@ -1,2 +1,6 @@
 node_modules/
 _antigos/
+_og.html
+*.bat
+Thumbs.db
+desktop.ini

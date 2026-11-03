@@ -493,94 +493,8 @@ body {
 
 /* pulsing effect setup */
 
-.sparkles::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../../../r2.wya.lol/sparkle.gif');
-    z-index: 1;
-    pointer-events: none;
-}
+/* (efeitos antigos sparkles/leaves/sakura/comet/thunder removidos: nenhuma página usava) */
 
-.sparkles {
-    position: relative;
-    z-index: 1;
-}
-
-/* sparkles effect setup */
-
-.leaves::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../../../r2.wya.lol/leaves1.gif');
-    background-size: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.leaves {
-    position: relative;
-    z-index: 1;
-}
-
-/* leaves effect setup */
-
-.sakura::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../../../r2.wya.lol/sakura2.gif');
-    background-size: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.sakura {
-    position: relative;
-    z-index: 1;
-}
-
-/* sakura effect setup */
-
-.comet::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../../../r2.wya.lol/blue-comet.gif');
-    background-size: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.comet {
-    position: relative;
-    z-index: 1;
-}
-
-/* comet effect setup */
-
-.thunder::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../../../r2.wya.lol/white-lightning.gif');
-    background-size: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.thunder {
-    position: relative;
-    z-index: 1;
-}
-
-/* thunder effect setup */
 
 canvas {
    position: absolute;
@@ -1416,6 +1330,14 @@ canvas {
 .dc-section-title { font-size: 11px; color: rgba(255, 255, 255, .55); margin-bottom: 6px; letter-spacing: .03em; }
 .dc-section-title .fa-spotify { color: #1db954; }
 .dc-section-title .fa-gamepad { color: rgb(var(--accent-rgb)); }
+.dc-section-title .fa-apple { color: #fa2d48; }
+.dc-section-title .fa-youtube { color: #ff0033; }
+.dc-section-title .fa-deezer { color: #a238ff; }
+.dc-section-title .fa-soundcloud { color: #ff5500; }
+.dc-section-title .fa-headphones { color: rgb(var(--accent-rgb)); }
+.dc-cover-wrap { position: relative; flex-shrink: 0; width: 54px; height: 54px; }
+.dc-cover-small { position: absolute; right: -5px; bottom: -5px; width: 20px; height: 20px; border-radius: 50%; object-fit: cover; background: #111; border: 2px solid #18191c; }
+.dc-act-album { font-size: 11px; color: rgba(255, 255, 255, .42); }
 .dc-act { display: flex; gap: 10px; align-items: center; }
 .dc-cover { width: 54px; height: 54px; border-radius: 8px; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 14px rgba(0, 0, 0, .5); }
 .dc-cover-fallback { display: flex; align-items: center; justify-content: center; background: rgba(var(--accent-rgb), .15); color: rgb(var(--accent-rgb)); font-size: 22px; }
@@ -1593,3 +1515,105 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
 /* banner real do perfil do Discord */
 .dc-banner.has-img { height: 72px; background-size: cover; background-position: center; }
 .dc-banner.has-img + .dc-head { margin-top: -32px; }
+
+/* ==========================================================
+   CELULAR — camada final (sobrepõe as regras antigas lá de cima,
+   que travavam o cartão em 260px e deixavam tudo espremido)
+   ========================================================== */
+@media (max-width: 600px) {
+    body { margin: 0; }
+    #user-page {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        justify-content: center;
+        padding: calc(env(safe-area-inset-top, 0px) + 20px) 12px calc(env(safe-area-inset-bottom, 0px) + 80px);
+    }
+
+    /* cartão usa a largura da tela */
+    body #mainDiv.main-container {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 440px;
+        padding: 24px 14px 16px;
+        border-radius: 26px;
+    }
+    #mainDiv .pp { width: 108px; height: 108px; }
+    #mainDiv .username { margin-top: 14px; margin-bottom: 10px; }
+    #mainDiv .badges-container { margin-bottom: 14px; padding: 11px 24px; }
+
+    #mainDiv .bio-container { box-sizing: border-box; width: 100%; padding: 13px 16px; margin-bottom: 0; }
+    #mainDiv .bio { font-size: 15px; line-height: 1.45; }
+
+    /* card do Discord ocupa a largura toda */
+    #mainDiv .pre-container { padding: 14px 0 0; }
+    #mainDiv .pre { font-size: 14px; }
+    .dc-body { padding: 6px 14px 14px; }
+    .dc-name { font-size: 18px; }
+    .dc-custom { font-size: 13px; padding: 8px 10px; }
+    .dc-section { padding: 10px; }
+    .dc-act-name { font-size: 14px; }
+    .dc-act-sub { font-size: 12.5px; }
+
+    /* links sempre numa linha só, do mesmo tamanho */
+    #mainDiv .links-container,
+    #mainDiv .links-container.fx-dock {
+        box-sizing: border-box;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 8px;
+        padding: 16px 0 14px !important;
+        overflow: visible !important;
+    }
+    #mainDiv .links-container .logo {
+        flex: 1 1 0;
+        width: auto;
+        height: auto;
+        min-width: 0;
+        min-height: 0;
+        max-width: 60px;
+        aspect-ratio: 1 / 1;
+        border-radius: 16px;
+    }
+    #mainDiv .logo i { font-size: 24px; }
+    #mainDiv .logo svg { width: 24px; height: 24px; }
+    #mainDiv .linksline { width: 100%; }
+
+    /* player com espaço pro nome da música; visitas logo abaixo */
+    #mainDiv .card-footer { gap: 10px; margin-top: 14px; justify-content: center; }
+    #mainDiv .card-footer .np { flex: 1 1 100%; padding: 0 12px 0 7px; gap: 10px; }
+    #mainDiv .np-btn { width: 32px; height: 32px; }
+    #mainDiv .np-title { font-size: 13px; }
+    #mainDiv .np-vol #mutetext { width: 32px; height: 32px; font-size: 14px; }
+    /* no iPhone o volume do site não pode ser mudado (só pelos botões do celular): fica só o mudo */
+    #mainDiv .np-volume { display: none; }
+
+    /* botão de membros no canto de cima (ali o cartão é vazio, do lado da foto),
+       some ao descer a página e volta ao subir; a lista abre pra baixo */
+    #members-toggle {
+        top: calc(env(safe-area-inset-top, 0px) + 30px) !important;
+        bottom: auto !important;
+        right: 22px !important;
+        width: 44px !important;
+        height: 44px !important;
+    }
+    #members-list {
+        top: calc(env(safe-area-inset-top, 0px) + 84px) !important;
+        bottom: auto !important;
+        right: 16px !important;
+        width: min(240px, calc(100vw - 32px)) !important;
+    }
+    #members-toggle.fx-hide { transform: translateY(calc(-100% - 40px)) !important; opacity: 0; pointer-events: none; }
+    #members-toggle { transition: transform .35s ease, opacity .35s ease, background .3s ease !important; }
+}
+
+@media (max-width: 360px) {
+    body #mainDiv.main-container { padding: 20px 10px 14px; }
+    #mainDiv .links-container .logo { border-radius: 13px; }
+    #mainDiv .logo i { font-size: 21px; }
+    #mainDiv .np-time { display: none; }
+}
+
+/* lista de membros com a fonte do site (estava caindo na fonte padrão do navegador) */
+.member-name { font-family: 'Bold', system-ui, sans-serif; font-weight: normal; letter-spacing: .02em; }

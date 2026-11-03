@@ -331,3 +331,75 @@ body .username.breathing {
 @media (max-width: 480px) {
     .profile-container[data-site] { flex-basis: 100%; max-width: 360px; }
 }
+
+/* em tela de toque não existe "mouse em cima": sem isso, depois de um toque
+   os outros cards ficavam borrados pra sempre */
+@media (hover: none) {
+    #mainDiv:has(.profile-container[data-site]:hover) .profile-container[data-site]:not(:hover) { filter: none; opacity: 1; }
+}
+
+/* ==========================================================
+   hub no CELULAR: cards compactos em lista (foto à esquerda,
+   nome / badges / status à direita) — cabe todo mundo na tela
+   ========================================================== */
+@media (max-width: 600px) {
+    body.hub { margin: 0; overflow-x: hidden; }
+    .hub #user-page {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        justify-content: flex-start;
+        padding: calc(env(safe-area-inset-top, 0px) + 18px) 14px calc(env(safe-area-inset-bottom, 0px) + 28px);
+    }
+    .hub .hub-hero { margin-bottom: 18px; }
+    body.hub #mainDiv {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
+        max-width: 460px;
+        margin: 0 auto;
+        padding: 0;
+    }
+    body.hub #mainDiv .profile-container[data-site] {
+        flex: none;
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas: "av name" "av badges" "av bio";
+        column-gap: 16px;
+        row-gap: 6px;
+        align-items: center;
+        justify-items: start;
+        text-align: left;
+        padding: 14px 18px 14px 14px;
+        border-radius: 22px;
+        transform: none;
+    }
+    body.hub #mainDiv .profile-container[data-site] .fx-avatar { grid-area: av; align-self: center; }
+    body.hub #mainDiv .profile-container[data-site] .pp { width: 76px; height: 76px; margin: 0; }
+    body.hub #mainDiv .profile-container[data-site] .fx-orbit { inset: -9px; }
+    body.hub #mainDiv .profile-container[data-site] .fx-orbit.r2 { display: none; }
+    body.hub #mainDiv .profile-container[data-site] .fx-status { width: 18px; height: 18px; border-width: 3px; right: 2%; bottom: 2%; }
+    body.hub #mainDiv .profile-container[data-site] .fx-name { grid-area: name; }
+    body.hub #mainDiv .profile-container[data-site] .username { margin: 0; font-size: 24px !important; line-height: 1.1; }
+    body.hub #mainDiv .profile-container[data-site] .badges-container {
+        grid-area: badges; margin: 0; padding: 6px 12px; gap: 10px; border-radius: 999px;
+    }
+    body.hub #mainDiv .profile-container[data-site] .badges { width: 17px; height: 17px; }
+    body.hub #mainDiv .profile-container[data-site] .bio-container {
+        grid-area: bio; width: 100%; max-width: 100%; min-height: 0; margin: 0; padding: 0;
+        background: none !important; border: 0 !important; box-shadow: none !important; text-align: left;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+    }
+    .hub .hub-title { font-size: min(42px, 10.5vw) !important; white-space: nowrap; }
+    body.hub #mainDiv .profile-container[data-site] .bio { text-align: left; font-size: 13px; line-height: 1.35; opacity: .8; }
+    body.hub #mainDiv .profile-container[data-site] .fx-activity { max-width: 100%; font-size: 13px; }
+}

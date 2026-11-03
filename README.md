@@ -1,16 +1,39 @@
 # irmandade.cc
 
-Site de bio da Tropa da Angola: o hub (`/`) e uma página para cada membro (`/noir`, `/emmanuel`, `/baresi`, `/caion`).
+Site de bio da Tropa da Angola: o hub (`irmandade.cc`) e uma página para cada membro (`/noir`, `/emmanuel`, `/baresi`, `/caion`, `/lu`).
 
-## Como mudar alguma coisa
+Status, jogo e música do Discord aparecem ao vivo (Lanyard), as badges vêm do perfil real do Discord, e cada página tem música, vídeo de fundo e contador de visitas.
 
-Tudo fica no **`membros.json`**: nome, cor, frase, links, música, vídeo, badges e ID do Discord de cada um.
+## Estrutura
+
+```
+membros.json          ← o único arquivo que você edita (dados de todo mundo)
+
+index.html            hub            ┐ gerados pelo build:
+noir/ emmanuel/ ...   um por membro  ┘ não edite na mão
+
+assets/
+  css/                hub.css · perfil.css · fx.css (efeitos) · extra.css (efeitos extras)
+  js/                 hub.js · perfil.js · fx.js · extra.js · snow.js
+  img/                avatares e favicon
+  badges/<id>/        badges do site, na cor de cada membro
+  discord/            ícones das badges do Discord
+  og/                 miniaturas que aparecem quando o link é enviado
+  fonts/
+media/<id>/           fundo.mp4 · musica.mp3 · capa.jpg
+
+scripts/
+  build.js            gera o hub e as páginas dos membros
+  og.js               gera as miniaturas (assets/og)
+```
+
+## Mudar alguma coisa
 
 1. Edite o `membros.json`
 2. Rode `npm run build`
-3. Suba os arquivos
+3. Dê dois cliques no `enviar-github.bat`
 
-O `build.js` recria o `index.html` do hub e o `index.html` de cada membro. **Não edite esses `index.html` na mão**, porque eles são sobrescritos no próximo build.
+O `enviar-github.bat` deixa a pasta do GitHub igual à do site, manda os arquivos velhos para `irmandade-para-apagar` (nada é apagado direto) e faz o envio.
 
 Para ver no seu PC: `npm install` uma vez, depois `npm run dev` e abra http://localhost:3000
 
@@ -20,8 +43,8 @@ Para ver no seu PC: `npm install` uma vez, depois `npm run dev` e abra http://lo
 2. Crie `assets/badges/<id>/` com `premium.png`, `early.png` e `booster.png` (pode copiar de outro membro)
 3. Crie `media/<id>/` com `fundo.mp4`, `capa.jpg` e `musica.mp3`
 4. Copie um bloco de membro no `membros.json` e troque os dados
-5. `npm run build`
-6. Opcional: gere a imagem de prévia `assets/og/<id>.jpg` (1200×630)
+5. `npm run og` (gera a miniatura e as páginas; precisa do Playwright: `npm i -D playwright && npx playwright install chromium`)
+   ou só `npm run build`, se não quiser a miniatura
 
 ### Campos de cada membro
 
@@ -32,10 +55,11 @@ Para ver no seu PC: `npm install` uma vez, depois `npm run dev` e abra http://lo
 | `frases` | frases que ficam digitando na bio (pode ter várias) |
 | `badges` / `badgesHub` | badges do perfil / do cartão no hub: `premium`, `dono`, `early`, `tda` |
 | `discord` | ID do Discord (precisa estar no servidor do Lanyard: discord.gg/lanyard) |
-| `badgesDiscordExtras` | badges que o Lanyard não informa: `nitro`, `server_boost`, `quest`, `quest_lastmeadow` |
+| `badgesDiscordExtras` | badges usadas só se o dstn.to estiver fora do ar: `nitro`, `server_boost`, `quest`… |
+| `nomeMusica` | nome que aparece no player |
 | `sincronizar` | `true` se o vídeo é o clipe da música e precisa andar junto com ela |
 | `contador` | nome do contador de visitas no Firebase |
-| `links` | `tipo` = nome do ícone do Font Awesome (`steam`, `github`, `youtube`, `tiktok`, `spotify`, `twitch`, `pinterest`, `instagram`, `discord`…) ou `roblox` |
+| `links` | `tipo` = ícone do Font Awesome (`steam`, `github`, `youtube`, `tiktok`, `spotify`, `twitch`, `pinterest`, `instagram`, `x`…), `roblox` ou `letterboxd` |
 
 ### Comprimir um vídeo novo
 
@@ -64,14 +88,6 @@ O contador soma 1 por visitante a cada 24h. Para ninguém conseguir trocar o nú
 
 Com elas, o único jeito de escrever é somar exatamente 1.
 
-## Estrutura
+## Créditos
 
-```
-membros.json        dados de todo mundo
-build.js            gera as páginas
-assets/css          hub.css, perfil.css
-assets/js           hub.js, perfil.js, snow.js
-assets/img|badges|fonts|og
-fx/                 efeitos (cartão 3D, luz, dock, cursor…)
-media/<id>/         fundo.mp4, capa.jpg, musica.mp3
-```
+Ícones das badges do Discord: [mezotv/discord-badges](https://github.com/mezotv/discord-badges) (MIT, ver `assets/discord/LICENSE-icones.txt`).
