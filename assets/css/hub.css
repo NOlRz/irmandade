@@ -19,8 +19,6 @@
     0 0 82px rgb(var(--accent-rgb));
 }
 
-/* font setup */
-
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -30,8 +28,6 @@
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
-
-/* fadeIn & fadeOut setup */
 
 #overlay {
     position: fixed;
@@ -62,8 +58,6 @@
     overflow: hidden;
 }
 
-/* overlay setup */
-
 body {
     background-color: #000;
     background-size: cover;
@@ -72,18 +66,14 @@ body {
     overflow: hidden;
 }
 
-/* basic setup */
-
 #user-page {
-    display: none; /* none = click to enter | flex = no click to enter */
-    animation: fadeIn 0.5s ease-in-out; /* fadeIn 0.5s ease-in-out = click to enter | none = no click to enter */
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 98vh;
 }
-
-/* will show when clicking on overlay */
 
 .background {
     z-index: -1;
@@ -94,15 +84,12 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    object-fit: cover; /*- |si cover n'est pas actif, sur tel ca va resize a la taille de l'ecran, donc c'est mieux de le laisser perma | optional, ca devrait etre un choix de faire en sorte que si y'a des black bar (imaginons un background en 4/3), qu'on force la video a cover toute la page sans resize (donc cet exemple on perdra un peu du haut et du bas de la video)*/
+    object-fit: cover;
 }
-
-/* background image / gif / video setup */
 
 .profile-container {
-    cursor: pointer; /* Muda o cursor para uma mão ao passar sobre os perfis */
+    cursor: pointer;
 }
-
 
 .main-container {
     display: flex;
@@ -112,7 +99,7 @@ body {
     width: 100%;
     padding: 20px;
     overflow: visible;
-    flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+    flex-wrap: wrap;
 }
 
 .profile-container {
@@ -122,7 +109,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(var(--accent-rgb), 0.2);
-    box-shadow: 
+    box-shadow:
         0 8px 32px 0 rgba(0, 0, 0, 0.37),
         0 0 20px rgba(var(--accent-rgb), 0.1);
     display: flex;
@@ -156,7 +143,7 @@ body {
 
 .profile-container:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 
+    box-shadow:
         0 12px 40px 0 rgba(0, 0, 0, 0.5),
         0 0 30px rgba(var(--accent-rgb), 0.3);
     border-color: rgba(var(--accent-rgb), 0.4);
@@ -167,7 +154,7 @@ body {
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    box-shadow: 
+    box-shadow:
         0 0 30px rgba(var(--accent-rgb), 0.5),
         0 8px 20px rgba(0, 0, 0, 0.7);
     border: 3px solid rgba(var(--accent-rgb), 0.3);
@@ -176,7 +163,7 @@ body {
 }
 
 .profile-container:hover .pp {
-    box-shadow: 
+    box-shadow:
         0 0 40px rgba(var(--accent-rgb), 0.8),
         0 12px 30px rgba(0, 0, 0, 0.8);
     border-color: rgba(var(--accent-rgb), 0.6);
@@ -185,7 +172,7 @@ body {
 
 .username {
     font-family: 'Bold';
-    font-size: 24px; /* Aumentando o tamanho da fonte */
+    font-size: 24px;
     color: #fff;
     position: relative;
     display: inline-block;
@@ -206,7 +193,7 @@ body {
     border-radius: 50px;
     padding: 16px 35px;
     margin-bottom: 2vh;
-    box-shadow: 
+    box-shadow:
         0 6px 12px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
@@ -214,7 +201,7 @@ body {
 
 .profile-container:hover .badges-container {
     background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.25) 0%, rgba(0, 0, 0, 0.8) 100%);
-    box-shadow: 
+    box-shadow:
         0 8px 16px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
@@ -227,7 +214,7 @@ body {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(var(--accent-rgb), 0.15);
-    box-shadow: 
+    box-shadow:
         0 0 20px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     border-radius: 15px;
@@ -244,16 +231,12 @@ body {
 
 .bio {
     font-family: 'Light';
-    font-size: 2.5vh; /* Aumentando o tamanho da fonte */
+    font-size: 2.5vh;
     color: #fff;
     line-height: 1.5;
     text-align: center;
     filter: drop-shadow(#ffffff 1px 0 7px)!important;
 }
-
-
-
-/* pp display setup */
 
 .username-container {
     position: relative;
@@ -261,7 +244,6 @@ body {
     z-index: 1;
 }
 
-/* Aplicando o sparkle.gif nos usernames */
 .username::before {
     content: "";
     position: absolute;
@@ -273,9 +255,9 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: -1; /* Mantém o gif atrás do texto */
-    opacity: 0.8; /* Ajuste conforme necessário */
-    pointer-events: none; /* Evita interferir na interação com o username */
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
 }
 
 .username {
@@ -285,9 +267,6 @@ body {
     color: #fff;
     text-shadow: 0 0 7px rgb(var(--accent-rgb));
 }
-
-
-/* user uid */
 
 .username {
     font-family: 'Bold';
@@ -325,8 +304,6 @@ body {
     transform: translateX(-50%) scaleY(1);
     opacity: 1;
 }
-
-/* username display setup */
 
 .badges-container {
     display: flex;
@@ -380,8 +357,6 @@ body {
     opacity: 1;
 }
 
-/* badge display setup */
-
 .bio-container {
     text-align: center;
     width: 80%;
@@ -408,8 +383,6 @@ body {
     filter: drop-shadow(#ffffff 1px 0 7px)!important;
 }
 
-/* bio setup */
-
 .bioline {
     background-color: rgba(10, 10, 10, 0.61);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -418,16 +391,11 @@ body {
     border-radius: 10px;
 }
 
-
-/* views container setup */
-
 .pic-badge {
     background-size: 100%;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     background-position: center center;
 }
-
-/* breath effect setup */
 
 .pulsing {
     color: #fff;
@@ -435,7 +403,7 @@ body {
     animation: pulse 2s ease-in-out infinite alternate;
     backface-visibility: hidden;
 }
-    
+
 @keyframes pulse {
     from {
     text-shadow: 0 0 10px #fff,
@@ -453,11 +421,6 @@ body {
     }
 }
 
-/* pulsing effect setup */
-
-/* (efeitos antigos sparkles/leaves/sakura/comet/thunder removidos: nenhuma página usava) */
-
-
 canvas {
    position: absolute;
    top: 0;
@@ -465,21 +428,15 @@ canvas {
    z-index: -1;
 }
 
-/* extras */
-/* Main div */
 #mainDiv{
     width: 100%;
     max-width: 1400px;
 }
-   
-/* Image */
+
 #mainDiv .bio img{
     padding-top:14px;
 }
 
-/* RESPONSIVIDADE MOBILE */
-
-/* Tablets e telas médias */
 @media (max-width: 1024px) {
     .main-container {
         gap: 20px;
@@ -516,7 +473,6 @@ canvas {
     }
 }
 
-/* Smartphones em landscape */
 @media (max-width: 768px) {
     .main-container {
         gap: 15px;
@@ -574,7 +530,6 @@ canvas {
     }
 }
 
-/* Smartphones em portrait */
 @media (max-width: 576px) {
     body {
         overflow-y: auto;
@@ -654,7 +609,6 @@ canvas {
         width: 80px;
     }
 
-    /* Ajuste do tooltip para mobile */
     .username::after,
     .badges::after {
         font-size: 14px;
@@ -662,14 +616,12 @@ canvas {
         bottom: 2.5vh;
     }
 
-    /* Melhor espaçamento dos efeitos de cursor em mobile */
     .cursor-explosion {
         width: 4px;
         height: 4px;
     }
 }
 
-/* Smartphones pequenos */
 @media (max-width: 375px) {
     .profile-container {
         width: 95%;
@@ -710,7 +662,6 @@ canvas {
     }
 }
 
-/* Landscape mode para smartphones */
 @media (max-height: 500px) and (orientation: landscape) {
     #user-page {
         padding: 10px 0;
@@ -760,7 +711,6 @@ canvas {
     }
 }
 
-/* Pre-container responsivo */
 @media (max-width: 576px) {
     #mainDiv {
         width: 100%;
@@ -781,7 +731,7 @@ canvas {
         font-size: 1.8vh;
     }
 }
-/* pre div */
+
 .pre-container {
     text-align: center;
     padding-top: 15px;
@@ -796,8 +746,6 @@ canvas {
     color: #fff;
     line-height: 1.5;
 }
-
-/* cursor */
 
 .cursor-explosion {
     position: absolute;
@@ -820,8 +768,6 @@ canvas {
     }
 }
 
-/* volume */
-
 #volume-control {
     position: fixed;
     top: 15px;
@@ -836,27 +782,24 @@ canvas {
     background: transparent;
     box-shadow: none;
     opacity: 0;
-    pointer-events: none; 
+    pointer-events: none;
 }
-  
-  
+
 #volume-control:hover {
     background: rgba(50, 50, 50, 0.9);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-  
- 
+
 #volume-icon {
     font-size: 18px;
     color: white;
     cursor: pointer;
     transition: color 0.3s ease;
 }
-  
+
 #volume-icon:hover {
     color: #ccc;
 }
-  
 
 #volume-slider {
     width: 0;
@@ -868,7 +811,6 @@ canvas {
     transition: width 0.3s ease, opacity 0.3s ease;
     appearance: none;
 }
-  
 
 #volume-slider::-webkit-slider-thumb {
     appearance: none;
@@ -879,7 +821,7 @@ canvas {
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-  
+
 #volume-slider::-moz-range-thumb {
     width: 10px;
     height: 10px;
@@ -888,7 +830,7 @@ canvas {
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-  
+
 #volume-control:hover #volume-slider {
     width: 100px;
     opacity: 1;
@@ -898,14 +840,7 @@ canvas {
     opacity: 1;
     pointer-events: auto;
 }
-  
 
-
-/* ==========================================
-   ANIMAÇÕES E EFEITOS VISUAIS MODERNOS
-   ========================================== */
-
-/* Animação de entrada suave para os perfis */
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -917,21 +852,19 @@ canvas {
     }
 }
 
-/* Animação de pulso melhorada */
 @keyframes pulseGlow {
     0%, 100% {
-        box-shadow: 
+        box-shadow:
             0 0 20px rgba(var(--accent-rgb), 0.3),
             0 8px 20px rgba(0, 0, 0, 0.5);
     }
     50% {
-        box-shadow: 
+        box-shadow:
             0 0 30px rgba(var(--accent-rgb), 0.6),
             0 12px 25px rgba(0, 0, 0, 0.6);
     }
 }
 
-/* Efeito de brilho nas bordas */
 @keyframes borderGlow {
     0%, 100% {
         border-color: rgba(var(--accent-rgb), 0.2);
@@ -941,7 +874,6 @@ canvas {
     }
 }
 
-/* Efeito de flutuação */
 @keyframes float {
     0%, 100% {
         transform: translateY(0px);
@@ -951,7 +883,6 @@ canvas {
     }
 }
 
-/* Gradiente animado de fundo */
 @keyframes gradientShift {
     0% {
         background-position: 0% 50%;
@@ -964,7 +895,6 @@ canvas {
     }
 }
 
-/* Efeito de ondulação no hover */
 @keyframes ripple {
     0% {
         transform: scale(0);
@@ -976,7 +906,6 @@ canvas {
     }
 }
 
-/* Animação de rotação suave */
 @keyframes rotateIn {
     from {
         opacity: 0;
@@ -988,14 +917,12 @@ canvas {
     }
 }
 
-/* Efeito de tremor sutil */
 @keyframes subtleShake {
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
     20%, 40%, 60%, 80% { transform: translateX(2px); }
 }
 
-/* Aplicar animações aos elementos */
 .profile-container {
     animation: slideInUp 0.6s ease-out forwards;
 }
@@ -1016,7 +943,6 @@ canvas {
     animation-delay: 0.4s;
 }
 
-/* Efeito hover melhorado para badges */
 .badges {
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -1026,12 +952,10 @@ canvas {
     filter: drop-shadow(0 0 15px rgb(var(--accent-rgb)));
 }
 
-/* Efeito de brilho contínuo nos usernames */
 .username.breathing {
     animation: pulseGlow 3s ease-in-out infinite;
 }
 
-/* Efeito hover no avatar */
 .pp {
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -1040,7 +964,6 @@ canvas {
     animation: float 2s ease-in-out infinite;
 }
 
-/* Efeito de loading para o overlay */
 @keyframes fadeInScale {
     from {
         opacity: 0;
@@ -1056,12 +979,10 @@ canvas {
     animation: fadeInScale 0.8s ease-out;
 }
 
-/* Partículas de cursor melhoradas */
 .cursor-explosion {
     animation: explode 0.6s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
 }
 
-/* Efeito de texto digitando melhorado */
 @keyframes blink {
     0%, 49% { border-color: transparent; }
     50%, 100% { border-color: rgb(var(--accent-rgb)); }
@@ -1073,7 +994,6 @@ canvas {
     margin-left: 2px;
 }
 
-/* Animação de entrada do volume control */
 #volume-control.visible {
     animation: slideInLeft 0.4s ease-out;
 }
@@ -1089,7 +1009,6 @@ canvas {
     }
 }
 
-/* Efeito de onda no background ao passar mouse */
 .profile-container::after {
     content: '';
     position: absolute;
@@ -1109,7 +1028,6 @@ canvas {
     height: 500px;
 }
 
-/* Efeito de scan line (linha retrô) */
 @keyframes scanline {
     0% {
         top: 0;
@@ -1129,58 +1047,55 @@ canvas {
     pointer-events: none;
 }
 
-/* Efeito de glitch para o título */
 @keyframes glitch {
     0% {
-        text-shadow: 
+        text-shadow:
             0.05em 0 0 rgba(255, 0, 0, 0.75),
             -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
             0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
     }
     14% {
-        text-shadow: 
+        text-shadow:
             0.05em 0 0 rgba(255, 0, 0, 0.75),
             -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
             0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
     }
     15% {
-        text-shadow: 
+        text-shadow:
             -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
             0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
             -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
     }
     49% {
-        text-shadow: 
+        text-shadow:
             -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
             0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
             -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
     }
     50% {
-        text-shadow: 
+        text-shadow:
             0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
             0.05em 0 0 rgba(0, 255, 0, 0.75),
             0 -0.05em 0 rgba(0, 0, 255, 0.75);
     }
     99% {
-        text-shadow: 
+        text-shadow:
             0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
             0.05em 0 0 rgba(0, 255, 0, 0.75),
             0 -0.05em 0 rgba(0, 0, 255, 0.75);
     }
     100% {
-        text-shadow: 
+        text-shadow:
             -0.025em 0 0 rgba(255, 0, 0, 0.75),
             -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
             -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
     }
 }
 
-/* Classe opcional para aplicar efeito glitch */
 .glitch-effect {
     animation: glitch 1s infinite;
 }
 
-/* Shimmer effect para badges premium */
 @keyframes shimmer {
     0% {
         background-position: -1000px 0;
@@ -1206,18 +1121,16 @@ canvas {
     animation: shimmer 3s infinite;
 }
 
-/* Smooth scroll para mobile */
 @media (max-width: 576px) {
     html {
         scroll-behavior: smooth;
     }
-    
+
     body {
         -webkit-overflow-scrolling: touch;
     }
 }
 
-/* Reduzir animações para usuários que preferem menos movimento */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1228,10 +1141,7 @@ canvas {
     }
 }
 
-
-/* ---------- cores por membro no hub ---------- */
 .profile-container .badges-container { cursor: pointer; }
 a.profile-container { text-decoration: none; color: inherit; }
 
-/* iPhone/iPad: o volume só muda pelos botões do aparelho, então fica só o botão de mudo */
 .is-ios #volume-slider { display: none !important; }

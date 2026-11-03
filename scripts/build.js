@@ -1,9 +1,3 @@
-/* ==========================================================
-   irmandade.cc — gerador das páginas
-   Edite o membros.json e rode:   npm run build   (ou: node scripts/build.js)
-   Isso recria o index.html do hub e o index.html de cada membro.
-   (não edite esses index.html na mão: eles são sobrescritos)
-   ========================================================== */
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -16,7 +10,7 @@ const FA = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.mi
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const rgb = hex => { const n = parseInt(hex.replace('#', ''), 16); return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`; };
 const json = o => JSON.stringify(o).replace(/</g, '\\u003c');
-// ?v=… muda sempre que a imagem muda: assim o Discord não fica mostrando a miniatura antiga
+
 const ver = p => { try { return '?v=' + crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, p))).digest('hex').slice(0, 8); } catch { return ''; } };
 
 const BADGES = {
@@ -47,7 +41,6 @@ function badgesHTML(m, list, p) {
 
 function head({ title, desc, url, image, color, p, css, ogType = 'website' }) {
     return `<!DOCTYPE html>
-<!-- gerado pelo build.js a partir do membros.json — não edite este arquivo na mão -->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -57,7 +50,6 @@ function head({ title, desc, url, image, color, p, css, ogType = 'website' }) {
     <meta name="theme-color" content="${color}">
     <link rel="canonical" href="${url}">
 
-    <!-- prévia ao colar o link no Discord / WhatsApp / Twitter -->
     <meta property="og:type" content="${ogType}">
     <meta property="og:site_name" content="${esc(site.nome)}">
     <meta property="og:title" content="${esc(title)}">
@@ -84,7 +76,6 @@ function head({ title, desc, url, image, color, p, css, ogType = 'website' }) {
 </head>`;
 }
 
-// ------------------------------------------------------------ hub
 function hubPage() {
     const p = './';
     const cards = membros.map(m => `
@@ -143,7 +134,6 @@ ${cards}
 `;
 }
 
-// ------------------------------------------------------------ perfil
 function profilePage(m) {
     const p = '../';
     const r = s => p + s;
@@ -157,7 +147,6 @@ function profilePage(m) {
                     ${m.links.map(l => `<a class="logo" href="${esc(l.url)}" target="_blank" rel="noopener" aria-label="${esc(l.nome || l.tipo)}">${linkIcon(l.tipo)}</a>`).join('\n                    ')}
                 </div>
 ` : '';
-
 
     return `${head({
         title: `${m.nome} · ${site.nome}`,
@@ -228,7 +217,6 @@ ${links}
             </div>
 
         </main>
-
 
     </div>
 

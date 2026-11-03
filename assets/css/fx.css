@@ -1,11 +1,3 @@
-/* ==========================================================
-   irmandade fx — camada visual compartilhada
-   Efeitos portados (em CSS/JS puro) de:
-   Magic UI (MagicCard, BorderBeam, NumberTicker, Dock, BlurFade),
-   Aceternity (3D Card, Card Spotlight), React Bits (ShinyText,
-   DecryptedText, ClickSpark), hover.dev (tilt) e Unicorn Studio (grain)
-   ========================================================== */
-
 :root {
     --fx-accent: #c18be0;
     --fx-accent-rgb: 193, 139, 224;
@@ -18,7 +10,6 @@
     inherits: false;
 }
 
-/* ---------- grain + vinheta por cima do vídeo ---------- */
 body::after {
     content: '';
     position: fixed;
@@ -29,7 +20,6 @@ body::after {
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ---------- overlay "clique para entrar" ---------- */
 #overlay {
     flex-direction: column;
     gap: 14px;
@@ -90,7 +80,6 @@ body::after {
     50%      { opacity: .8; }
 }
 
-/* ---------- cartões: spotlight + border beam + tilt 3D ---------- */
 .fx-card {
     isolation: isolate;
 }
@@ -160,12 +149,10 @@ body .fx-card.fx-ready:hover {
     --lift: -8px;
 }
 
-/* página de perfil: o cartão é o #mainDiv */
 body #mainDiv.fx-card.fx-ready:hover {
     --lift: -4px;
 }
 
-/* ---------- avatar com anel animado + status do discord ---------- */
 .fx-avatar {
     position: relative;
     display: inline-flex;
@@ -254,7 +241,6 @@ body #mainDiv.fx-card.fx-ready:hover {
     transform: translateX(-50%) translateY(0);
 }
 
-/* linha de presença nos cartões do hub (status ou atividade do Discord) */
 .fx-presence {
     display: flex;
     align-items: center;
@@ -276,18 +262,27 @@ body #mainDiv.fx-card.fx-ready:hover {
 }
 .fx-presence:empty { visibility: hidden; }
 .fx-presence-txt { min-width: 0; overflow: hidden; text-overflow: ellipsis; animation: fx-rise .5s var(--fx-ease) both; }
+
+.fx-presence-txt.is-scrolling {
+    flex: 1 1 auto;
+    text-overflow: clip;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.fx-mq { display: inline-flex; animation: fx-mq var(--mq-dur, 8s) linear infinite; will-change: transform; }
+.fx-mq > span { padding: 0 2.5em 0 .6em; }
+@keyframes fx-mq { 0%, 15% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .fx-mq { animation: none; } }
 .fx-presence-dot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--fx-status); box-shadow: 0 0 8px var(--fx-status); }
 .fx-presence i { flex-shrink: 0; font-size: 12px; color: rgb(var(--fx-accent-rgb)); }
 .fx-presence .fa-spotify { color: #1db954; }
 .fx-presence .fa-apple { color: #fa2d48; }
 .fx-presence .fa-youtube { color: #ff0033; }
 
-/* ---------- texto decifrado ---------- */
 .fx-scramble {
     font-variant-numeric: tabular-nums;
 }
 
-/* ---------- dock com magnificação (links sociais) ---------- */
 .links-container.fx-dock {
     overflow: visible !important;
     align-items: flex-end;
@@ -341,18 +336,15 @@ body #mainDiv.fx-card.fx-ready:hover {
     transform: translateX(-50%) translateY(0) scale(calc(1 / var(--s, 1)));
 }
 
-/* ---------- entrada escalonada (blur fade) ---------- */
 .fx-enter {
     animation: fx-rise .8s var(--fx-ease) both;
     animation-delay: calc(var(--i, 0) * 70ms + 120ms);
 }
 
-/* ---------- contador ---------- */
 #view-count {
     font-variant-numeric: tabular-nums;
 }
 
-/* ---------- lista de membros em vidro ---------- */
 #members-toggle {
     background: rgba(17, 17, 17, .55) !important;
     backdrop-filter: blur(10px);
@@ -395,7 +387,6 @@ body #mainDiv.fx-card.fx-ready:hover {
     border-color: rgb(var(--fx-accent-rgb)) !important;
 }
 
-/* ---------- cursor (canvas) ---------- */
 canvas.fx-cursor {
     position: fixed !important;
     inset: 0 !important;
@@ -405,7 +396,6 @@ canvas.fx-cursor {
     pointer-events: none !important;
 }
 
-/* ---------- foco visível p/ teclado ---------- */
 .profile-container:focus-visible {
     outline: 2px solid rgb(var(--fx-accent-rgb));
     outline-offset: 4px;

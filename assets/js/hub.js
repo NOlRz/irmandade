@@ -1,12 +1,9 @@
-/* ==========================================================
-   irmandade.cc — script do hub (página inicial)
-   ========================================================== */
 (() => {
     const $ = s => document.querySelector(s);
     const audio = $('#backgroundsong');
     const video = $('#backgroundvideo');
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    // no iPhone/iPad o site não consegue mudar o volume (só o mudo funciona): esconde a barrinha
+
     if (/iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) document.documentElement.classList.add('is-ios');
 
     const store = {
@@ -41,7 +38,6 @@
         setTimeout(() => { overlay.style.display = 'none'; }, 800);
     };
 
-    // vídeo acompanha a música
     setInterval(() => {
         if (!audio.paused && Math.abs(video.currentTime - audio.currentTime) > .25) video.currentTime = audio.currentTime;
     }, 1000);
@@ -52,7 +48,6 @@
         else if (wasPlaying) { video.currentTime = audio.currentTime; audio.volume = 0; audio.play().then(() => fadeTo(slider.value / 100, 600)).catch(() => {}); video.play().catch(() => {}); }
     });
 
-    // título da aba
     (() => {
         const text = window.SITE.titulo;
         let i = 0, del = false;
@@ -66,7 +61,6 @@
         tick();
     })();
 
-    // volume
     const slider = $('#volume-slider');
     const icon = $('#volume-icon');
     slider.value = store.get('volume', isMobile ? 20 : 30);
@@ -81,7 +75,6 @@
         if (!entered && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); window.removeOverlay(); }
     });
 
-    // pré-carrega o perfil ao passar o mouse no cartão
     const prefetched = new Set();
     document.querySelectorAll('.profile-container').forEach(c => c.addEventListener('pointerenter', () => {
         if (prefetched.has(c.href)) return;
@@ -90,7 +83,6 @@
     }));
     icon.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); icon.click(); } });
 
-    // feedback de toque no celular
     if ('ontouchstart' in window) {
         document.querySelectorAll('.profile-container').forEach(c => {
             c.addEventListener('touchstart', () => { c.style.transform = 'scale(.97)'; }, { passive: true });

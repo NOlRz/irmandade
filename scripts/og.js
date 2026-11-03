@@ -1,10 +1,3 @@
-/* ==========================================================
-   irmandade.cc — gera as miniaturas que aparecem quando o link
-   é enviado no Discord / WhatsApp / Twitter (assets/og/*.jpg)
-
-   Precisa do Playwright:   npm i -D playwright && npx playwright install chromium
-   Rodar:                   npm run og   (gera as imagens e já refaz as páginas)
-   ========================================================== */
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
 
@@ -14,7 +7,6 @@ const FA = process.env.FA_CSS || 'https://cdnjs.cloudflare.com/ajax/libs/font-aw
 const f = p => 'file://' + path.join(R, p).replace(/\\/g, '/');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-// ---- cores: a cor do membro + uma versão clara que sempre dá pra ler no fundo escuro
 function hexToHsl(hex) {
     const n = parseInt(hex.slice(1), 16);
     let r = (n >> 16 & 255) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255;

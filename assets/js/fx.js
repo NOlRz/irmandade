@@ -1,13 +1,19 @@
-/* ==========================================================
-   irmandade fx — camada de interação compartilhada (JS puro)
-   Uso: <script src="assets/js/fx.js" data-accent="#c18be0" data-discord="ID" defer></script>
-   ========================================================== */
 (() => {
     const script = document.currentScript;
     const root = document.documentElement;
 
-    // ---------- config ----------
-    // ids do Discord vêm do membros.json (via build.js)
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+        const c = e.code, mod = e.ctrlKey || e.metaKey;
+        if (e.key === 'F12' ||
+            (mod && e.shiftKey && ['KeyI', 'KeyJ', 'KeyC', 'KeyK'].includes(c)) ||
+            (e.metaKey && e.altKey && ['KeyI', 'KeyJ', 'KeyC', 'KeyU'].includes(c)) ||
+            (mod && !e.shiftKey && ['KeyU', 'KeyS'].includes(c))) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, true);
+
     const MEMBERS = Object.fromEntries((window.MEMBROS || []).map(m => [m.id, m.discord]));
 
     const accent = (script && script.dataset.accent) || '#c18be0';
@@ -28,14 +34,13 @@
         return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
     }
 
-    // ---------- overlay ----------
     const overlay = document.getElementById('overlay');
     if (overlay && !overlay.querySelector('.fx-hint')) {
         const hint = document.createElement('span');
         hint.className = 'fx-hint';
         hint.textContent = 'clique para entrar';
         overlay.appendChild(hint);
-        // clicar em qualquer lugar do overlay entra
+
         overlay.addEventListener('click', e => {
             if (e.target === overlay && typeof window.removeOverlay === 'function') window.removeOverlay();
         });
@@ -51,7 +56,6 @@
         onEnter();
     };
 
-    // ---------- cartões: spotlight, beam, tilt ----------
     const TILT = isHub ? 9 : 5;
     cards.forEach(card => {
         card.classList.add('fx-card');
@@ -98,12 +102,10 @@
         });
     });
 
-    // libera o transform depois da animação de entrada original
     function readyCards() {
         cards.forEach(c => c.classList.add('fx-ready'));
     }
 
-    // ---------- avatar: anel + status ----------
     const avatars = [];
     cards.forEach(card => {
         const img = card.querySelector('.pp');
@@ -122,8 +124,8 @@
 
     const STATUS = {
         online:  ['#43b581', 'online'],
-        idle:    ['#faa61a', 'ausente'],
-        dnd:     ['#f04747', 'não perturbe'],
+        idle:    ['#faa61a', 'idle'],
+        dnd:     ['#f04747', 'do not disturb'],
         offline: ['#747f8d', 'offline']
     };
 
@@ -148,16 +150,13 @@
             dispatchEvent(new CustomEvent('lanyard', { detail: data }));
         };
 
-        // primeira carga rápida (REST)
         avatars.forEach(({ id }) => {
             fetch('https://api.lanyard.rest/v1/users/' + id)
                 .then(r => r.json())
                 .then(({ success, data }) => { if (success && data) apply(data); })
-                .catch(() => { /* lanyard fora do ar: só não mostra o status */ });
+                .catch(() => {  });
         });
 
-        // depois, tempo real: um WebSocket só, inscrito em todos os membros.
-        // status, jogo e Spotify mudam na hora, sem recarregar a página.
         const ids = Object.keys(byId);
         const connect = () => {
             if (!ids.length) return;
@@ -178,13 +177,10 @@
         };
         connect();
     } else if (avatars[0]) {
-        // no perfil, o perfil.js já está conectado ao Lanyard em tempo real
+
         addEventListener('lanyard', e => setStatus(avatars[0].dot, e.detail));
     }
 
-    // linha de presença nos cartões do hub: a atividade (jogando / ouvindo) ou o status,
-    // sempre no mesmo lugar e do mesmo tamanho em todos os cartões. O "click to see
-    // profile" continua igual em todos.
     function presenceRow(card) {
         let row = card.querySelector('.fx-presence');
         if (!row) {
@@ -198,12 +194,12 @@
         }
         return row;
     }
-    if (isHub) cards.forEach(presenceRow); // já reserva o espaço antes dos dados chegarem
+    if (isHub) cards.forEach(presenceRow);
 
     function showActivity(card, data) {
         const row = presenceRow(card);
         const acts = data.activities || [];
-        // "Ouvindo" de outros apps (Apple Music, YouTube Music, Deezer...)
+
         const music = acts.find(a => a.type === 2 && a.name !== 'Spotify' && a.id !== 'spotify:1');
         const game = acts.find(a => a.type === 0);
         let icon = '', text = '';
@@ -226,13 +222,37 @@
             ? '<i class="' + icon + '"></i><span class="fx-presence-txt">' + esc(text) + '</span>'
             : '<span class="fx-presence-dot"></span><span class="fx-presence-txt">' + label + '</span>';
         row.title = text || label;
+        requestAnimationFrame(() => fitPresence(row));
+    }
+
+    function fitPresence(row) {
+        const txt = row.querySelector('.fx-presence-txt');
+        if (!txt) return;
+        const plain = txt.dataset.full || txt.textContent;
+        txt.dataset.full = plain;
+        txt.classList.remove('is-scrolling');
+        txt.textContent = plain;
+        if (reduce || txt.scrollWidth <= txt.clientWidth + 1) return;
+        txt.classList.add('is-scrolling');
+        txt.innerHTML = '<span class="fx-mq"><span>' + esc(plain) + '</span><span aria-hidden="true">' + esc(plain) + '</span></span>';
+        const half = txt.firstChild.scrollWidth / 2;
+        txt.style.setProperty('--mq-dur', Math.max(5, half / 28).toFixed(1) + 's');
+    }
+
+    if (isHub && window.ResizeObserver) {
+        const ro = new ResizeObserver(entries => entries.forEach(e => {
+            const w = Math.round(e.contentRect.width);
+            if (w && w !== +e.target.dataset.w) { e.target.dataset.w = w; fitPresence(e.target); }
+        }));
+        document.querySelectorAll('.fx-presence').forEach(r => ro.observe(r));
+    } else if (isHub) {
+        addEventListener('resize', () => document.querySelectorAll('.fx-presence').forEach(fitPresence));
     }
 
     function esc(s) {
         return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
 
-    // ---------- texto decifrado (usernames) ----------
     const GLYPHS = '!<>-_\\/[]{}—=+*^?#░▒▓アカサタナ01';
     function scramble(el) {
         if (reduce || el._fxBusy) return;
@@ -260,7 +280,6 @@
         if (u && fine) card.addEventListener('pointerenter', () => scramble(u));
     });
 
-    // ---------- dock (links sociais) ----------
     const dock = document.querySelector('.links-container');
     if (dock) {
         const logos = [...dock.querySelectorAll('.logo')];
@@ -296,7 +315,6 @@
         }
     }
 
-    // ---------- contador animado ----------
     const counter = document.getElementById('view-count');
     if (counter && !counter.hasAttribute('data-slide')) {
         let animating = false;
@@ -320,13 +338,11 @@
         }).observe(counter, { childList: true, characterData: true, subtree: true });
     }
 
-    // ---------- membros: clicar na linha inteira ----------
     document.querySelectorAll('#members-list .member').forEach(m => {
         const n = m.querySelector('.member-name');
         if (n) m.addEventListener('click', e => { if (e.target !== n) n.click(); });
     });
 
-    // ---------- entrada ----------
     function onEnter() {
         if (!isHub) {
             const card = cards[0];
@@ -336,7 +352,7 @@
                 parts.forEach((p, i) => {
                     p.style.setProperty('--i', i);
                     p.classList.add('fx-enter');
-                    // devolve as animações originais (ex.: brilho do nome) depois da entrada
+
                     p.addEventListener('animationend', function done(e) {
                         if (e.animationName !== 'fx-rise') return;
                         p.classList.remove('fx-enter');
@@ -349,10 +365,8 @@
         setTimeout(readyCards, 1100);
     }
 
-    // se a página não tem overlay, entra direto
     if (!overlay || getComputedStyle(overlay).display === 'none') onEnter();
 
-    // ---------- cursor: rastro + click spark (canvas) ----------
     if (!fine || reduce) return;
     const cv = document.createElement('canvas');
     cv.className = 'fx-cursor';
@@ -410,7 +424,6 @@
         const idle = !trail.length && !sparks.length && Math.abs(mouse.tx - mouse.x) < .3 && Math.abs(mouse.ty - mouse.y) < .3;
         ctx.clearRect(0, 0, W, H);
 
-        // brilho que segue o cursor com atraso
         mouse.x += (mouse.tx - mouse.x) * .18;
         mouse.y += (mouse.ty - mouse.y) * .18;
         if (mouse.seen) {
@@ -421,7 +434,6 @@
             ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 18, 0, Math.PI * 2); ctx.fill();
         }
 
-        // partículas
         for (let i = trail.length - 1; i >= 0; i--) {
             const p = trail[i];
             p.x += p.vx; p.y += p.vy; p.life -= .025;
@@ -430,7 +442,6 @@
             ctx.beginPath(); ctx.arc(p.x, p.y, p.r * p.life + .3, 0, Math.PI * 2); ctx.fill();
         }
 
-        // click spark
         ctx.lineCap = 'round';
         for (let i = sparks.length - 1; i >= 0; i--) {
             const s = sparks[i];

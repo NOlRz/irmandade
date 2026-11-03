@@ -1,10 +1,3 @@
-/* ==========================================================
-   irmandade fx — camada "chamativa"
-   Meteors e Spotlight (Aceternity), Aurora Text, Shine Border,
-   Orbiting Circles, Animated Badge (Magic UI), Focus Cards (Aceternity)
-   ========================================================== */
-
-/* ---------- meteoros caindo pelo fundo ---------- */
 .fx-meteors {
     position: fixed;
     inset: 0;
@@ -40,7 +33,6 @@
     100% { transform: rotate(215deg) translateX(-900px); opacity: 0; }
 }
 
-/* ---------- holofote vindo de cima ---------- */
 .fx-spotlight {
     position: fixed;
     top: -40vh;
@@ -63,11 +55,9 @@
     50%      { transform: translateX(14vw); }
 }
 
-/* conteúdo por cima dos meteoros; o vídeo continua no fundo */
 .main-container, .hub-hero { position: relative; z-index: 1; }
 .volume-control, #volume-control, #members-toggle, #members-list { z-index: 1000 !important; }
 
-/* ---------- vidro forte nos cartões ---------- */
 body .profile-container[data-site],
 body #mainDiv.fx-card {
     background:
@@ -91,18 +81,15 @@ body #mainDiv.fx-card:hover {
         0 0 70px rgba(var(--fx-accent-rgb), .35) !important;
 }
 
-/* borda brilhante sempre visível e mais forte */
 .fx-beam { opacity: .85 !important; padding: 1.5px !important; }
 .fx-card:hover .fx-beam { opacity: 1 !important; }
 
-/* ---------- focus cards (hub) ---------- */
 #mainDiv:has(.profile-container[data-site]:hover) .profile-container[data-site]:not(:hover) {
     filter: blur(2px) brightness(.55) saturate(.7);
     opacity: .8;
 }
 .profile-container[data-site] { transition: filter .4s ease, opacity .4s ease; }
 
-/* ---------- título do hub ---------- */
 .hub-hero {
     display: flex;
     flex-direction: column;
@@ -182,7 +169,6 @@ body #mainDiv.fx-card:hover {
     animation: fx-ping 1.6s cubic-bezier(0, 0, .2, 1) infinite;
 }
 
-/* ---------- nome com gradiente animado (aurora) ---------- */
 body .username.breathing {
     background: linear-gradient(90deg, #fff 0%, rgb(var(--fx-accent-rgb)) 30%, #fff 50%, rgb(var(--fx-accent-rgb)) 70%, #fff 100%) !important;
     background-size: 250% 100% !important;
@@ -195,7 +181,6 @@ body .username.breathing {
 #mainDiv .username { font-size: 30px !important; letter-spacing: .02em; }
 @keyframes fx-aurora { to { background-position: -250% 0; } }
 
-/* ---------- partículas orbitando o avatar ---------- */
 .fx-orbit {
     position: absolute;
     inset: -16px;
@@ -217,7 +202,6 @@ body .username.breathing {
 .fx-orbit.r2 i:nth-child(1) { top: 50%; left: -3px; width: 4px; height: 4px; }
 @keyframes fx-spin-plain { to { transform: rotate(360deg); } }
 
-/* ---------- links acendem na cor do perfil ---------- */
 .links-container .logo {
     background: rgba(255, 255, 255, .05) !important;
     backdrop-filter: blur(8px);
@@ -236,7 +220,6 @@ body .username.breathing {
     filter: drop-shadow(0 0 8px rgb(var(--fx-accent-rgb))) !important;
 }
 
-/* ---------- contador de visitas em pílula ---------- */
 #mainDiv .views-container {
     margin-inline: auto;
     width: fit-content;
@@ -252,7 +235,6 @@ body .username.breathing {
     .hub-title span { opacity: 1; filter: none; transform: none; }
 }
 
-/* ---------- brilhinhos em volta do nome (estilo "Sparkles") ---------- */
 .fx-name { position: relative; display: inline-block; }
 .fx-spark {
     position: absolute;
@@ -271,7 +253,6 @@ body .username.breathing {
     50% { opacity: 1; transform: scale(1) rotate(90deg); }
 }
 
-/* ---------- feixe de luz sobre o título do hub (estilo "Lamp") ---------- */
 .hub-hero { position: relative; }
 .hub-hero::before {
     content: '';
@@ -311,10 +292,6 @@ body .username.breathing {
     .hub-hero::before, .hub-hero::after { animation: none; opacity: 1; transform: translateX(-50%); }
 }
 
-/* ==========================================================
-   hub: manter os cards alinhados lado a lado (5+ membros)
-   5 por linha no desktop → 3 → 2 → 1, sempre centralizados
-   ========================================================== */
 #mainDiv { gap: 18px; align-items: stretch; }
 .profile-container[data-site] {
     box-sizing: border-box;
@@ -332,16 +309,10 @@ body .username.breathing {
     .profile-container[data-site] { flex-basis: 100%; max-width: 360px; }
 }
 
-/* em tela de toque não existe "mouse em cima": sem isso, depois de um toque
-   os outros cards ficavam borrados pra sempre */
 @media (hover: none) {
     #mainDiv:has(.profile-container[data-site]:hover) .profile-container[data-site]:not(:hover) { filter: none; opacity: 1; }
 }
 
-/* ==========================================================
-   hub no CELULAR: cards compactos em lista (foto à esquerda,
-   nome / badges / status à direita) — cabe todo mundo na tela
-   ========================================================== */
 @media (max-width: 600px) {
     body.hub { margin: 0; overflow-x: hidden; }
     .hub #user-page {
@@ -401,7 +372,7 @@ body .username.breathing {
     }
     .hub .hub-title { font-size: min(42px, 10.5vw) !important; white-space: nowrap; }
     body.hub #mainDiv .profile-container[data-site] .bio { text-align: left; font-size: 13px; line-height: 1.35; opacity: .8; }
-    /* no celular o cartão inteiro já é o botão: no lugar do "click to see profile" fica o status */
+
     body.hub #mainDiv .profile-container[data-site] .bio-container { display: none; }
     body.hub #mainDiv .profile-container[data-site] .fx-presence { grid-area: presence; justify-content: flex-start; margin: 0; padding: 0; font-size: 13px; }
 }

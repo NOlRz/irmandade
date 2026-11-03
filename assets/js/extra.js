@@ -1,12 +1,8 @@
-/* ==========================================================
-   irmandade fx — camada "chamativa" (JS puro)
-   ========================================================== */
 (() => {
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const mobile = matchMedia('(max-width: 600px)').matches;
     const isHub = !!document.querySelector('.profile-container[data-site]');
 
-    // ---------- meteoros + holofote ----------
     if (!reduce) {
         const box = document.createElement('div');
         box.className = 'fx-meteors';
@@ -26,7 +22,6 @@
         document.body.prepend(spot);
     }
 
-    // ---------- título do hub ----------
     if (isHub) {
         const main = document.getElementById('mainDiv');
         const hero = document.createElement('header');
@@ -41,7 +36,6 @@
             </div>`;
         main.parentNode.insertBefore(hero, main);
 
-        // conta quem está online (o fx.js avisa quando recebe o status de cada um)
         const seen = {};
         addEventListener('lanyard', e => {
             const d = e.detail;
@@ -54,7 +48,6 @@
         });
     }
 
-    // ---------- brilhinhos em volta do nome ----------
     if (!reduce) {
         document.querySelectorAll('#mainDiv .username, .profile-container[data-site] .username').forEach(u => {
             const wrap = document.createElement('span');
@@ -75,7 +68,6 @@
         });
     }
 
-    // ---------- partículas orbitando o avatar ----------
     if (!reduce) {
         document.querySelectorAll('.fx-avatar').forEach(a => {
             a.insertAdjacentHTML('afterbegin', '<span class="fx-orbit"><i></i><i></i></span><span class="fx-orbit r2"><i></i></span>');

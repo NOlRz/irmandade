@@ -19,8 +19,6 @@
     0 0 82px rgb(var(--accent-rgb));
 }
 
-/* font setup */
-
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -30,8 +28,6 @@
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
-
-/* fadeIn & fadeOut setup */
 
 #overlay {
     position: fixed;
@@ -64,8 +60,6 @@
     transform: translateY(-2px);
 }
 
-/* overlay setup */
-
 body {
     background-color: #000;
     background-size: cover;
@@ -74,18 +68,14 @@ body {
     overflow: hidden;
 }
 
-/* basic setup */
-
 #user-page {
-    display: none; /* none = click to enter | flex = no click to enter */
-    animation: fadeIn 0.5s ease-in-out; /* fadeIn 0.5s ease-in-out = click to enter | none = no click to enter */
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 98vh;
 }
-
-/* will show when clicking on overlay */
 
 .background {
     z-index: -1;
@@ -96,10 +86,8 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    object-fit: cover; /*- |si cover n'est pas actif, sur tel ca va resize a la taille de l'ecran, donc c'est mieux de le laisser perma | optional, ca devrait etre un choix de faire en sorte que si y'a des black bar (imaginons un background en 4/3), qu'on force la video a cover toute la page sans resize (donc cet exemple on perdra un peu du haut et du bas de la video)*/
+    object-fit: cover;
 }
-
-/* background image / gif / video setup */
 
 .main-container {
     width: 300px;
@@ -120,15 +108,11 @@ body {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* user page setup */
-
 .profile-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
-/* container for pp / username / badges */
 
 .pp {
     object-fit: cover;
@@ -144,8 +128,6 @@ body {
     border-color: rgba(var(--accent-rgb), 0.5);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
 }
-
-/* pp display setup */
 
 .username {
     font-family: 'Bold';
@@ -183,8 +165,6 @@ body {
     transform: translateX(-50%) scaleY(1);
     opacity: 1;
 }
-
-/* username display setup */
 
 .badges-container {
     display: flex;
@@ -242,8 +222,6 @@ body {
     opacity: 1;
 }
 
-/* badge display setup */
-
 .bio-container {
     text-align: center;
     width: 85%;
@@ -267,8 +245,6 @@ body {
     filter: drop-shadow(#ffffff 1px 0 7px)!important;
 }
 
-/* bio setup */
-
 .bioline {
     background-color: rgba(10, 10, 10, 0.61);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -283,24 +259,22 @@ body {
     width: 80%;
     height: 2px;
     border-radius: 10px;
-    
-}
 
-/* separation line setup */
+}
 
 .links-container {
     display: flex;
-    flex-direction: row; /* Garante que os itens fiquem em uma linha */
-    justify-content: space-around; /* Distribui os ícones uniformemente */
-    align-items: center; /* Centraliza verticalmente */
-    padding: 10px; /* Adiciona um pouco de espaçamento */
-    gap: 10px; /* Espaçamento entre os ícones */
-    width: 100%; /* Use a largura total do contêiner */
-    overflow-x: auto; /* Adiciona scroll horizontal, caso necessário */
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 .links-container::-webkit-scrollbar {
-    display: none; /* Remove a barra de rolagem */
+    display: none;
 }
 
 .logo {
@@ -331,10 +305,6 @@ body {
     filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 3px);
 }
 
-
-
-/* socials container setup */
-
 .views-container {
     font-family: 'Light';
     font-size: 20px;
@@ -344,12 +314,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; 
+    gap: 8px;
 }
 
 .views-container svg {
     padding-bottom: 6px;
-    height: 25px; 
+    height: 25px;
     width: 25px;
     display: inline-block;
     vertical-align: middle;
@@ -359,18 +329,11 @@ body {
     filter: drop-shadow(#ffffff 1px 0 7px)!important;
 }
 
-
-
-
-/* views container setup */
-
 .pic-badge {
     background-size: 100%;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     background-position: center center;
 }
-
-/* badge setup */
 
 .volume-control {
     font-family: 'Light';
@@ -446,8 +409,6 @@ body {
     transform: scale(1.2);
 }
 
-/* mute button setup */
-
 .breathing {
     background: linear-gradient(90deg, transparent 30%, #fff 50%, transparent 70%);
     background-size: 200%;
@@ -465,15 +426,13 @@ body {
     }
 }
 
-/* breath effect setup */
-
 .pulsing {
     color: #fff;
     text-align: center;
     animation: pulse 2s ease-in-out infinite alternate;
     backface-visibility: hidden;
 }
-    
+
 @keyframes pulse {
     from {
     text-shadow: 0 0 10px #fff,
@@ -491,11 +450,6 @@ body {
     }
 }
 
-/* pulsing effect setup */
-
-/* (efeitos antigos sparkles/leaves/sakura/comet/thunder removidos: nenhuma página usava) */
-
-
 canvas {
    position: absolute;
    top: 0;
@@ -503,25 +457,21 @@ canvas {
    z-index: -1;
 }
 
-/* extras */
-/* Main div */
 #mainDiv{
     width:375px;
    }
-   
-   /* Image */
+
    #mainDiv .bio img{
     padding-top:14px;
    }
-   
+
    @media (max-width:576px){
-   
-    /* Main div */
+
     #mainDiv{
      width:275px;
     }
 }
-/* pre div */
+
 .pre-container {
     text-align: center;
     padding-top: 15px;
@@ -568,9 +518,6 @@ canvas {
     object-fit: contain;
 }
 
-/* memberlist */
-
-/* Ícone do toggle */
 #members-toggle {
     position: fixed;
     bottom: 20px;
@@ -591,7 +538,6 @@ canvas {
     background-color: rgb(var(--accent-rgb));
 }
 
-/* Ícone dentro do botão */
 #members-icon {
     font-size: 24px;
     color: #fff;
@@ -602,13 +548,12 @@ canvas {
     transform: rotate(180deg);
 }
 
-/* Container da lista de membros */
 #members-list {
     position: fixed;
-    bottom: 80px; /* Acima do botão de toggle */
+    bottom: 80px;
     right: 20px;
     width: 250px;
-    max-height: 0; /* Escondido inicialmente */
+    max-height: 0;
     overflow: hidden;
     background-color: #3636362c;
     border: 1px solid #cccccc36;
@@ -620,11 +565,10 @@ canvas {
 }
 
 #members-list.expand {
-    max-height: 400px; /* Altura máxima da lista */
+    max-height: 400px;
     opacity: 1;
 }
 
-/* Estilo de cada membro */
 .member {
     display: flex;
     align-items: center;
@@ -636,7 +580,6 @@ canvas {
     border-bottom: none;
 }
 
-/* Estilo do avatar */
 .avatar {
     width: 40px;
     height: 40px;
@@ -646,7 +589,6 @@ canvas {
     border: 2px solid rgb(var(--accent-rgb));
 }
 
-/* Nome do membro */
 .member-name {
     font-size: 14px;
     color: #ffffffa9;
@@ -658,31 +600,21 @@ canvas {
 
 .member-name:hover {
     cursor: pointer;
-    text-decoration: underline; /* Opcional para destacar visualmente o clique */
+    text-decoration: underline;
 }
-
-/* mute icon */
 
 #mutetext {
-    color: rgba(255, 255, 255, 0.493); /* Cor do ícone */
-    font-size: 15px; /* Tamanho */
-    cursor: pointer; /* Estilo do cursor ao passar por cima */
+    color: rgba(255, 255, 255, 0.493);
+    font-size: 15px;
+    cursor: pointer;
 }
 
-/* ==========================================
-   CSS RESPONSIVO PARA PERFIL NOIR
-   ========================================== */
-
-/* Variáveis CSS para fácil customização */
 :root {
     --primary-color: rgb(var(--accent-rgb));
     --primary-glow: rgba(var(--accent-rgb), 0.3);
     --bg-dark: rgba(17, 17, 17, 0.75);
 }
 
-/* ==========================================
-   TABLETS E TELAS MÉDIAS (768px - 1024px)
-   ========================================== */
 @media (max-width: 1024px) {
     .main-container {
         width: 290px;
@@ -722,9 +654,6 @@ canvas {
     }
 }
 
-/* ==========================================
-   SMARTPHONES LANDSCAPE (576px - 768px)
-   ========================================== */
 @media (max-width: 768px) {
     body {
         overflow-y: auto;
@@ -787,7 +716,6 @@ canvas {
         font-size: 26px;
     }
 
-    /* Membro toggle para mobile */
     #members-toggle {
         width: 45px;
         height: 45px;
@@ -805,7 +733,6 @@ canvas {
         right: 15px;
     }
 
-    /* Volume control */
     .volume-control {
         right: 1.5vh;
         bottom: 1.5vh;
@@ -815,18 +742,16 @@ canvas {
         font-size: 16px;
         padding: 5px;
     }
-    
+
     .volume-control:hover .volume-slider {
         width: 70px;
     }
 
-    /* Overlay button */
     .overlaybtn {
         font-size: 4.5vh;
         padding: 15px 30px;
     }
 
-    /* Tooltips ajustados */
     .username::after,
     .badges::after {
         font-size: 14px;
@@ -834,7 +759,6 @@ canvas {
         bottom: 2.5vh;
     }
 
-    /* Views container */
     .views-container {
         font-size: 18px;
         margin-top: 1.5vh;
@@ -846,9 +770,6 @@ canvas {
     }
 }
 
-/* ==========================================
-   SMARTPHONES PORTRAIT (< 576px)
-   ========================================== */
 @media (max-width: 576px) {
     .main-container {
         width: 260px;
@@ -908,13 +829,10 @@ canvas {
         width: 85%;
     }
 
-    /* Pre container para RPC */
     .pre-container {
         padding: 12px 10px;
     }
 
-
-    /* Member list */
     #members-toggle {
         width: 42px;
         height: 42px;
@@ -945,7 +863,6 @@ canvas {
         font-size: 13px;
     }
 
-    /* Volume control */
     .volume-control {
         right: 1vh;
         bottom: 1vh;
@@ -955,18 +872,16 @@ canvas {
         font-size: 15px;
         padding: 5px;
     }
-    
+
     .volume-control:hover .volume-slider {
         width: 60px;
     }
 
-    /* Overlay button */
     .overlaybtn {
         font-size: 4vh;
         padding: 12px 25px;
     }
 
-    /* Views */
     .views-container {
         font-size: 17px;
         margin-top: 1.5vh;
@@ -977,7 +892,6 @@ canvas {
         width: 20px;
     }
 
-    /* Ajuste tooltips */
     .username::after,
     .badges::after {
         font-size: 13px;
@@ -985,9 +899,6 @@ canvas {
     }
 }
 
-/* ==========================================
-   SMARTPHONES PEQUENOS (< 375px)
-   ========================================== */
 @media (max-width: 375px) {
     .main-container {
         width: 240px;
@@ -1046,9 +957,6 @@ canvas {
     }
 }
 
-/* ==========================================
-   LANDSCAPE MODE (altura < 500px)
-   ========================================== */
 @media (max-height: 500px) and (orientation: landscape) {
     #user-page {
         padding: 10px 0;
@@ -1113,7 +1021,6 @@ canvas {
         padding: 8px;
     }
 
-
     #members-toggle {
         width: 38px;
         height: 38px;
@@ -1124,11 +1031,6 @@ canvas {
     }
 }
 
-/* ==========================================
-   ANIMAÇÕES MOBILE
-   ========================================== */
-
-/* Animação de entrada */
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -1144,28 +1046,22 @@ canvas {
     animation: slideInUp 0.6s ease-out;
 }
 
-/* Smooth scroll */
 @media (max-width: 768px) {
     html {
         scroll-behavior: smooth;
     }
-    
+
     body {
         -webkit-overflow-scrolling: touch;
     }
 }
 
-/* ==========================================
-   TOUCH IMPROVEMENTS
-   ========================================== */
-
 @media (hover: none) and (pointer: coarse) {
-    /* Remove hover effects em dispositivos touch */
+
     .logo:hover {
         transform: scale(1);
     }
 
-    /* Adiciona feedback visual ao touch */
     .logo:active {
         transform: scale(0.95);
         background: rgba(var(--accent-rgb), 0.2);
@@ -1175,7 +1071,6 @@ canvas {
         transform: scale(1.1);
     }
 
-    /* Aumentar área de toque */
     .logo {
         min-height: 44px;
         min-width: 44px;
@@ -1190,22 +1085,17 @@ canvas {
         gap: 6px;
         bottom: 1vh;
     }
-    
+
     #mutetext {
         padding: 8px;
         font-size: 16px;
     }
-    
+
     .volume-control:hover .volume-slider {
         width: 55px;
     }
 }
 
-/* ==========================================
-   ACESSIBILIDADE
-   ========================================== */
-
-/* Reduzir movimento para usuários sensíveis */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1220,7 +1110,6 @@ canvas {
     }
 }
 
-/* Alto contraste */
 @media (prefers-contrast: high) {
     .main-container {
         border: 2px solid rgba(var(--accent-rgb), 0.8);
@@ -1231,11 +1120,6 @@ canvas {
     }
 }
 
-/* ==========================================
-   OTIMIZAÇÕES DE PERFORMANCE
-   ========================================== */
-
-/* Força aceleração por hardware */
 .main-container,
 .pp,
 .logo,
@@ -1245,7 +1129,6 @@ canvas {
     -webkit-transform: translateZ(0);
 }
 
-/* Prevenir zoom acidental em iOS */
 @media (max-width: 768px) {
     input,
     select,
@@ -1254,17 +1137,12 @@ canvas {
     }
 }
 
-/* Fix para viewport height em mobile */
 @supports (-webkit-touch-callout: none) {
     #user-page {
         min-height: -webkit-fill-available;
     }
 }
 
-
-/* ==========================================================
-   card do discord (gerado pelo perfil.js) — no estilo do perfil do Discord
-   ========================================================== */
 .dc-card {
     width: 100%;
     background: rgba(17, 17, 19, .92);
@@ -1285,7 +1163,7 @@ canvas {
 .dc-head { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 12px; margin-top: -30px; }
 .dc-avatar { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
 .dc-pfp { box-sizing: border-box; width: 72px; height: 72px; border-radius: 50%; border: 4px solid #111113; display: block; background: #111113; object-fit: cover; }
-/* moldura (decoração do avatar): 1,2x o tamanho da foto e sempre centralizada nela, como no Discord */
+
 .dc-deco { position: absolute; left: 50%; top: 50%; width: 77px; height: 77px; max-width: none; transform: translate(-50%, -50%); pointer-events: none; }
 .dc-dot { position: absolute; right: 0; bottom: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--st); border: 3px solid #111113; }
 .dc-badges {
@@ -1337,7 +1215,6 @@ a.dc-act-name:hover { text-decoration: underline; }
 .dc-bar span { display: block; height: 100%; width: 0; background: #fff; transition: width 1s linear; }
 .dc-times { display: flex; justify-content: space-between; font-size: 10px; color: rgba(255, 255, 255, .45); margin-top: 3px; font-variant-numeric: tabular-nums; }
 
-/* ---------- avatar no ritmo da música ---------- */
 .main-container .fx-avatar {
     transform: scale(calc(1 + var(--beat, 0) * .06));
     transition: transform .08s linear;
@@ -1349,7 +1226,6 @@ a.dc-act-name:hover { text-decoration: underline; }
     box-shadow: 0 0 calc(10px + var(--beat, 0) * 40px) rgba(var(--accent-rgb), calc(.25 + var(--beat, 0) * .6)), 0 4px 15px rgba(0, 0, 0, .5) !important;
 }
 
-/* ---------- música tocando (ao lado do volume) ---------- */
 .now-playing {
     font-family: 'Light', system-ui, sans-serif;
     font-size: 12px;
@@ -1368,7 +1244,6 @@ a.dc-act-name:hover { text-decoration: underline; }
 .now-playing .eq i:nth-child(3) { animation-delay: -.6s; }
 @keyframes eq { 0%, 100% { height: 3px; } 50% { height: 10px; } }
 
-/* links como <a> */
 a.logo { color: inherit; text-decoration: none; }
 .logo i { font-size: 28px; filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 3px); color: #fff; }
 .member a { color: inherit; text-decoration: none; display: flex; align-items: center; width: 100%; }
@@ -1381,15 +1256,11 @@ a.logo { color: inherit; text-decoration: none; }
 h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height: 1.2; }
 #members-toggle { color: #fff; padding: 0; z-index: 900; }
 
-/* volume no canto esquerdo (o botão de membros fica no direito) */
 .volume-control { right: auto !important; left: max(2vh, env(safe-area-inset-left, 0px)); flex-direction: row !important; }
 .volume-control #mutetext { order: 0; }
 .volume-control .volume-slider { order: 1; }
 .volume-control .now-playing { order: 2; }
 
-/* ==========================================================
-   rodapé do cartão: mini player + visitas
-   ========================================================== */
 .card-footer {
     width: 100%;
     display: flex;
@@ -1434,7 +1305,6 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
 @keyframes np-marquee { 0%, 15% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 .np-time { flex-shrink: 0; font-size: 11px; color: rgba(255, 255, 255, .55); font-variant-numeric: tabular-nums; min-width: 30px; text-align: right; }
 
-/* barras (progresso e volume) */
 #np-seek, .np-volume {
     -webkit-appearance: none; appearance: none;
     width: 100%; height: 4px; border-radius: 4px; margin: 0;
@@ -1461,7 +1331,6 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
 }
 #mainDiv .card-footer .views-container svg { padding-bottom: 0; width: 20px; height: 20px; }
 
-/* números deslizando (estilo "Sliding Number") — altura em px inteiros pra não desalinhar */
 #view-count { font-family: 'Light', system-ui, sans-serif; font-size: 16px; letter-spacing: .03em; color: rgba(255, 255, 255, .88); filter: none !important; }
 .sn { display: inline-flex; align-items: flex-start; height: 20px; overflow: hidden; font-variant-numeric: tabular-nums lining-nums; }
 .sn-col { display: flex; flex-direction: column; flex-shrink: 0; transition: transform 1.4s cubic-bezier(.16, 1, .3, 1); will-change: transform; }
@@ -1478,7 +1347,6 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     .np-title.scroll span { animation: none; }
 }
 
-/* frase da bio: cursor piscando sempre, caixa não fica "vazia" */
 #mainDiv .bio.typewriter { min-height: 1.5em; }
 #mainDiv .bio.typewriter::after {
     content: '';
@@ -1493,21 +1361,14 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
 }
 @keyframes caret { 50% { opacity: 0; } }
 
-/* ícone do roblox (svg) branco como os outros */
 .logo svg { color: #fff; filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 3px); }
 
-/* player e views com a mesma altura */
 .np { height: 44px; box-sizing: border-box; padding-block: 0; }
 #mainDiv .card-footer .views-container { height: 44px; box-sizing: border-box; }
 
-/* banner real do perfil do Discord */
 .dc-banner.has-img { height: 72px; background-size: cover; background-position: center; }
 .dc-banner.has-img + .dc-head { margin-top: -32px; }
 
-/* ==========================================================
-   CELULAR — camada final (sobrepõe as regras antigas lá de cima,
-   que travavam o cartão em 260px e deixavam tudo espremido)
-   ========================================================== */
 @media (max-width: 600px) {
     body { margin: 0; }
     #user-page {
@@ -1519,7 +1380,6 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
         padding: calc(env(safe-area-inset-top, 0px) + 16px) 12px calc(env(safe-area-inset-bottom, 0px) + 20px);
     }
 
-    /* cartão usa a largura da tela */
     body #mainDiv.main-container {
         box-sizing: border-box;
         width: 100%;
@@ -1534,7 +1394,6 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     #mainDiv .bio-container { box-sizing: border-box; width: 100%; padding: 13px 16px; margin-bottom: 0; }
     #mainDiv .bio { font-size: 15px; line-height: 1.45; }
 
-    /* card do Discord ocupa a largura toda */
     #mainDiv .pre-container { padding: 14px 0 0; }
     #mainDiv .pre { font-size: 14px; }
     .dc-body { padding: 6px 14px 14px; }
@@ -1544,7 +1403,6 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     .dc-act-name { font-size: 14px; }
     .dc-act-sub { font-size: 12.5px; }
 
-    /* links sempre numa linha só, do mesmo tamanho */
     #mainDiv .links-container,
     #mainDiv .links-container.fx-dock {
         box-sizing: border-box;
@@ -1568,17 +1426,14 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     #mainDiv .logo svg { width: 24px; height: 24px; }
     #mainDiv .linksline { width: 100%; }
 
-    /* player com espaço pro nome da música; visitas logo abaixo */
     #mainDiv .card-footer { gap: 10px; margin-top: 14px; justify-content: center; }
     #mainDiv .card-footer .np { flex: 1 1 100%; padding: 0 12px 0 7px; gap: 10px; }
     #mainDiv .np-btn { width: 32px; height: 32px; }
     #mainDiv .np-title { font-size: 13px; }
     #mainDiv .np-vol #mutetext { width: 32px; height: 32px; font-size: 14px; }
-    /* no iPhone o volume do site não pode ser mudado (só pelos botões do celular): fica só o mudo */
+
     #mainDiv .np-volume { display: none; }
 
-    /* botão de membros no canto de cima (ali o cartão é vazio, do lado da foto),
-       some ao descer a página e volta ao subir; a lista abre pra baixo */
     #members-toggle {
         top: calc(env(safe-area-inset-top, 0px) + 30px) !important;
         bottom: auto !important;
@@ -1603,10 +1458,8 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     #mainDiv .np-time { display: none; }
 }
 
-/* lista de membros com a fonte do site (estava caindo na fonte padrão do navegador) */
 .member-name { font-family: 'Bold', system-ui, sans-serif; font-weight: normal; letter-spacing: .02em; }
 
-/* atividades extras do Discord (2ª em diante) em formato compacto */
 .dc-mini { padding: 7px 9px; margin-top: 7px; }
 .dc-mini .dc-act { gap: 9px; }
 .dc-mini .dc-cover-wrap, .dc-mini .dc-cover { width: 38px; height: 38px; border-radius: 7px; }
@@ -1620,14 +1473,12 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
 .dc-mini .dc-act-sub .fa-youtube { color: #ff0033; }
 .dc-mini .dc-bar { height: 3px; margin-top: 5px; }
 
-/* no PC a página rola quando o cartão é maior que a tela (antes cortava) */
 @media (min-width: 601px) {
     html, body { overflow-x: hidden; }
     body { margin: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .18) transparent; }
     #user-page { box-sizing: border-box; min-height: 100vh; padding: 28px 0; }
 }
 
-/* telas mais baixas (notebook, janela menor): cartão mais compacto pra caber sem rolar */
 @media (max-height: 1000px) {
     body #mainDiv.main-container { padding-top: 18px; padding-bottom: 14px; }
     body #mainDiv .pp { width: 96px; height: 96px; }
@@ -1644,14 +1495,12 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     body #mainDiv .card-footer { margin-top: 10px; }
 }
 
-/* janela estreita mas não celular: player e visitas lado a lado (só empilha em tela de celular) */
 @media (min-width: 400px) and (max-width: 600px) {
     body #mainDiv .card-footer { flex-wrap: nowrap; }
     body #mainDiv .card-footer .np { flex: 1 1 0; min-width: 0; }
     body #mainDiv .card-footer .views-container { flex: 0 0 auto; margin: 0; }
 }
 
-/* telas bem baixas (notebook 768px): um pouco mais compacto ainda */
 @media (min-width: 601px) and (max-height: 800px) {
     #user-page { padding-top: 8px; padding-bottom: 8px; }
     body #mainDiv .pp { width: 84px; height: 84px; }
@@ -1662,5 +1511,4 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     body #mainDiv .logo { width: 50px; height: 50px; }
 }
 
-/* iPhone/iPad: o volume só muda pelos botões do aparelho, então fica só o botão de mudo */
 .is-ios .np-volume { display: none !important; }

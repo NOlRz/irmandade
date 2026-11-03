@@ -1,9 +1,3 @@
-/* ==========================================================
-   irmandade.cc — script das páginas de perfil
-   Os dados vêm de window.MEMBRO e window.SITE (gerados pelo build.js
-   a partir do membros.json). Não precisa editar este arquivo para
-   mudar links, frases, músicas etc.
-   ========================================================== */
 (() => {
     const M = window.MEMBRO;
     const SITE = window.SITE;
@@ -11,14 +5,12 @@
     const audio = $('#backgroundsong');
     const video = $('.background');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // iPhone/iPad: o Safari ignora mudo/volume e pode travar ao despausar quando o
-    // áudio passa pela Web Audio (efeito do avatar no ritmo). Lá o áudio fica "normal".
+
     const IOS = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     if (IOS) document.documentElement.classList.add('is-ios');
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-    // ---------- volume salvo entre as páginas ----------
     const store = {
         get(k, d) { try { const v = localStorage.getItem('irmandade:' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
         set(k, v) { try { localStorage.setItem('irmandade:' + k, JSON.stringify(v)); } catch { } }
@@ -27,8 +19,6 @@
     if ($('#volumeSlider')) $('#volumeSlider').value = savedVol;
     if (audio) audio.muted = store.get('mudo', false);
 
-    // volume e mudo passam por aqui: com o efeito do avatar ligado (Web Audio) quem
-    // controla o som é o gainNode; sem ele, o próprio <audio>
     let audioCtx = null, gainNode = null, curVol = 0;
     function setVol(v) {
         curVol = Math.min(1, Math.max(0, v));
@@ -46,7 +36,7 @@
         if (!audio) return;
         const id = ++fadeId, from = curVol, start = performance.now();
         const step = now => {
-            if (id !== fadeId) return; // outro fade começou: este para
+            if (id !== fadeId) return;
             const t = Math.min(1, (now - start) / ms);
             setVol(from + (target - from) * t);
             if (t < 1) requestAnimationFrame(step);
@@ -54,7 +44,6 @@
         requestAnimationFrame(step);
     }
 
-    // ---------- entrar (overlay) ----------
     let entered = false;
     window.removeOverlay = function () {
         if (entered) return;
@@ -74,12 +63,11 @@
         setTimeout(() => { if (pendingSlide) { pendingSlide(); pendingSlide = null; } }, 700);
     };
     let pendingSlide = null;
-    // Enter ou espaço também entram
+
     document.addEventListener('keydown', e => {
         if (!entered && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); window.removeOverlay(); }
     });
 
-    // ---------- volume ----------
     window.toggleMusic = function () {
         if (!audio) return;
         if (audio.paused) audio.play().catch(() => {});
@@ -90,7 +78,7 @@
     function updateVolumeIcon() {
         const btn = $('#mutetext');
         if (!btn || !audio) return;
-        // no iPhone quem manda no volume são os botões do aparelho: o ícone só mostra mudo ou não
+
         const v = IOS ? 1 : +($("#volumeSlider")?.value ?? curVol * 100) / 100;
         const icon = audio.muted || v === 0 ? 'fa-volume-mute'
             : v < .5 ? 'fa-volume-down' : 'fa-volume-up';
@@ -103,7 +91,7 @@
         slider.style.setProperty('--p', slider.value + '%');
         slider.addEventListener('input', () => {
             slider.style.setProperty('--p', slider.value + '%');
-            fadeId++; // para qualquer fade em andamento
+            fadeId++;
             setVol(slider.value / 100);
             if (audio.muted && slider.value > 0) setMuted(false);
             store.set('volume', +slider.value);
@@ -111,7 +99,6 @@
         });
     }
 
-    // ---------- mini player (estilo "Now Playing") ----------
     const playBtn = $('#playbtn'), seek = $('#np-seek'), timeEl = $('#np-time');
     const fmtS = t => { t = Math.max(0, Math.floor(t || 0)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; };
     function setPlayIcon() {
@@ -156,14 +143,13 @@
             paint(pct * 100);
             timeEl.textContent = fmtS(audio.currentTime);
         });
-        // nome da música rola se não couber
+
         const t = $('.np-title'), sp = $('.np-title span');
         const checkMarquee = () => t && sp && t.classList.toggle('scroll', sp.scrollWidth > t.clientWidth + 2);
         addEventListener('resize', checkMarquee);
         setTimeout(checkMarquee, 900);
     }
 
-    // ---------- sincronizar vídeo com a música ----------
     if (M.sincronizar && video && audio) {
         setInterval(() => {
             if (!audio.paused && Math.abs(video.currentTime - audio.currentTime) > 0.25) {
@@ -172,7 +158,6 @@
         }, 1000);
     }
 
-    // pausa tudo quando a aba fica em segundo plano
     let wasPlaying = false;
     document.addEventListener('visibilitychange', () => {
         if (!audio) return;
@@ -190,7 +175,6 @@
         }
     });
 
-    // ---------- título da aba digitando ----------
     (() => {
         const prefix = '⠐ ';
         const text = M.nome;
@@ -205,7 +189,6 @@
         tick();
     })();
 
-    // ---------- frase digitando ----------
     (() => {
         const el = $('.bio.typewriter');
         if (!el || !M.frases?.length) return;
@@ -223,10 +206,6 @@
         tick();
     })();
 
-    // ---------- contador de visitas ----------
-    // Soma 1 só uma vez por visitante a cada 24h (não conta F5).
-    // O incremento é feito pelo próprio Firebase ({".sv": {"increment": 1}}),
-    // então duas visitas ao mesmo tempo não se atropelam.
     (async () => {
         const out = $('#view-count');
         if (!out || !M.contador) return;
@@ -250,7 +229,7 @@
             slide(out, n);
             try { localStorage.setItem('irmandade:views:' + M.id, n); } catch { }
         } catch {
-            // Firebase fora do ar: mostra o último número que este visitante viu
+
             let last = null;
             try { last = localStorage.getItem('irmandade:views:' + M.id); } catch { }
             if (last) slide(out, last); else out.textContent = '—';
@@ -273,7 +252,6 @@
         }));
     }
 
-    // ---------- lista de membros ----------
     window.toggleMembersList = function () {
         const list = $('#members-list');
         const icon = $('#members-icon');
@@ -285,8 +263,6 @@
     document.addEventListener('click', e => { if (!e.target.closest('#members-list, #members-toggle')) closeMembers(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMembers(); });
 
-    // celular: o botão de membros some enquanto desce a página (não fica por cima do cartão)
-    // e volta ao subir ou ao chegar no fim
     {
         let lastY = scrollY;
         addEventListener('scroll', () => {
@@ -300,7 +276,6 @@
         }, { passive: true });
     }
 
-    // pré-carrega a página de um membro ao passar o mouse (abre mais rápido)
     const prefetched = new Set();
     document.addEventListener('pointerover', e => {
         const a = e.target.closest('a[href^="../"]');
@@ -311,7 +286,6 @@
         document.head.appendChild(l);
     });
 
-    // ---------- card do Discord (Lanyard) ----------
     const BADGE_ICONS = {
         staff: ['5e74e9b61934fc1f67c65515d1f7e60d', 'Discord Staff'],
         partner: ['3f9748e53446a137a052f3454e2de41e', 'Partnered Server Owner'],
@@ -336,10 +310,8 @@
         512: 'early_supporter', 16384: 'bug_hunter_level_2', 131072: 'verified_bot_developer',
         262144: 'certified_moderator', 4194304: 'active_developer'
     };
-    const STATUS = { online: ['#43b581', 'online'], idle: ['#faa61a', 'ausente'], dnd: ['#f04747', 'não perturbe'], offline: ['#747f8d', 'offline'] };
+    const STATUS = { online: ['#43b581', 'online'], idle: ['#faa61a', 'idle'], dnd: ['#f04747', 'do not disturb'], offline: ['#747f8d', 'offline'] };
 
-    // ícones dos badges ficam no próprio site (assets/discord), então sempre aparecem
-    // badges extras (os que o Lanyard não informa) — o nome é o arquivo em assets/discord
     const EXTRA_LABELS = {
         'streaming-breakout': 'Badge de transmissão',
         'streaming-standout': 'Badge de transmissão',
@@ -354,7 +326,6 @@
         return `<span class="dc-badge" data-tip="${esc(label)}"><img src="../assets/discord/${name}.${ext}" alt="${esc(label)}"></span>`;
     };
 
-    // badges vindos do perfil real: usa ícone local quando existe, senão o do Discord
     const LOCAL_BADGE = id => {
         if (/^premium_tenure_(\d+)_month/.test(id)) return `premium_tenure_${RegExp.$1}.svg`;
         if (id === 'premium') return 'nitro.svg';
@@ -391,7 +362,7 @@
     }
 
     const intToHex = n => '#' + (n >>> 0).toString(16).padStart(6, '0').slice(-6);
-    // cor do nome que dá pra ler no fundo escuro do card (cor escura vira a mesma cor, só que clara)
+
     function readable(hex) {
         const n = parseInt(hex.slice(1), 16);
         const r = (n >> 16 & 255) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255;
@@ -408,7 +379,7 @@
 
     function activityImage(a, key = 'large_image') {
         const img = a.assets && a.assets[key];
-        // jogo sem imagem (ex: Fortnite detectado pelo Discord): tenta o ícone do app
+
         if (!img) return key === 'large_image' && a.application_id ? `https://dcdn.dstn.to/app-icons/${a.application_id}` : '';
         if (img.startsWith('mp:')) return 'https://media.discordapp.net/' + img.slice(3);
         if (img.startsWith('spotify:')) return 'https://i.scdn.co/image/' + img.slice(8);
@@ -416,7 +387,6 @@
         return a.application_id ? `https://cdn.discordapp.com/app-assets/${a.application_id}/${img}.png` : '';
     }
 
-    // ícone do app de música (Apple Music, YouTube Music, Deezer...)
     function musicIcon(name) {
         const n = (name || '').toLowerCase();
         if (n.includes('apple') || n.includes('itunes') || n.includes('cider')) return 'fab fa-apple';
@@ -453,8 +423,6 @@
             ? `<img class="dc-deco" src="https://cdn.discordapp.com/avatar-decoration-presets/${u.avatar_decoration_data.asset}.png?size=160&passthrough=true" alt="">` : '';
         const name = u.display_name || u.global_name || u.username;
 
-        // nome com as cores/gradiente que a pessoa usa no Discord (se tiver)
-        // cor 0 = cor padrão do Discord (não é preto): ignora
         const rawCols = (u.display_name_styles?.colors || []).filter(c => c);
         const cols = rawCols.length > 1 ? rawCols.map(c => readable(intToHex(c))) : null;
         const solid = rawCols.length === 1 ? readable(intToHex(rawCols[0])) : null;
@@ -464,10 +432,10 @@
 
         let badgesHTML = '';
         if (dprofile && Array.isArray(dprofile.badges)) {
-            // badges reais do perfil do Discord (via dstn.to)
+
             badgesHTML = dprofile.badges.map(profileBadge).join('');
         } else {
-            // sem dstn: flags públicas do Lanyard + extras do membros.json
+
             const badges = [];
             for (const [flag, n] of Object.entries(FLAGS)) if ((u.public_flags || 0) & +flag) badges.push(n);
             (M.badgesDiscordExtras || []).forEach(b => { if (!badges.includes(b)) badges.push(b); });
@@ -480,13 +448,11 @@
         const custom = acts.find(a => a.type === 4);
         const game = acts.find(a => a.type === 0 || a.type === 1 || a.type === 3 || a.type === 5);
         const sp = d.listening_to_spotify && d.spotify;
-        // "Ouvindo" de outros apps (Apple Music etc). O do Spotify já vem pronto em d.spotify
+
         const music = acts.find(a => a.type === 2 && !(sp && (a.id === 'spotify:1' || a.name === 'Spotify')));
 
         const device = d.active_on_discord_mobile && !d.active_on_discord_desktop ? '<i class="fas fa-mobile-alt"></i>' : '';
 
-        // cada atividade vira um item: a primeira aparece grande, as outras compactas
-        // (assim o cartão não cresce demais quando tem Spotify + jogo + ...)
         const items = [];
         if (sp) items.push({
             icon: 'fab fa-spotify', title: 'ouvindo Spotify',
@@ -564,7 +530,6 @@
         </div>`;
     }
 
-    // dica dos badges: fica por cima de tudo e nunca sai da tela
     const tip = document.createElement('div');
     tip.className = 'dc-tip';
     document.body.appendChild(tip);
@@ -594,7 +559,6 @@
         });
     }, 1000);
 
-    // barra de progresso da música (Spotify, Apple Music...) — só se o app mandar início e fim
     function barHTML(ts, times = true) {
         if (!ts || !ts.start || !ts.end || ts.end <= ts.start) return '';
         return `<div class="dc-bar" data-start="${+ts.start}" data-end="${+ts.end}"><span></span></div>` +
@@ -616,7 +580,6 @@
     let lastPresence = null;
     let dprofile = null;
 
-    // badges e banner do perfil real (dstn.to); status/foto/atividade vêm do Lanyard ao vivo
     async function loadProfile() {
         try {
             const r = await fetch(`https://dcdn.dstn.to/profile/${M.discord}`);
@@ -626,7 +589,7 @@
             const changed = JSON.stringify([j.badges, j.user.banner]) !== JSON.stringify([dprofile?.badges, dprofile?.user?.banner]);
             dprofile = j;
             if (changed && lastPresence) { lastKey = ''; applyPresence(lastPresence); }
-        } catch { /* dstn fora: segue com Lanyard + membros.json */ }
+        } catch {  }
     }
 
     function applyPresence(d) {
@@ -635,7 +598,7 @@
         lastPresence = d;
         $('.pre-container').style.display = '';
         window.dispatchEvent(new CustomEvent('lanyard', { detail: d }));
-        // só redesenha se algo mudou (evita piscar)
+
         const key = JSON.stringify([d.discord_status, d.discord_user.avatar, d.discord_user.avatar_decoration_data?.asset, d.discord_user.global_name, d.spotify?.track_id, d.spotify?.timestamps?.start, (d.activities || []).map(a => [a.type, a.name, a.details, a.state, a.timestamps?.start, a.timestamps?.end, a.assets?.large_image].join('|'))]);
         if (key === lastKey) return;
         lastKey = key;
@@ -643,8 +606,6 @@
         tickBars();
     }
 
-    // Conecta no Lanyard por WebSocket: status, jogo e Spotify mudam na hora,
-    // sem precisar recarregar. Se cair, reconecta sozinho.
     function connectSocket() {
         let hb = 0;
         let ws;
@@ -669,15 +630,11 @@
         try {
             const j = await fetch(`https://api.lanyard.rest/v1/users/${M.discord}`).then(r => r.json());
             if (j.success) applyPresence(j.data);
-            else if (j.error?.code === 'user_not_monitored') {
-                console.warn(`[irmandade] ${M.nome} não está no servidor do Lanyard (discord.gg/lanyard), por isso o card do Discord não aparece.`);
-                return;
-            }
-        } catch { /* sem internet ou Lanyard fora: tenta pelo socket */ }
+            else if (j.error?.code === 'user_not_monitored') return;
+        } catch {  }
         connectSocket();
     })();
 
-    // ---------- avatar pulsando no ritmo da música ----------
     let vizStarted = false;
     function startVisualizer() {
         if (vizStarted || reduce || IOS || !audio || !window.AudioContext) return;
@@ -694,7 +651,7 @@
             gain.connect(ctx.destination);
             audioCtx = ctx;
             gainNode = gain;
-            audio.volume = 1; // daqui pra frente o volume é o do gain
+            audio.volume = 1;
             const data = new Uint8Array(an.frequencyBinCount);
             const target = $('.main-container');
             let smooth = 0;
@@ -708,6 +665,6 @@
                 requestAnimationFrame(loop);
             };
             loop();
-        } catch { /* navegador sem Web Audio: segue sem o efeito */ }
+        } catch {  }
     }
 })();
