@@ -182,37 +182,50 @@
         addEventListener('lanyard', e => setStatus(avatars[0].dot, e.detail));
     }
 
+    // linha de presença nos cartões do hub: a atividade (jogando / ouvindo) ou o status,
+    // sempre no mesmo lugar e do mesmo tamanho em todos os cartões. O "click to see
+    // profile" continua igual em todos.
+    function presenceRow(card) {
+        let row = card.querySelector('.fx-presence');
+        if (!row) {
+            row = document.createElement('div');
+            row.className = 'fx-presence';
+            const badges = card.querySelector('.badges-container');
+            const bio = card.querySelector('.bio-container');
+            if (badges) badges.insertAdjacentElement('afterend', row);
+            else if (bio) bio.insertAdjacentElement('beforebegin', row);
+            else card.appendChild(row);
+        }
+        return row;
+    }
+    if (isHub) cards.forEach(presenceRow); // já reserva o espaço antes dos dados chegarem
+
     function showActivity(card, data) {
-        const bio = card.querySelector('.bio');
-        if (!bio) return;
-        if (bio.dataset.fxOrig === undefined) bio.dataset.fxOrig = bio.innerHTML;
-        let html = '';
+        const row = presenceRow(card);
         const acts = data.activities || [];
         // "Ouvindo" de outros apps (Apple Music, YouTube Music, Deezer...)
         const music = acts.find(a => a.type === 2 && a.name !== 'Spotify' && a.id !== 'spotify:1');
-        const line = (icon, main, sub) => '<i class="' + icon + '"></i><span class="fx-act-txt"><span class="fx-act-main">' + esc(main) + '</span>' + (sub ? '<span class="fx-act-sub">' + esc(sub) + '</span>' : '') + '</span>';
+        const game = acts.find(a => a.type === 0);
+        let icon = '', text = '';
         if (data.listening_to_spotify && data.spotify) {
-            html = line('fab fa-spotify', data.spotify.song, data.spotify.artist);
+            icon = 'fab fa-spotify';
+            text = data.spotify.song + ' — ' + data.spotify.artist;
         } else if (music) {
             const n = (music.name || '').toLowerCase();
-            const icon = /apple|itunes|cider/.test(n) ? 'fab fa-apple' : n.includes('youtube') ? 'fab fa-youtube' : n.includes('deezer') ? 'fab fa-deezer' : n.includes('soundcloud') ? 'fab fa-soundcloud' : 'fas fa-headphones';
+            icon = /apple|itunes|cider/.test(n) ? 'fab fa-apple' : n.includes('youtube') ? 'fab fa-youtube' : n.includes('deezer') ? 'fab fa-deezer' : n.includes('soundcloud') ? 'fab fa-soundcloud' : 'fas fa-headphones';
             const artist = (music.state || '').replace(/^(by|de|por)\s+/i, '');
-            html = line(icon, music.details || music.name, artist);
-        } else {
-            const game = acts.find(a => a.type === 0);
-            if (game) html = line('fas fa-gamepad', 'jogando ' + game.name);
+            text = (music.details || music.name) + (artist ? ' — ' + artist : '');
+        } else if (game) {
+            icon = 'fas fa-gamepad';
+            text = 'jogando ' + game.name;
         }
-        if (!html) {
-            if (bio.classList.contains('fx-has-activity')) {
-                bio.innerHTML = bio.dataset.fxOrig;
-                bio.classList.remove('fx-has-activity');
-                bio.classList.add('typewriter');
-            }
-            return;
-        }
-        bio.classList.remove('typewriter');
-        bio.classList.add('fx-has-activity');
-        bio.innerHTML = '<span class="fx-activity">' + html + '</span>';
+        const [color, label] = STATUS[data.discord_status] || STATUS.offline;
+        row.style.setProperty('--fx-status', color);
+        row.classList.toggle('is-activity', !!icon);
+        row.innerHTML = icon
+            ? '<i class="' + icon + '"></i><span class="fx-presence-txt">' + esc(text) + '</span>'
+            : '<span class="fx-presence-dot"></span><span class="fx-presence-txt">' + label + '</span>';
+        row.title = text || label;
     }
 
     function esc(s) {

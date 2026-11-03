@@ -373,7 +373,7 @@ body .username.breathing {
         margin: 0;
         display: grid;
         grid-template-columns: auto minmax(0, 1fr);
-        grid-template-areas: "av name" "av badges" "av bio";
+        grid-template-areas: "av name" "av badges" "av presence";
         column-gap: 16px;
         row-gap: 6px;
         align-items: center;
@@ -401,5 +401,7 @@ body .username.breathing {
     }
     .hub .hub-title { font-size: min(42px, 10.5vw) !important; white-space: nowrap; }
     body.hub #mainDiv .profile-container[data-site] .bio { text-align: left; font-size: 13px; line-height: 1.35; opacity: .8; }
-    body.hub #mainDiv .profile-container[data-site] .fx-activity { max-width: 100%; font-size: 13px; }
+    /* no celular o cartão inteiro já é o botão: no lugar do "click to see profile" fica o status */
+    body.hub #mainDiv .profile-container[data-site] .bio-container { display: none; }
+    body.hub #mainDiv .profile-container[data-site] .fx-presence { grid-area: presence; justify-content: flex-start; margin: 0; padding: 0; font-size: 13px; }
 }
