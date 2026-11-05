@@ -231,6 +231,52 @@
           "url": "https://x.com/_ikiul"
         }
       ]
+    },
+    {
+      "id": "kato",
+      "nome": "Kato",
+      "uid": 6,
+      "cor": "#e0303f",
+      "avatar": "assets/img/kato.jpg",
+      "entrada": "𝖑𝖚𝖘𝖙",
+      "frases": [
+        "embrace the shame"
+      ],
+      "badges": [
+        "premium",
+        "early",
+        "tda"
+      ],
+      "discord": "628750451109658635",
+      "badgesDiscordExtras": [],
+      "fundo": "media/kato/fundo.mp4",
+      "capa": "media/kato/capa.jpg",
+      "musica": "media/kato/musica.mp3",
+      "nomeMusica": "2ZDinizz – Coisas Que Aprendi com Bicho",
+      "sincronizar": true,
+      "contador": "kato_views",
+      "links": [
+        {
+          "tipo": "steam",
+          "url": "https://steamcommunity.com/id/kato_shame/"
+        },
+        {
+          "tipo": "spotify",
+          "url": "https://open.spotify.com/user/22jfdyyfdd42jf6jprwvbhqoy"
+        },
+        {
+          "tipo": "instagram",
+          "url": "https://www.instagram.com/kato_shame"
+        },
+        {
+          "tipo": "roblox",
+          "url": "https://www.roblox.com/share?code=0ea526151d356443b40b723cec624e72&type=Profile&source=ProfileShare&stamp=1793791482477"
+        },
+        {
+          "tipo": "tiktok",
+          "url": "https://www.tiktok.com/@kato_shame"
+        }
+      ]
     }
   ]
 }

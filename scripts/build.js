@@ -111,7 +111,7 @@ function hubPage() {
             <source src="${site.fundo}" type="video/mp4">
         </video>
 
-        <main class="main-container" id="mainDiv">
+        <main class="main-container" id="mainDiv" style="--n: ${membros.length}">
 ${cards}
         </main>
 

@@ -295,7 +295,7 @@ body .username.breathing {
 #mainDiv { gap: 18px; align-items: stretch; }
 .profile-container[data-site] {
     box-sizing: border-box;
-    flex: 1 1 calc(20% - 15px);
+    flex: 1 1 calc((100% - (var(--n, 5) - 1) * 18px) / var(--n, 5));
     min-width: 0;
     max-width: 320px;
 }
