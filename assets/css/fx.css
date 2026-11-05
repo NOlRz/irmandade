@@ -279,10 +279,6 @@ body #mainDiv.fx-card.fx-ready:hover {
 .fx-presence .fa-apple { color: #fa2d48; }
 .fx-presence .fa-youtube { color: #ff0033; }
 
-.fx-scramble {
-    font-variant-numeric: tabular-nums;
-}
-
 .links-container.fx-dock {
     overflow: visible !important;
     align-items: flex-end;

@@ -253,33 +253,6 @@
         return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
 
-    const GLYPHS = '!<>-_\\/[]{}—=+*^?#░▒▓アカサタナ01';
-    function scramble(el) {
-        if (reduce || el._fxBusy) return;
-        const final = el.dataset.fxText || (el.dataset.fxText = el.textContent.trim());
-        el._fxBusy = true;
-        el.classList.add('fx-scramble');
-        let frame = 0;
-        const total = final.length * 3 + 6;
-        const tick = () => {
-            let out = '';
-            for (let i = 0; i < final.length; i++) {
-                if (frame >= i * 3 + 6 || final[i] === ' ') out += final[i];
-                else out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
-            }
-            el.textContent = out;
-            if (++frame <= total) requestAnimationFrame(() => setTimeout(tick, 28));
-            else { el.textContent = final; el._fxBusy = false; }
-        };
-        tick();
-    }
-
-    const usernames = cards.map(c => c.querySelector('.username')).filter(Boolean);
-    cards.forEach(card => {
-        const u = card.querySelector('.username');
-        if (u && fine) card.addEventListener('pointerenter', () => scramble(u));
-    });
-
     const dock = document.querySelector('.links-container');
     if (dock) {
         const logos = [...dock.querySelectorAll('.logo')];
@@ -361,7 +334,6 @@
                 });
             }
         }
-        setTimeout(() => usernames.forEach((u, i) => setTimeout(() => scramble(u), i * 120)), isHub ? 500 : 350);
         setTimeout(readyCards, 1100);
     }
 
