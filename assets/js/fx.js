@@ -2,6 +2,40 @@
     const script = document.currentScript;
     const root = document.documentElement;
 
+    let leaving = false, prevVol = null;
+    function leave(url) {
+        if (leaving) return;
+        leaving = true;
+        const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const song = document.getElementById('backgroundsong');
+        root.classList.add('fx-leaving');
+        if (song && !song.paused) {
+            prevVol = song.volume;
+            const t0 = performance.now();
+            const fade = now => {
+                const k = Math.min(1, (now - t0) / 260);
+                song.volume = prevVol * (1 - k);
+                if (k < 1 && leaving) requestAnimationFrame(fade);
+            };
+            requestAnimationFrame(fade);
+        }
+        setTimeout(() => { location.href = url; }, noMotion ? 0 : 300);
+    }
+    document.addEventListener('click', e => {
+        if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        const a = e.target.closest && e.target.closest('a[href]');
+        if (!a || a.target === '_blank' || a.origin !== location.origin || a.pathname === location.pathname) return;
+        e.preventDefault();
+        leave(a.href);
+    });
+    addEventListener('pageshow', e => {
+        if (!e.persisted) return;
+        leaving = false;
+        root.classList.remove('fx-leaving');
+        const song = document.getElementById('backgroundsong');
+        if (song && prevVol !== null) song.volume = prevVol;
+    });
+
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', e => {
         const c = e.code, mod = e.ctrlKey || e.metaKey;
@@ -72,7 +106,7 @@
             card.addEventListener('keydown', e => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    location.href = card.dataset.site;
+                    leave(card.dataset.site);
                 }
             });
         }

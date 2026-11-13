@@ -1,32 +1,27 @@
-:root { --accent-rgb: 193, 139, 224; }
-
-@font-face {
-    font-family: 'Bold';
-    src: url('../fonts/mainfont.ttf');
-    font-display: swap;
+:root {
+    --accent-rgb: 193, 139, 224
 }
 
 @font-face {
-    font-family: 'Light';
-    src: url('../fonts/miscfont.ttf');
-    font-display: swap;
+    font-family: "Bold";
+    src: url(../fonts/mainfont.ttf);
+    font-display: swap
 }
 
-.highlight {
-    color: rgb(var(--accent-rgb));
-    text-shadow:
-    0 0 42px rgb(var(--accent-rgb)),
-    0 0 82px rgb(var(--accent-rgb));
+@font-face {
+    font-family: "Light";
+    src: url(../fonts/miscfont.ttf);
+    font-display: swap
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+    0% {
+        opacity: 0
+    }
 
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    to {
+        opacity: 1
+    }
 }
 
 #overlay {
@@ -39,23 +34,23 @@
     justify-content: center;
     align-items: center;
     opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-    background-color: rgba(0, 0, 0, 0.54);
+    transition: opacity .5s ease-in-out;
+    background-color: rgba(0, 0, 0, .54)
 }
 
 .overlaybtn {
-    background: transparent;
+    background: 0 0;
     color: #fff;
     cursor: pointer;
-    border: none;
-    font-family: 'Light';
+    border: 0;
+    font-family: "Light";
     font-size: 6vh;
     padding: 20px 40px;
     border-radius: 20px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     position: relative;
-    overflow: hidden;
+    overflow: hidden
 }
 
 body {
@@ -63,16 +58,16 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow: hidden;
+    overflow: hidden
 }
 
 #user-page {
     display: none;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn .5s ease-in-out;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 98vh;
+    min-height: 98vh
 }
 
 .background {
@@ -84,11 +79,11 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    object-fit: cover;
+    object-fit: cover
 }
 
 .profile-container {
-    cursor: pointer;
+    cursor: pointer
 }
 
 .main-container {
@@ -99,19 +94,17 @@ body {
     width: 100%;
     padding: 20px;
     overflow: visible;
-    flex-wrap: wrap;
+    flex-wrap: wrap
 }
 
 .profile-container {
     flex: 1;
     border-radius: 30px;
-    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.1) 0%, rgba(17, 17, 17, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), .1) 0%, rgba(17, 17, 17, .8) 100%);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(var(--accent-rgb), 0.2);
-    box-shadow:
-        0 8px 32px 0 rgba(0, 0, 0, 0.37),
-        0 0 20px rgba(var(--accent-rgb), 0.1);
+    border: 1px solid rgba(var(--accent-rgb), .2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, .37), 0 0 20px rgba(var(--accent-rgb), .1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,33 +113,31 @@ body {
     max-width: 300px;
     min-width: 250px;
     padding: 30px 20px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all .4s cubic-bezier(.175, .885, .32, 1.275);
     position: relative;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .profile-container::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(var(--accent-rgb), 0.15), transparent 70%);
+    background: radial-gradient(circle at 50% 0%, rgba(var(--accent-rgb), .15), transparent 70%);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity .4s ease
 }
 
 .profile-container:hover::before {
-    opacity: 1;
+    opacity: 1
 }
 
 .profile-container:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow:
-        0 12px 40px 0 rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(var(--accent-rgb), 0.3);
-    border-color: rgba(var(--accent-rgb), 0.4);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, .5), 0 0 30px rgba(var(--accent-rgb), .3);
+    border-color: rgba(var(--accent-rgb), .4)
 }
 
 .pp {
@@ -154,31 +145,27 @@ body {
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    box-shadow:
-        0 0 30px rgba(var(--accent-rgb), 0.5),
-        0 8px 20px rgba(0, 0, 0, 0.7);
-    border: 3px solid rgba(var(--accent-rgb), 0.3);
-    transition: all 0.4s ease;
-    position: relative;
+    box-shadow: 0 0 30px rgba(var(--accent-rgb), .5), 0 8px 20px rgba(0, 0, 0, .7);
+    border: 3px solid rgba(var(--accent-rgb), .3);
+    transition: all .4s ease;
+    position: relative
 }
 
 .profile-container:hover .pp {
-    box-shadow:
-        0 0 40px rgba(var(--accent-rgb), 0.8),
-        0 12px 30px rgba(0, 0, 0, 0.8);
-    border-color: rgba(var(--accent-rgb), 0.6);
-    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(var(--accent-rgb), .8), 0 12px 30px rgba(0, 0, 0, .8);
+    border-color: rgba(var(--accent-rgb), .6);
+    transform: scale(1.05)
 }
 
 .username {
-    font-family: 'Bold';
+    font-family: "Bold";
     font-size: 24px;
     color: #fff;
     position: relative;
     display: inline-block;
     margin-top: 2vh;
     margin-bottom: 1vh;
-    filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 7px)!important;
+    filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 7px) !important
 }
 
 .badges-container {
@@ -186,62 +173,50 @@ body {
     flex-direction: row;
     align-items: center;
     gap: 22px;
-    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.15) 0%, rgba(0, 0, 0, 0.7) 100%);
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), .15) 0%, rgba(0, 0, 0, .7) 100%);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(var(--accent-rgb), 0.2);
+    border: 1px solid rgba(var(--accent-rgb), .2);
     border-radius: 50px;
     padding: 16px 35px;
     margin-bottom: 2vh;
-    box-shadow:
-        0 6px 12px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .1);
+    transition: all .3s ease
 }
 
 .profile-container:hover .badges-container {
-    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.25) 0%, rgba(0, 0, 0, 0.8) 100%);
-    box-shadow:
-        0 8px 16px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), .25) 0%, rgba(0, 0, 0, .8) 100%);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .2)
 }
 
 .bio-container {
     text-align: center;
     width: 90%;
     padding: 20px;
-    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.08) 0%, rgba(22, 22, 22, 0.3) 100%);
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), .08) 0%, rgba(22, 22, 22, .3) 100%);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(var(--accent-rgb), 0.15);
-    box-shadow:
-        0 0 20px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(var(--accent-rgb), .15);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .05);
     border-radius: 15px;
     max-width: 100%;
     overflow-wrap: break-word;
     margin-bottom: 2vh;
-    transition: all 0.3s ease;
+    transition: all .3s ease
 }
 
 .profile-container:hover .bio-container {
-    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.12) 0%, rgba(22, 22, 22, 0.4) 100%);
-    border-color: rgba(var(--accent-rgb), 0.25);
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), .12) 0%, rgba(22, 22, 22, .4) 100%);
+    border-color: rgba(var(--accent-rgb), .25)
 }
 
 .bio {
-    font-family: 'Light';
+    font-family: "Light";
     font-size: 2.5vh;
     color: #fff;
     line-height: 1.5;
     text-align: center;
-    filter: drop-shadow(#ffffff 1px 0 7px)!important;
-}
-
-.username-container {
-    position: relative;
-    display: inline-block;
-    z-index: 1;
+    filter: drop-shadow(#fff 1px 0 7px) !important
 }
 
 .username::before {
@@ -251,58 +226,58 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../img/white-lightning.gif');
+    background-image: url(../img/white-lightning.gif);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     z-index: -1;
-    opacity: 0.8;
-    pointer-events: none;
+    opacity: .8;
+    pointer-events: none
 }
 
 .username {
     position: relative;
-    font-family: 'Bold';
+    font-family: "Bold";
     font-size: 24px;
     color: #fff;
-    text-shadow: 0 0 7px rgb(var(--accent-rgb));
+    text-shadow: 0 0 7px rgb(var(--accent-rgb))
 }
 
 .username {
-    font-family: 'Bold';
+    font-family: "Bold";
     font-size: 22px;
     color: #fff;
     position: relative;
     display: inline-block;
     margin-top: 2vh;
     margin-bottom: 1vh;
-    filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 7px)!important;
+    filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 7px) !important
 }
 
 .username::after {
     content: attr(data-tooltip);
-    font-family: 'Light';
+    font-family: "Light";
     font-size: 17px;
     position: absolute;
     bottom: 3vh;
     left: 50%;
     transform: translateX(-50%) scaleY(0);
     padding: 5px;
-    background-color: rgba(17, 17, 17, 0.6);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(17, 17, 17, .6);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     backdrop-filter: blur(3px);
     color: #fff;
     border-radius: 6px;
     white-space: nowrap;
     z-index: 1;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform .3s ease, opacity .3s ease;
     opacity: 0;
-    -webkit-text-fill-color: #fff;
+    -webkit-text-fill-color: #fff
 }
 
 .username:hover::after {
     transform: translateX(-50%) scaleY(1);
-    opacity: 1;
+    opacity: 1
 }
 
 .badges-container {
@@ -316,9 +291,9 @@ body {
     border-radius: 50px;
     padding: 14px 30px;
     margin-bottom: 2vh;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
     cursor: default;
-    position: relative;
+    position: relative
 }
 
 .badges {
@@ -330,39 +305,39 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 7px)!important;
+    filter: drop-shadow(rgb(var(--accent-rgb)) 1px 0 7px) !important
 }
 
 .badges::after {
     content: attr(data-tooltip);
-    font-family: 'Light';
+    font-family: "Light";
     position: absolute;
     bottom: 3vh;
     left: 50%;
     transform: translateX(-50%) scaleY(0);
     padding: 6px;
-    background-color: rgba(17, 17, 17, 0.7);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(17, 17, 17, .7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     backdrop-filter: blur(3px);
     color: #fff;
     border-radius: 6px;
     white-space: nowrap;
     z-index: 1;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
+    transition: transform .3s ease, opacity .3s ease;
+    opacity: 0
 }
 
 .badges:hover::after {
     transform: translateX(-50%) scaleY(1);
-    opacity: 1;
+    opacity: 1
 }
 
 .bio-container {
     text-align: center;
     width: 80%;
     padding: 15px;
-    background-color: rgba(22, 22, 22, 0.178);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(22, 22, 22, .178);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     border-radius: 15px;
     backdrop-filter: blur(3px);
     max-width: 100%;
@@ -371,181 +346,155 @@ body {
     min-height: 29px;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100%
 }
 
 .bio {
-    font-family: 'Light';
+    font-family: "Light";
     font-size: 2vh;
     color: #fff;
     line-height: 1.5;
     text-align: center;
-    filter: drop-shadow(#ffffff 1px 0 7px)!important;
-}
-
-.bioline {
-    background-color: rgba(10, 10, 10, 0.61);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 80%;
-    height: 2px;
-    border-radius: 10px;
+    filter: drop-shadow(#fff 1px 0 7px) !important
 }
 
 .pic-badge {
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position: center center;
-}
-
-.pulsing {
-    color: #fff;
-    text-align: center;
-    animation: pulse 2s ease-in-out infinite alternate;
-    backface-visibility: hidden;
+    background-position: center center
 }
 
 @keyframes pulse {
-    from {
-    text-shadow: 0 0 10px #fff,
-           0 0 20px #fff,
-           0 0 30px #fff,
-           0 0 40px rgb(var(--accent-rgb)),
+    0% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(var(--accent-rgb)),
     }
+
     to {
-    text-shadow: 0 0 5px #fff,
-           0 0 10px #fff,
-           0 0 15px #fff,
-           0 0 20px rgb(var(--accent-rgb)),
-           0 0 35px rgb(var(--accent-rgb)),
-           0 0 40px rgb(var(--accent-rgb));
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px rgb(var(--accent-rgb)), 0 0 35px rgb(var(--accent-rgb)), 0 0 40px rgb(var(--accent-rgb))
     }
 }
 
 canvas {
-   position: absolute;
-   top: 0;
-   left: 0;
-   z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1
 }
 
-#mainDiv{
+#mainDiv {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1400px
 }
 
-#mainDiv .bio img{
-    padding-top:14px;
-}
-
-@media (max-width: 1024px) {
+@media (max-width:1024px) {
     .main-container {
         gap: 20px;
-        padding: 15px;
+        padding: 15px
     }
 
     .profile-container {
         max-width: 280px;
         min-width: 220px;
-        padding: 25px 15px;
+        padding: 25px 15px
     }
 
     .pp {
         height: 130px;
-        width: 130px;
+        width: 130px
     }
 
     .username {
-        font-size: 22px;
+        font-size: 22px
     }
 
     .bio {
-        font-size: 2.2vh;
+        font-size: 2.2vh
     }
 
     .badges {
         width: 20px;
-        height: 20px;
+        height: 20px
     }
 
     .badges-container {
         gap: 18px;
-        padding: 14px 28px;
+        padding: 14px 28px
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width:768px) {
     .main-container {
         gap: 15px;
-        padding: 10px;
+        padding: 10px
     }
 
     .profile-container {
         max-width: 240px;
         min-width: 200px;
         padding: 20px 15px;
-        margin-bottom: 1.5vh;
+        margin-bottom: 1.5vh
     }
 
     .pp {
         height: 110px;
-        width: 110px;
+        width: 110px
     }
 
     .username {
         font-size: 20px;
-        margin-top: 1.5vh;
+        margin-top: 1.5vh
     }
 
     .bio {
-        font-size: 2vh;
+        font-size: 2vh
     }
 
     .bio-container {
-        padding: 15px;
+        padding: 15px
     }
 
     .badges {
         width: 18px;
-        height: 18px;
+        height: 18px
     }
 
     .badges-container {
         gap: 15px;
-        padding: 12px 24px;
+        padding: 12px 24px
     }
 
     .overlaybtn {
         font-size: 4.5vh;
-        padding: 15px 30px;
+        padding: 15px 30px
     }
 
     #volume-control {
         top: 10px;
         left: 10px;
-        padding: 6px;
+        padding: 6px
     }
 
     #volume-icon {
-        font-size: 16px;
+        font-size: 16px
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width:576px) {
     body {
         overflow-y: auto;
-        overflow-x: hidden;
+        overflow-x: hidden
     }
 
     #user-page {
         min-height: auto;
-        padding: 20px 0;
+        padding: 20px 0
     }
 
     .main-container {
         flex-direction: column;
         align-items: center;
         gap: 20px;
-        padding: 10px;
+        padding: 10px
     }
 
     .profile-container {
@@ -553,182 +502,177 @@ canvas {
         max-width: 100%;
         min-width: auto;
         padding: 25px 20px;
-        margin-bottom: 0;
+        margin-bottom: 0
     }
 
     .pp {
         height: 120px;
-        width: 120px;
+        width: 120px
     }
 
     .username {
         font-size: 22px;
         margin-top: 2vh;
-        margin-bottom: 1vh;
+        margin-bottom: 1vh
     }
 
     .bio {
-        font-size: 2.3vh;
+        font-size: 2.3vh
     }
 
     .bio-container {
         width: 85%;
-        padding: 18px;
+        padding: 18px
     }
 
     .badges {
         width: 20px;
-        height: 20px;
+        height: 20px
     }
 
     .badges-container {
         gap: 18px;
         padding: 14px 30px;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: center
     }
 
     .overlaybtn {
         font-size: 4vh;
         padding: 12px 25px;
-        text-align: center;
+        text-align: center
     }
 
     #volume-control {
         top: 8px;
         left: 8px;
         padding: 5px;
-        background: rgba(50, 50, 50, 0.7);
+        background: rgba(50, 50, 50, .7)
     }
 
     #volume-icon {
-        font-size: 14px;
+        font-size: 14px
     }
 
     #volume-control:hover #volume-slider {
-        width: 80px;
+        width: 80px
     }
 
     .username::after,
     .badges::after {
         font-size: 14px;
         padding: 4px 8px;
-        bottom: 2.5vh;
-    }
-
-    .cursor-explosion {
-        width: 4px;
-        height: 4px;
+        bottom: 2.5vh
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width:375px) {
     .profile-container {
         width: 95%;
-        padding: 20px 15px;
+        padding: 20px 15px
     }
 
     .pp {
         height: 100px;
-        width: 100px;
+        width: 100px
     }
 
     .username {
-        font-size: 20px;
+        font-size: 20px
     }
 
     .bio {
-        font-size: 2vh;
+        font-size: 2vh
     }
 
     .bio-container {
         width: 90%;
-        padding: 15px;
+        padding: 15px
     }
 
     .badges {
         width: 18px;
-        height: 18px;
+        height: 18px
     }
 
     .badges-container {
         gap: 15px;
-        padding: 12px 25px;
+        padding: 12px 25px
     }
 
     .overlaybtn {
         font-size: 3.5vh;
-        padding: 10px 20px;
+        padding: 10px 20px
     }
 }
 
-@media (max-height: 500px) and (orientation: landscape) {
+@media (max-height:500px) and (orientation:landscape) {
     #user-page {
-        padding: 10px 0;
+        padding: 10px 0
     }
 
     .main-container {
         flex-direction: row;
         flex-wrap: wrap;
-        padding: 10px;
+        padding: 10px
     }
 
     .profile-container {
         width: calc(50% - 15px);
         max-width: 280px;
-        padding: 15px;
+        padding: 15px
     }
 
     .pp {
         height: 80px;
-        width: 80px;
+        width: 80px
     }
 
     .username {
         font-size: 18px;
         margin-top: 1vh;
-        margin-bottom: 0.5vh;
+        margin-bottom: .5vh
     }
 
     .bio {
-        font-size: 1.8vh;
+        font-size: 1.8vh
     }
 
     .bio-container {
         padding: 10px;
-        margin-bottom: 1vh;
+        margin-bottom: 1vh
     }
 
     .badges {
         width: 16px;
-        height: 16px;
+        height: 16px
     }
 
     .badges-container {
         gap: 12px;
         padding: 10px 20px;
-        margin-bottom: 1vh;
+        margin-bottom: 1vh
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width:576px) {
     #mainDiv {
-        width: 100%;
+        width: 100%
     }
 
     .pre-container {
-        padding: 10px;
+        padding: 10px
     }
 
     .pre-container img {
-        transform: scale(0.8);
+        transform: scale(.8);
         max-width: 100%;
         height: auto;
-        display: block;
+        display: block
     }
 
     .pre {
-        font-size: 1.8vh;
+        font-size: 1.8vh
     }
 }
 
@@ -737,35 +681,14 @@ canvas {
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
-    overflow-wrap: break-word;
+    overflow-wrap: break-word
 }
 
 .pre {
-    font-family: 'Light';
+    font-family: "Light";
     font-size: 2vh;
     color: #fff;
-    line-height: 1.5;
-}
-
-.cursor-explosion {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background-color: rgb(var(--accent-rgb));
-    border-radius: 50%;
-    pointer-events: none;
-    animation: explode 0.6s ease forwards;
-}
-
-@keyframes explode {
-    0% {
-        transform: scale(1) translate(0, 0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0) translate(var(--dx), var(--dy));
-        opacity: 0;
-    }
+    line-height: 1.5
 }
 
 #volume-control {
@@ -777,28 +700,28 @@ canvas {
     gap: 8px;
     padding: 8px;
     border-radius: 25px;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
     z-index: 1000;
-    background: transparent;
+    background: 0 0;
     box-shadow: none;
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none
 }
 
 #volume-control:hover {
-    background: rgba(50, 50, 50, 0.9);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(50, 50, 50, .9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2)
 }
 
 #volume-icon {
     font-size: 18px;
-    color: white;
+    color: #fff;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color .3s ease
 }
 
 #volume-icon:hover {
-    color: #ccc;
+    color: #ccc
 }
 
 #volume-slider {
@@ -806,10 +729,10 @@ canvas {
     height: 4px;
     border-radius: 2px;
     background: #aaa;
-    outline: none;
+    outline: 0;
     opacity: 0;
-    transition: width 0.3s ease, opacity 0.3s ease;
-    appearance: none;
+    transition: width .3s ease, opacity .3s ease;
+    appearance: none
 }
 
 #volume-slider::-webkit-slider-thumb {
@@ -817,331 +740,1343 @@ canvas {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: white;
+    background: #fff;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3)
 }
 
 #volume-slider::-moz-range-thumb {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: white;
+    background: #fff;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3)
 }
 
 #volume-control:hover #volume-slider {
     width: 100px;
-    opacity: 1;
+    opacity: 1
 }
 
 #volume-control.visible {
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: auto
 }
 
 @keyframes slideInUp {
-    from {
+    0% {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(50px)
     }
+
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0)
     }
 }
 
 @keyframes pulseGlow {
-    0%, 100% {
-        box-shadow:
-            0 0 20px rgba(var(--accent-rgb), 0.3),
-            0 8px 20px rgba(0, 0, 0, 0.5);
-    }
-    50% {
-        box-shadow:
-            0 0 30px rgba(var(--accent-rgb), 0.6),
-            0 12px 25px rgba(0, 0, 0, 0.6);
-    }
-}
 
-@keyframes borderGlow {
-    0%, 100% {
-        border-color: rgba(var(--accent-rgb), 0.2);
+    0%,
+    to {
+        box-shadow: 0 0 20px rgba(var(--accent-rgb), .3), 0 8px 20px rgba(0, 0, 0, .5)
     }
+
     50% {
-        border-color: rgba(var(--accent-rgb), 0.5);
+        box-shadow: 0 0 30px rgba(var(--accent-rgb), .6), 0 12px 25px rgba(0, 0, 0, .6)
     }
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
 
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-@keyframes rotateIn {
-    from {
-        opacity: 0;
-        transform: rotate(-200deg) scale(0);
-    }
+    0%,
     to {
-        opacity: 1;
-        transform: rotate(0deg) scale(1);
+        transform: translateY(0)
     }
-}
 
-@keyframes subtleShake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-    20%, 40%, 60%, 80% { transform: translateX(2px); }
+    50% {
+        transform: translateY(-10px)
+    }
 }
 
 .profile-container {
-    animation: slideInUp 0.6s ease-out forwards;
+    animation: slideInUp .6s ease-out forwards
 }
 
 .profile-container:nth-child(1) {
-    animation-delay: 0.1s;
+    animation-delay: .1s
 }
 
 .profile-container:nth-child(2) {
-    animation-delay: 0.2s;
+    animation-delay: .2s
 }
 
 .profile-container:nth-child(3) {
-    animation-delay: 0.3s;
+    animation-delay: .3s
 }
 
 .profile-container:nth-child(4) {
-    animation-delay: 0.4s;
+    animation-delay: .4s
 }
 
 .badges {
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .3s cubic-bezier(.68, -.55, .265, 1.55)
 }
 
 .badges:hover {
     transform: scale(1.2) rotate(5deg);
-    filter: drop-shadow(0 0 15px rgb(var(--accent-rgb)));
+    filter: drop-shadow(0 0 15px rgb(var(--accent-rgb)))
 }
 
 .username.breathing {
-    animation: pulseGlow 3s ease-in-out infinite;
+    animation: pulseGlow 3s ease-in-out infinite
 }
 
 .pp {
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .4s cubic-bezier(.68, -.55, .265, 1.55)
 }
 
 .profile-container:hover .pp {
-    animation: float 2s ease-in-out infinite;
+    animation: float 2s ease-in-out infinite
 }
 
 @keyframes fadeInScale {
-    from {
+    0% {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(.8)
     }
+
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1)
     }
 }
 
 .overlaybtn {
-    animation: fadeInScale 0.8s ease-out;
-}
-
-.cursor-explosion {
-    animation: explode 0.6s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+    animation: fadeInScale .8s ease-out
 }
 
 @keyframes blink {
-    0%, 49% { border-color: transparent; }
-    50%, 100% { border-color: rgb(var(--accent-rgb)); }
+
+    0%,
+    49% {
+        border-color: transparent
+    }
+
+    50%,
+    to {
+        border-color: rgb(var(--accent-rgb))
+    }
 }
 
 .typewriter::after {
-    content: '|';
+    content: "|";
     animation: blink 1s infinite;
-    margin-left: 2px;
+    margin-left: 2px
 }
 
 #volume-control.visible {
-    animation: slideInLeft 0.4s ease-out;
+    animation: slideInLeft .4s ease-out
 }
 
 @keyframes slideInLeft {
-    from {
+    0% {
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateX(-20px)
     }
+
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0)
     }
 }
 
 .profile-container::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(var(--accent-rgb), .2) 0%, transparent 70%);
     transform: translate(-50%, -50%);
-    transition: width 0.8s, height 0.8s;
-    pointer-events: none;
+    transition: width .8s, height .8s;
+    pointer-events: none
 }
 
 .profile-container:hover::after {
     width: 500px;
-    height: 500px;
-}
-
-@keyframes scanline {
-    0% {
-        top: 0;
-    }
-    100% {
-        top: 100%;
-    }
-}
-
-.profile-container.retro-effect::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(transparent, rgba(var(--accent-rgb), 0.5), transparent);
-    animation: scanline 4s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes glitch {
-    0% {
-        text-shadow:
-            0.05em 0 0 rgba(255, 0, 0, 0.75),
-            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    14% {
-        text-shadow:
-            0.05em 0 0 rgba(255, 0, 0, 0.75),
-            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    15% {
-        text-shadow:
-            -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    49% {
-        text-shadow:
-            -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    50% {
-        text-shadow:
-            0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-            0.05em 0 0 rgba(0, 255, 0, 0.75),
-            0 -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    99% {
-        text-shadow:
-            0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-            0.05em 0 0 rgba(0, 255, 0, 0.75),
-            0 -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    100% {
-        text-shadow:
-            -0.025em 0 0 rgba(255, 0, 0, 0.75),
-            -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-            -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-}
-
-.glitch-effect {
-    animation: glitch 1s infinite;
+    height: 500px
 }
 
 @keyframes shimmer {
     0% {
-        background-position: -1000px 0;
+        background-position: -1000px 0
     }
-    100% {
-        background-position: 1000px 0;
+
+    to {
+        background-position: 1000px 0
     }
 }
 
 .badges.premium::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-    animation: shimmer 3s infinite;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+    animation: shimmer 3s infinite
 }
 
-@media (max-width: 576px) {
+@media (max-width:576px) {
     html {
-        scroll-behavior: smooth;
+        scroll-behavior: smooth
     }
 
     body {
-        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion:reduce) {
+
     *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
+    ::before,
+    ::after {
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: .01ms !important
     }
 }
 
-.profile-container .badges-container { cursor: pointer; }
-a.profile-container { text-decoration: none; color: inherit; }
+.profile-container .badges-container {
+    cursor: pointer
+}
 
-.is-ios #volume-slider { display: none !important; }
+a.profile-container {
+    text-decoration: none;
+    color: inherit
+}
+
+.is-ios #volume-slider {
+    display: none !important
+}
+
+:root {
+    --fx-accent: #c18be0;
+    --fx-accent-rgb: 193, 139, 224;
+    --fx-ease: cubic-bezier(.2, .8, .2, 1)
+}
+
+@property --fx-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+}
+
+#overlay {
+    flex-direction: column;
+    gap: 14px;
+    z-index: 9000;
+    transition: opacity .7s var(--fx-ease), filter .7s var(--fx-ease), transform .7s var(--fx-ease) !important
+}
+
+#overlay.fx-out {
+    filter: blur(14px);
+    transform: scale(1.06);
+    pointer-events: none
+}
+
+.overlaybtn {
+    background: linear-gradient(110deg, rgba(255, 255, 255, .45) 30%, #fff 45%, #fff 50%, #fff 55%, rgba(255, 255, 255, .45) 70%) !important;
+    background-size: 250% 100% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: drop-shadow(0 0 18px rgba(var(--fx-accent-rgb), .35));
+    animation: fx-shine 3.2s linear infinite, fx-rise .9s var(--fx-ease) both !important
+}
+
+.overlaybtn:hover {
+    transform: none !important
+}
+
+.fx-hint {
+    font-family: "Light", system-ui, sans-serif;
+    font-size: 12px;
+    letter-spacing: .45em;
+    text-transform: lowercase;
+    color: rgba(255, 255, 255, .6);
+    padding-left: .45em;
+    animation: fx-hint 2.4s ease-in-out infinite, fx-rise 1.2s .25s var(--fx-ease) both;
+    pointer-events: none
+}
+
+@keyframes fx-shine {
+    0% {
+        background-position: 125%0
+    }
+
+    to {
+        background-position: -125%0
+    }
+}
+
+@keyframes fx-rise {
+    0% {
+        opacity: 0;
+        transform: translateY(14px);
+        filter: blur(8px)
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+        filter: blur(0)
+    }
+}
+
+@keyframes fx-hint {
+
+    0%,
+    to {
+        opacity: .35
+    }
+
+    50% {
+        opacity: .8
+    }
+}
+
+.fx-card {
+    isolation: isolate
+}
+
+.fx-spot,
+.fx-beam {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none
+}
+
+.fx-spot {
+    z-index: -1;
+    opacity: 0;
+    transition: opacity .4s ease;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(var(--fx-accent-rgb), .22), transparent 45%)
+}
+
+.fx-card:hover .fx-spot {
+    opacity: 1
+}
+
+.fx-beam {
+    z-index: 2;
+    padding: 1.5px;
+    background: conic-gradient(from var(--fx-angle), transparent 0 70%, rgba(var(--fx-accent-rgb), 0) 72%, rgb(var(--fx-accent-rgb)) 86%, #fff 90%, transparent 92%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity: .45;
+    animation: fx-spin 7s linear infinite;
+    transition: opacity .4s ease
+}
+
+.fx-card:hover .fx-beam {
+    opacity: 1;
+    animation-duration: 3.5s
+}
+
+@keyframes fx-spin {
+    to {
+        --fx-angle: 360deg
+    }
+}
+
+body .fx-card.fx-ready {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+    transition: transform .6s var(--fx-ease), box-shadow .4s ease, border-color .4s ease !important;
+    will-change: transform
+}
+
+body .fx-card.fx-ready.fx-moving {
+    transition: transform .12s linear, box-shadow .4s ease, border-color .4s ease !important
+}
+
+body .fx-card.fx-ready:hover {
+    --lift: -8px
+}
+
+.fx-avatar {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%
+}
+
+.fx-avatar::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    padding: 2px;
+    background: conic-gradient(from var(--fx-angle), rgb(var(--fx-accent-rgb)), transparent 30%, transparent 50%, rgba(var(--fx-accent-rgb), .8) 70%, #fff 85%, rgb(var(--fx-accent-rgb)));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    animation: fx-spin 5s linear infinite;
+    opacity: .85;
+    pointer-events: none
+}
+
+.fx-status {
+    position: absolute;
+    right: 6%;
+    bottom: 6%;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--fx-status, #747f8d);
+    border: 4px solid #0b0b0d;
+    box-shadow: 0 0 12px var(--fx-status, transparent);
+    z-index: 3;
+    transform: scale(0);
+    transition: transform .5s cubic-bezier(.34, 1.56, .64, 1)
+}
+
+.fx-status.fx-on {
+    transform: scale(1)
+}
+
+.fx-status[data-s=online]::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--fx-status);
+    animation: fx-ping 2s cubic-bezier(0, 0, .2, 1) infinite
+}
+
+@keyframes fx-ping {
+
+    75%,
+    to {
+        transform: scale(1.8);
+        opacity: 0
+    }
+}
+
+.fx-status::before {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    font: 12px"Light", system-ui, sans-serif;
+    color: #fff;
+    background: rgba(12, 12, 14, .85);
+    border: 1px solid rgba(255, 255, 255, .1);
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease
+}
+
+.fx-status:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0)
+}
+
+.fx-presence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    flex-shrink: 0;
+    height: 20px;
+    min-height: 20px;
+    margin: -6px 0 10px;
+    padding: 0 8px;
+    font: 13px/20px"Light", system-ui, sans-serif;
+    letter-spacing: .02em;
+    color: rgba(255, 255, 255, .8);
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.fx-presence:empty {
+    visibility: hidden
+}
+
+.fx-presence-txt {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    animation: fx-rise .5s var(--fx-ease) both
+}
+
+.fx-presence-txt.is-scrolling {
+    flex: 1 1 auto;
+    text-overflow: clip;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)
+}
+
+.fx-mq {
+    display: inline-flex;
+    animation: fx-mq var(--mq-dur, 8s) linear infinite;
+    will-change: transform
+}
+
+.fx-mq>span {
+    padding: 0 2.5em 0 .6em
+}
+
+@keyframes fx-mq {
+
+    0%,
+    15% {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .fx-mq {
+        animation: none
+    }
+}
+
+.fx-presence-dot {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fx-status);
+    box-shadow: 0 0 8px var(--fx-status)
+}
+
+.fx-presence i {
+    flex-shrink: 0;
+    font-size: 12px;
+    color: rgb(var(--fx-accent-rgb))
+}
+
+.fx-presence .fa-spotify {
+    color: #1db954
+}
+
+.fx-presence .fa-apple {
+    color: #fa2d48
+}
+
+.fx-presence .fa-youtube {
+    color: #f03
+}
+
+.links-container.fx-dock {
+    overflow: visible !important;
+    align-items: flex-end;
+    padding-top: 22px !important
+}
+
+.links-container.fx-dock .logo {
+    transform: translateY(calc((var(--s, 1) - 1)*-22px)) scale(var(--s, 1)) !important;
+    transform-origin: bottom center;
+    transition: transform .18s var(--fx-ease), background .25s ease, border-color .25s ease, box-shadow .25s ease !important;
+    position: relative
+}
+
+.links-container.fx-dock.fx-idle .logo {
+    transition: transform .45s var(--fx-ease), background .25s ease, border-color .25s ease !important
+}
+
+.links-container .logo {
+    outline: 0
+}
+
+.links-container .logo:hover,
+.links-container .logo:focus-visible {
+    background: rgba(var(--fx-accent-rgb), .14) !important;
+    border-color: rgba(var(--fx-accent-rgb), .45) !important;
+    box-shadow: 0 0 22px rgba(var(--fx-accent-rgb), .25)
+}
+
+.links-container .logo::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px) scale(calc(1/var(--s, 1)));
+    transform-origin: bottom center;
+    font: 12px"Light", system-ui, sans-serif;
+    color: #fff;
+    background: rgba(12, 12, 14, .85);
+    border: 1px solid rgba(var(--fx-accent-rgb), .3);
+    padding: 4px 9px;
+    border-radius: 7px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease
+}
+
+.links-container .logo:hover::after,
+.links-container .logo:focus-visible::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(calc(1/var(--s, 1)))
+}
+
+.fx-enter {
+    animation: fx-rise .8s var(--fx-ease) both;
+    animation-delay: calc(var(--i, 0)*70ms + 120ms)
+}
+
+#view-count {
+    font-variant-numeric: tabular-nums
+}
+
+#members-toggle {
+    background: rgba(17, 17, 17, .55) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, .1);
+    transition: background .3s ease, border-color .3s ease, transform .3s var(--fx-ease) !important
+}
+
+#members-toggle:hover {
+    background: rgba(var(--fx-accent-rgb), .25) !important;
+    border-color: rgba(var(--fx-accent-rgb), .5);
+    transform: scale(1.06)
+}
+
+#members-list {
+    background: rgba(14, 14, 16, .72) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-color: rgba(255, 255, 255, .08) !important;
+    border-radius: 14px !important;
+    transform: translateY(10px);
+    transition: max-height .4s var(--fx-ease), opacity .3s ease, transform .4s var(--fx-ease) !important
+}
+
+#members-list.expand {
+    transform: none
+}
+
+#members-list .member {
+    cursor: pointer;
+    transition: background .2s ease, padding-left .25s var(--fx-ease)
+}
+
+#members-list .member:hover {
+    background: rgba(var(--fx-accent-rgb), .12);
+    padding-left: 16px
+}
+
+#members-list .avatar {
+    border-color: rgb(var(--fx-accent-rgb)) !important
+}
+
+canvas.fx-cursor {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9500 !important;
+    pointer-events: none !important
+}
+
+.profile-container:focus-visible {
+    outline: 2px solid rgb(var(--fx-accent-rgb));
+    outline-offset: 4px
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    .fx-beam,
+    .fx-avatar::before,
+    .overlaybtn,
+    .fx-hint {
+        animation: none !important
+    }
+}
+
+html {
+    background: #000
+}
+
+body {
+    transition: opacity .3s ease
+}
+
+html.fx-leaving body {
+    opacity: 0;
+    pointer-events: none
+}
+
+@media (prefers-reduced-motion:reduce) {
+    body {
+        transition: none
+    }
+}
+
+.fx-meteors {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0
+}
+
+.fx-meteor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 6px 2px rgba(var(--fx-accent-rgb), .7);
+    transform: rotate(215deg);
+    animation: fx-meteor linear infinite;
+    opacity: 0
+}
+
+.fx-meteor::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    width: 90px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(var(--fx-accent-rgb), .9), transparent)
+}
+
+@keyframes fx-meteor {
+    0% {
+        transform: rotate(215deg) translateX(0);
+        opacity: 0
+    }
+
+    5% {
+        opacity: 1
+    }
+
+    70% {
+        opacity: 1
+    }
+
+    to {
+        transform: rotate(215deg) translateX(-900px);
+        opacity: 0
+    }
+}
+
+.fx-spotlight {
+    position: fixed;
+    top: -40vh;
+    left: -10vw;
+    width: 120vw;
+    height: 120vh;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(ellipse 35% 55%at 30% 20%, rgba(var(--fx-accent-rgb), .22), transparent 70%);
+    filter: blur(20px);
+    opacity: 0;
+    animation: fx-spot-in 2.2s .3s cubic-bezier(.2, .8, .2, 1) forwards, fx-spot-sway 14s 2.5s ease-in-out infinite
+}
+
+@keyframes fx-spot-in {
+    0% {
+        opacity: 0;
+        transform: translate(-6%, -8%) scale(.9)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@keyframes fx-spot-sway {
+
+    0%,
+    to {
+        transform: translateX(0)
+    }
+
+    50% {
+        transform: translateX(14vw)
+    }
+}
+
+.main-container,
+.hub-hero {
+    position: relative;
+    z-index: 1
+}
+
+.volume-control,
+#volume-control,
+#members-toggle,
+#members-list {
+    z-index: 1000 !important
+}
+
+body .profile-container[data-site] {
+    background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02) 40%, rgba(var(--fx-accent-rgb), .08)), rgba(12, 10, 16, .58) !important;
+    backdrop-filter: blur(18px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, .1) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), inset 0 0 40px rgba(var(--fx-accent-rgb), .06), 0 20px 60px rgba(0, 0, 0, .55), 0 0 40px rgba(var(--fx-accent-rgb), .12) !important
+}
+
+body .profile-container[data-site]:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), inset 0 0 60px rgba(var(--fx-accent-rgb), .1), 0 30px 80px rgba(0, 0, 0, .6), 0 0 70px rgba(var(--fx-accent-rgb), .35) !important
+}
+
+.fx-beam {
+    opacity: .85 !important;
+    padding: 1.5px !important
+}
+
+.fx-card:hover .fx-beam {
+    opacity: 1 !important
+}
+
+#mainDiv:has(.profile-container[data-site]:hover) .profile-container[data-site]:not(:hover) {
+    filter: blur(2px) brightness(.55) saturate(.7);
+    opacity: .8
+}
+
+.profile-container[data-site] {
+    transition: filter .4s ease, opacity .4s ease
+}
+
+.hub-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin: 4vh 0 3vh;
+    text-align: center;
+    padding-inline: 16px
+}
+
+.hub-title {
+    margin: 0;
+    font-family: serif;
+    font-weight: 400;
+    font-size: clamp(42px, 8vw, 96px);
+    line-height: 1;
+    background: linear-gradient(90deg, #fff 0%, rgb(var(--fx-accent-rgb)) 25%, #fff 50%, #f5c2ff 75%, #fff 100%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 3px 12px rgba(0, 0, 0, .7)) drop-shadow(0 0 28px rgba(var(--fx-accent-rgb), .55));
+    animation: fx-aurora 8s linear infinite
+}
+
+.hub-title span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(18px);
+    animation: fx-letter .9s cubic-bezier(.2, .8, .2, 1) forwards;
+    animation-delay: calc(var(--i)*45ms + 200ms);
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text
+}
+
+@keyframes fx-letter {
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: none
+    }
+}
+
+.hub-sub {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: "Light", system-ui, sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, .65);
+    letter-spacing: .08em;
+    animation: fx-rise .8s .9s cubic-bezier(.2, .8, .2, 1) both
+}
+
+.fx-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(8, 6, 12, .55);
+    border: 1px solid rgba(255, 255, 255, .14);
+    color: rgba(255, 255, 255, .85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden
+}
+
+.fx-pill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .18) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: fx-sweep 3.5s ease-in-out infinite
+}
+
+@keyframes fx-sweep {
+
+    60%,
+    to {
+        transform: translateX(100%)
+    }
+}
+
+.fx-live {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #43b581;
+    position: relative
+}
+
+.fx-live::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #43b581;
+    animation: fx-ping 1.6s cubic-bezier(0, 0, .2, 1) infinite
+}
+
+body .username.breathing {
+    background: linear-gradient(90deg, #fff 0%, rgb(var(--fx-accent-rgb)) 30%, #fff 50%, rgb(var(--fx-accent-rgb)) 70%, #fff 100%) !important;
+    background-size: 250% 100% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    animation: fx-aurora 5s linear infinite !important;
+    filter: drop-shadow(0 0 12px rgba(var(--fx-accent-rgb), .7)) !important
+}
+
+#mainDiv .username {
+    font-size: 30px !important;
+    letter-spacing: .02em
+}
+
+@keyframes fx-aurora {
+    to {
+        background-position: -250%0
+    }
+}
+
+.fx-orbit {
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    border: 1px dashed rgba(var(--fx-accent-rgb), .25);
+    animation: fx-spin-plain 12s linear infinite;
+    pointer-events: none
+}
+
+.fx-orbit.r2 {
+    inset: -28px;
+    border-style: solid;
+    border-color: rgba(var(--fx-accent-rgb), .1);
+    animation-duration: 20s;
+    animation-direction: reverse
+}
+
+.fx-orbit i {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgb(var(--fx-accent-rgb));
+    box-shadow: 0 0 10px 2px rgba(var(--fx-accent-rgb), .8)
+}
+
+.fx-orbit i:nth-child(1) {
+    top: -3px;
+    left: 50%
+}
+
+.fx-orbit i:nth-child(2) {
+    bottom: 12%;
+    right: 4%;
+    width: 5px;
+    height: 5px;
+    background: #fff
+}
+
+.fx-orbit.r2 i:nth-child(1) {
+    top: 50%;
+    left: -3px;
+    width: 4px;
+    height: 4px
+}
+
+@keyframes fx-spin-plain {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.links-container .logo {
+    background: rgba(255, 255, 255, .05) !important;
+    backdrop-filter: blur(8px)
+}
+
+.links-container .logo:hover,
+.links-container .logo:focus-visible {
+    background: color-mix(in srgb, rgb(var(--fx-accent-rgb)) 18%, transparent) !important;
+    border-color: color-mix(in srgb, rgb(var(--fx-accent-rgb)) 60%, transparent) !important;
+    box-shadow: 0 0 26px color-mix(in srgb, rgb(var(--fx-accent-rgb)) 45%, transparent) !important
+}
+
+.links-container .logo i,
+.links-container .logo svg {
+    transition: color .25s ease, filter .25s ease
+}
+
+.links-container .logo:hover i,
+.links-container .logo:hover svg {
+    color: rgb(var(--fx-accent-rgb)) !important;
+    filter: drop-shadow(0 0 8px rgb(var(--fx-accent-rgb))) !important
+}
+
+#mainDiv .views-container {
+    margin-inline: auto;
+    width: fit-content;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1)
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    .fx-meteors,
+    .fx-spotlight {
+        display: none
+    }
+
+    .fx-orbit,
+    .hub-title,
+    .hub-title span,
+    body .username.breathing,
+    .fx-pill::after {
+        animation: none !important
+    }
+
+    .hub-title span {
+        opacity: 1;
+        filter: none;
+        transform: none
+    }
+}
+
+.fx-name {
+    position: relative;
+    display: inline-block
+}
+
+.fx-spark {
+    position: absolute;
+    width: var(--s, 10px);
+    height: var(--s, 10px);
+    pointer-events: none;
+    background: radial-gradient(circle, #fff 0 18%, transparent 20%), conic-gradient(from 45deg, transparent 0 20%, rgba(255, 255, 255, .95) 25%, transparent 30% 45%, rgba(255, 255, 255, .95) 50%, transparent 55% 70%, rgba(255, 255, 255, .95) 75%, transparent 80% 95%, rgba(255, 255, 255, .95) 100%);
+    clip-path: polygon(50%0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+    filter: drop-shadow(0 0 4px rgb(var(--fx-accent-rgb)));
+    opacity: 0;
+    animation: fx-twinkle var(--d, 2.4s) ease-in-out infinite;
+    animation-delay: var(--dl, 0s)
+}
+
+@keyframes fx-twinkle {
+
+    0%,
+    to {
+        opacity: 0;
+        transform: scale(.3) rotate(0deg)
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(90deg)
+    }
+}
+
+.hub-hero {
+    position: relative
+}
+
+.hub-hero::before {
+    content: "";
+    position: absolute;
+    top: -9vh;
+    left: 50%;
+    width: min(760px, 96vw);
+    height: 240px;
+    transform: translateX(-50%) scaleX(.4);
+    background: conic-gradient(from 180deg at 50% 0%, transparent 32%, rgba(var(--fx-accent-rgb), .55) 50%, transparent 68%);
+    -webkit-mask: linear-gradient(#000 20%, transparent);
+    mask: linear-gradient(#000 20%, transparent);
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    animation: fx-lamp 1.6s .3s cubic-bezier(.2, .8, .2, 1) forwards;
+    pointer-events: none
+}
+
+.hub-hero::after {
+    content: "";
+    position: absolute;
+    top: -9vh;
+    left: 50%;
+    width: min(420px, 70vw);
+    height: 2px;
+    transform: translateX(-50%) scaleX(.3);
+    background: linear-gradient(90deg, transparent, rgb(var(--fx-accent-rgb)), #fff, rgb(var(--fx-accent-rgb)), transparent);
+    box-shadow: 0 0 20px 4px rgba(var(--fx-accent-rgb), .7);
+    opacity: 0;
+    animation: fx-lamp 1.6s .3s cubic-bezier(.2, .8, .2, 1) forwards;
+    pointer-events: none
+}
+
+@keyframes fx-lamp {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1)
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .fx-spark {
+        display: none
+    }
+
+    .hub-hero::before,
+    .hub-hero::after {
+        animation: none;
+        opacity: 1;
+        transform: translateX(-50%)
+    }
+}
+
+#mainDiv {
+    gap: 18px;
+    align-items: stretch
+}
+
+.profile-container[data-site] {
+    box-sizing: border-box;
+    flex: 1 1 calc((100% - (var(--n, 5) - 1)*18px)/var(--n, 5));
+    min-width: 0;
+    max-width: 320px
+}
+
+@media (max-width:1150px) {
+    .profile-container[data-site] {
+        flex-basis: calc(33.333% - 12px);
+        max-width: 360px
+    }
+}
+
+@media (max-width:760px) {
+    .profile-container[data-site] {
+        flex-basis: calc(50% - 9px)
+    }
+}
+
+@media (max-width:480px) {
+    .profile-container[data-site] {
+        flex-basis: 100%;
+        max-width: 360px
+    }
+}
+
+@media (hover:none) {
+    #mainDiv:has(.profile-container[data-site]:hover) .profile-container[data-site]:not(:hover) {
+        filter: none;
+        opacity: 1
+    }
+}
+
+@media (max-width:600px) {
+    body.hub {
+        margin: 0;
+        overflow-x: hidden
+    }
+
+    .hub #user-page {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        justify-content: flex-start;
+        padding: calc(env(safe-area-inset-top, 0) + 18px) 14px calc(env(safe-area-inset-bottom, 0) + 28px)
+    }
+
+    .hub .hub-hero {
+        margin-bottom: 18px
+    }
+
+    body.hub #mainDiv {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
+        max-width: 460px;
+        margin: 0 auto;
+        padding: 0
+    }
+
+    body.hub #mainDiv .profile-container[data-site] {
+        flex: none;
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas: "av name" "av badges" "av presence";
+        column-gap: 16px;
+        row-gap: 6px;
+        align-items: center;
+        justify-items: start;
+        text-align: left;
+        padding: 14px 18px 14px 14px;
+        border-radius: 22px;
+        transform: none
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .fx-avatar {
+        grid-area: av;
+        align-self: center
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .pp {
+        width: 76px;
+        height: 76px;
+        margin: 0
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .fx-orbit {
+        inset: -9px
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .fx-orbit.r2 {
+        display: none
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .fx-status {
+        width: 18px;
+        height: 18px;
+        border-width: 3px;
+        right: 2%;
+        bottom: 2%
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .fx-name {
+        grid-area: name
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .username {
+        margin: 0;
+        font-size: 24px !important;
+        line-height: 1.1
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .badges-container {
+        grid-area: badges;
+        margin: 0;
+        padding: 6px 12px;
+        gap: 10px;
+        border-radius: 999px
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .badges {
+        width: 17px;
+        height: 17px
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .bio-container {
+        grid-area: bio;
+        width: 100%;
+        max-width: 100%;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        background: 0 0 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        text-align: left;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important
+    }
+
+    .hub .hub-title {
+        font-size: min(42px, 10.5vw) !important;
+        white-space: nowrap
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .bio {
+        text-align: left;
+        font-size: 13px;
+        line-height: 1.35;
+        opacity: .8
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .bio-container {
+        display: none
+    }
+
+    body.hub #mainDiv .profile-container[data-site] .fx-presence {
+        grid-area: presence;
+        justify-content: flex-start;
+        margin: 0;
+        padding: 0;
+        font-size: 13px
+    }
+}

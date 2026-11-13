@@ -11,6 +11,10 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const rgb = hex => { const n = parseInt(hex.replace('#', ''), 16); return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`; };
 const json = o => JSON.stringify(o).replace(/</g, '\\u003c');
 
+const leve = (src, p) => {
+    const m = src.replace(/\.mp4$/, '-m.mp4');
+    return m !== src && fs.existsSync(path.join(ROOT, m)) ? `            <source src="${p}${m}" type="video/mp4" media="(max-width: 700px)">\n` : '';
+};
 const ver = p => { try { return '?v=' + crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, p))).digest('hex').slice(0, 8); } catch { return ''; } };
 
 const BADGES = {
@@ -70,9 +74,7 @@ function head({ title, desc, url, image, color, p, css, ogType = 'website' }) {
 
     <link rel="preload" href="${p}assets/fonts/mainfont.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="${FA}">
-    <link rel="stylesheet" href="${p}assets/css/${css}">
-    <link rel="stylesheet" href="${p}assets/css/fx.css">
-    <link rel="stylesheet" href="${p}assets/css/extra.css">
+    <link rel="stylesheet" href="${p}assets/css/${css}${ver('assets/css/' + css)}">
 </head>`;
 }
 
@@ -108,7 +110,7 @@ function hubPage() {
     <div id="user-page">
 
         <video class="background" id="backgroundvideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="${site.capa}">
-            <source src="${site.fundo}" type="video/mp4">
+${leve(site.fundo, '')}            <source src="${site.fundo}" type="video/mp4">
         </video>
 
         <main class="main-container" id="mainDiv" style="--n: ${membros.length}">
@@ -125,10 +127,10 @@ ${cards}
     <audio id="backgroundsong" src="${site.musica}" loop preload="auto"></audio>
 
     <script>window.SITE = ${json(site)}; window.MEMBROS = ${json(membros.map(({ id, nome, discord, cor }) => ({ id, nome, discord, cor })))};</script>
-    <script src="${p}assets/js/snow.js" defer></script>
-    <script src="${p}assets/js/hub.js" defer></script>
-    <script src="${p}assets/js/fx.js" data-accent="${site.cor}" defer></script>
-    <script src="${p}assets/js/extra.js" defer></script>
+    <script src="${p}assets/js/snow.js${ver('assets/js/snow.js')}" defer></script>
+    <script src="${p}assets/js/hub.js${ver('assets/js/hub.js')}" defer></script>
+    <script src="${p}assets/js/fx.js${ver('assets/js/fx.js')}" data-accent="${site.cor}" defer></script>
+    <script src="${p}assets/js/extra.js${ver('assets/js/extra.js')}" defer></script>
 </body>
 </html>
 `;
@@ -154,7 +156,7 @@ function profilePage(m) {
         url: `${site.dominio}/${m.id}/`,
         image: `${site.dominio}/assets/og/${m.id}.jpg${ver(`assets/og/${m.id}.jpg`)}`,
         color: m.cor, p, css: 'perfil.css', ogType: 'profile'
-    }).replace('<link rel="stylesheet" href="../assets/css/fx.css">', `<link rel="stylesheet" href="../assets/css/fx.css">\n    <style>:root { --accent-rgb: ${rgb(m.cor)}; }</style>`)}
+    }).replace('</head>', `    <style>:root { --accent-rgb: ${rgb(m.cor)}; }</style>\n</head>`)}
 <body>
 
     <div id="overlay">
@@ -171,7 +173,7 @@ function profilePage(m) {
     <div id="user-page">
 
 ${m.fundo ? `        <video class="background" autoplay muted loop playsinline webkit-playsinline preload="auto"${m.capa ? ` poster="${r(m.capa)}"` : ''}>
-            <source src="${r(m.fundo)}" type="video/mp4">
+${leve(m.fundo, p)}            <source src="${r(m.fundo)}" type="video/mp4">
         </video>` : '        <div class="background fundo-preto"></div>'}
 
         <main class="main-container" id="mainDiv">
@@ -221,16 +223,60 @@ ${links}
     <audio id="backgroundsong" src="${r(m.musica)}" loop preload="auto"></audio>
 
     <script>window.SITE = ${json(site)}; window.MEMBRO = ${json(m)}; window.MEMBROS = ${json(membros.map(({ id, nome, discord, cor }) => ({ id, nome, discord, cor })))};</script>
-    <script src="${p}assets/js/snow.js" defer></script>
-    <script src="${p}assets/js/perfil.js" defer></script>
-    <script src="${p}assets/js/fx.js" data-accent="${m.cor}" data-discord="${m.discord || ''}" defer></script>
-    <script src="${p}assets/js/extra.js" defer></script>
+    <script src="${p}assets/js/snow.js${ver('assets/js/snow.js')}" defer></script>
+    <script src="${p}assets/js/perfil.js${ver('assets/js/perfil.js')}" defer></script>
+    <script src="${p}assets/js/fx.js${ver('assets/js/fx.js')}" data-accent="${m.cor}" data-discord="${m.discord || ''}" defer></script>
+    <script src="${p}assets/js/extra.js${ver('assets/js/extra.js')}" defer></script>
+</body>
+</html>
+`;
+}
+
+function notFoundPage() {
+    return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>404 · ${esc(site.nome)}</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="${site.cor}">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
+    <style>
+        @font-face { font-family: 'Bold'; src: url('/assets/fonts/mainfont.ttf'); font-display: swap; }
+        @font-face { font-family: 'Light'; src: url('/assets/fonts/miscfont.ttf'); font-display: swap; }
+        * { margin: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
+        body { display: flex; align-items: center; justify-content: center; padding: 20px; background: #050506; color: #fff; font-family: 'Light', system-ui, sans-serif; overflow: hidden; }
+        .bg { position: fixed; inset: -40px; background: url('/${site.capa}') center / cover; filter: blur(18px) brightness(.35) saturate(1.2); z-index: -2; }
+        .glow { position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(${rgb(site.cor)}, .32), transparent 60%); z-index: -1; }
+        main { width: 100%; max-width: 420px; padding: 38px 26px 30px; text-align: center; border-radius: 26px; border: 1px solid rgba(${rgb(site.cor)}, .45); background: linear-gradient(140deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02) 45%, rgba(0, 0, 0, .3)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 0 80px rgba(${rgb(site.cor)}, .2), inset 0 1px 0 rgba(255, 255, 255, .12); animation: in .6s cubic-bezier(.2, .8, .2, 1) both; }
+        h1 { font-family: 'Bold', system-ui, sans-serif; font-weight: normal; font-size: clamp(84px, 26vw, 128px); line-height: 1; letter-spacing: .02em; background: linear-gradient(180deg, #fff 30%, ${site.cor}); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 26px rgba(${rgb(site.cor)}, .6)); animation: pulse 3.2s ease-in-out infinite; }
+        p { margin-top: 14px; font-size: 16px; color: rgba(255, 255, 255, .75); }
+        a { display: inline-block; margin-top: 26px; padding: 12px 24px; border-radius: 999px; font-family: 'Bold', system-ui, sans-serif; font-size: 14px; letter-spacing: .06em; color: #fff; text-decoration: none; border: 1px solid rgba(${rgb(site.cor)}, .7); background: rgba(${rgb(site.cor)}, .2); transition: background .25s ease, box-shadow .25s ease, transform .25s ease; }
+        a:hover, a:focus-visible { background: rgba(${rgb(site.cor)}, .38); box-shadow: 0 0 28px rgba(${rgb(site.cor)}, .5); transform: translateY(-2px); outline: none; }
+        @keyframes in { from { opacity: 0; transform: translateY(16px) scale(.97); filter: blur(8px); } }
+        @keyframes pulse { 50% { filter: drop-shadow(0 0 40px rgba(${rgb(site.cor)}, .95)); } }
+        @media (prefers-reduced-motion: reduce) { main, h1 { animation: none; } }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="glow"></div>
+    <main>
+        <h1>404</h1>
+        <p>page not found</p>
+        <a href="/">back to ${esc(site.nome)}</a>
+    </main>
+    <script>document.addEventListener('contextmenu', e => e.preventDefault());</script>
 </body>
 </html>
 `;
 }
 
 fs.writeFileSync(path.join(ROOT, 'index.html'), hubPage());
+fs.writeFileSync(path.join(ROOT, '404.html'), notFoundPage());
+console.log('✓ 404.html');
 console.log('✓ index.html');
 for (const m of membros) {
     fs.mkdirSync(path.join(ROOT, m.id), { recursive: true });

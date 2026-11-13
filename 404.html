@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>404 · irmandade.cc</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#c18be0">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
+    <style>
+        @font-face { font-family: 'Bold'; src: url('/assets/fonts/mainfont.ttf'); font-display: swap; }
+        @font-face { font-family: 'Light'; src: url('/assets/fonts/miscfont.ttf'); font-display: swap; }
+        * { margin: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
+        body { display: flex; align-items: center; justify-content: center; padding: 20px; background: #050506; color: #fff; font-family: 'Light', system-ui, sans-serif; overflow: hidden; }
+        .bg { position: fixed; inset: -40px; background: url('/media/hub/capa.jpg') center / cover; filter: blur(18px) brightness(.35) saturate(1.2); z-index: -2; }
+        .glow { position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(193, 139, 224, .32), transparent 60%); z-index: -1; }
+        main { width: 100%; max-width: 420px; padding: 38px 26px 30px; text-align: center; border-radius: 26px; border: 1px solid rgba(193, 139, 224, .45); background: linear-gradient(140deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02) 45%, rgba(0, 0, 0, .3)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 0 80px rgba(193, 139, 224, .2), inset 0 1px 0 rgba(255, 255, 255, .12); animation: in .6s cubic-bezier(.2, .8, .2, 1) both; }
+        h1 { font-family: 'Bold', system-ui, sans-serif; font-weight: normal; font-size: clamp(84px, 26vw, 128px); line-height: 1; letter-spacing: .02em; background: linear-gradient(180deg, #fff 30%, #c18be0); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 26px rgba(193, 139, 224, .6)); animation: pulse 3.2s ease-in-out infinite; }
+        p { margin-top: 14px; font-size: 16px; color: rgba(255, 255, 255, .75); }
+        a { display: inline-block; margin-top: 26px; padding: 12px 24px; border-radius: 999px; font-family: 'Bold', system-ui, sans-serif; font-size: 14px; letter-spacing: .06em; color: #fff; text-decoration: none; border: 1px solid rgba(193, 139, 224, .7); background: rgba(193, 139, 224, .2); transition: background .25s ease, box-shadow .25s ease, transform .25s ease; }
+        a:hover, a:focus-visible { background: rgba(193, 139, 224, .38); box-shadow: 0 0 28px rgba(193, 139, 224, .5); transform: translateY(-2px); outline: none; }
+        @keyframes in { from { opacity: 0; transform: translateY(16px) scale(.97); filter: blur(8px); } }
+        @keyframes pulse { 50% { filter: drop-shadow(0 0 40px rgba(193, 139, 224, .95)); } }
+        @media (prefers-reduced-motion: reduce) { main, h1 { animation: none; } }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="glow"></div>
+    <main>
+        <h1>404</h1>
+        <p>page not found</p>
+        <a href="/">back to irmandade.cc</a>
+    </main>
+    <script>document.addEventListener('contextmenu', e => e.preventDefault());</script>
+</body>
+</html>
