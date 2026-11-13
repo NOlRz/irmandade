@@ -3,7 +3,7 @@
     const SITE = window.SITE;
     const $ = (s, r = document) => r.querySelector(s);
     const audio = $('#backgroundsong');
-    const video = $('.background');
+    const video = document.querySelector('video.background');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const IOS = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -99,51 +99,7 @@
         });
     }
 
-    const playBtn = $('#playbtn'), seek = $('#np-seek'), timeEl = $('#np-time');
-    const fmtS = t => { t = Math.max(0, Math.floor(t || 0)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; };
-    function setPlayIcon() {
-        if (!playBtn || !audio) return;
-        const p = audio.paused;
-        playBtn.innerHTML = `<i class="fas fa-${p ? 'play' : 'pause'}"></i>`;
-        playBtn.setAttribute('aria-label', p ? 'tocar' : 'pausar');
-        $('.np')?.classList.toggle('playing', !p);
-    }
-    if (audio && playBtn) {
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                if (audioCtx && audioCtx.state !== 'running') audioCtx.resume().catch(() => {});
-                if (M.sincronizar && video) video.currentTime = audio.currentTime;
-                audio.play().then(startVisualizer).catch(() => {});
-                video?.play().catch(() => {});
-            } else {
-                audio.pause();
-                if (M.sincronizar) video?.pause();
-            }
-        });
-        audio.addEventListener('play', setPlayIcon);
-        audio.addEventListener('pause', setPlayIcon);
-        let dragging = false;
-        const paint = pct => seek.style.setProperty('--p', pct + '%');
-        seek.addEventListener('input', () => {
-            dragging = true;
-            paint(seek.value / 10);
-            if (isFinite(audio.duration)) timeEl.textContent = fmtS(seek.value / 1000 * audio.duration);
-        });
-        seek.addEventListener('change', () => {
-            if (isFinite(audio.duration)) {
-                audio.currentTime = seek.value / 1000 * audio.duration;
-                if (M.sincronizar && video) video.currentTime = audio.currentTime;
-            }
-            dragging = false;
-        });
-        audio.addEventListener('timeupdate', () => {
-            if (dragging || !isFinite(audio.duration)) return;
-            const pct = audio.currentTime / audio.duration;
-            seek.value = pct * 1000;
-            paint(pct * 100);
-            timeEl.textContent = fmtS(audio.currentTime);
-        });
-
+    if (audio) {
         const t = $('.np-title'), sp = $('.np-title span');
         const checkMarquee = () => t && sp && t.classList.toggle('scroll', sp.scrollWidth > t.clientWidth + 2);
         addEventListener('resize', checkMarquee);

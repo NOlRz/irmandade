@@ -249,11 +249,11 @@
       ],
       "discord": "628750451109658635",
       "badgesDiscordExtras": [],
-      "fundo": "media/kato/fundo.mp4",
-      "capa": "media/kato/capa.jpg",
+      "fundo": "",
+      "capa": "",
       "musica": "media/kato/musica.mp3",
       "nomeMusica": "2ZDinizz – Coisas Que Aprendi com Bicho",
-      "sincronizar": true,
+      "sincronizar": false,
       "contador": "kato_views",
       "links": [
         {
@@ -270,7 +270,7 @@
         },
         {
           "tipo": "roblox",
-          "url": "https://www.roblox.com/share?code=0ea526151d356443b40b723cec624e72&type=Profile&source=ProfileShare&stamp=1793791482477"
+          "url": "https://www.roblox.com/users/2278658504/profile"
         },
         {
           "tipo": "tiktok",

@@ -41,7 +41,7 @@ const base = (accRgb, litC, bg) => `
 @font-face{font-family:L;src:url('${f('assets/fonts/miscfont.ttf')}')}
 *{margin:0;box-sizing:border-box}
 body{width:1200px;height:630px;background:#060608;overflow:hidden;position:relative;font-family:L,monospace;color:#fff}
-.bg{position:absolute;inset:-50px;background:url('${f(bg)}') center/cover;filter:blur(14px) brightness(.42) saturate(1.25)}
+.bg{position:absolute;inset:-50px;background:${bg ? `url('${f(bg)}') center/cover` : '#000'};filter:blur(14px) brightness(.42) saturate(1.25)}
 .shade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.6) 100%)}
 .grain{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .frame{position:absolute;inset:26px;border-radius:30px;border:1.5px solid rgba(${accRgb},.55);

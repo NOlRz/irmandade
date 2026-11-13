@@ -1533,3 +1533,12 @@ h1.username { font-weight: normal; margin-left: 0; margin-right: 0; line-height:
     opacity: .8;
     pointer-events: none;
 }
+
+.fundo-preto { background: #000; }
+
+.np-note { flex-shrink: 0; margin-left: 8px; font-size: 13px; color: rgb(var(--accent-rgb)); filter: drop-shadow(0 0 calc(4px + var(--beat, 0) * 10px) rgba(var(--accent-rgb), .9)); }
+.np-info { justify-content: center; }
+.np-title { font-size: 13px; }
+@media (min-width: 601px) {
+    .np-volume { width: 64px; opacity: 1; }
+}

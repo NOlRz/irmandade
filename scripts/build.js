@@ -170,9 +170,9 @@ function profilePage(m) {
 
     <div id="user-page">
 
-        <video class="background" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="${r(m.capa)}">
+${m.fundo ? `        <video class="background" autoplay muted loop playsinline webkit-playsinline preload="auto"${m.capa ? ` poster="${r(m.capa)}"` : ''}>
             <source src="${r(m.fundo)}" type="video/mp4">
-        </video>
+        </video>` : '        <div class="background fundo-preto"></div>'}
 
         <main class="main-container" id="mainDiv">
 
@@ -198,12 +198,10 @@ ${links}
 
                 <div class="card-footer">
                     <div class="np" role="group" aria-label="música">
-                        <button id="playbtn" class="np-btn" aria-label="tocar"><i class="fas fa-play"></i></button>
+                        <i class="fas fa-music np-note" aria-hidden="true"></i>
                         <div class="np-info">
                             <div class="np-title"><span>${esc(m.nomeMusica || 'música do perfil')}</span></div>
-                            <input type="range" id="np-seek" min="0" max="1000" value="0" aria-label="posição da música">
                         </div>
-                        <span id="np-time" class="np-time">0:00</span>
                         <div class="np-vol">
                             <button id="mutetext" class="np-btn" onclick="toggleMusic()" aria-label="silenciar"><i class="fas fa-volume-up"></i></button>
                             <input type="range" id="volumeSlider" min="0" max="100" value="30" class="np-volume" aria-label="volume">
