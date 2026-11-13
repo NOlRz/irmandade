@@ -1427,10 +1427,6 @@ canvas.fx-cursor {
     }
 }
 
-html {
-    background: #000
-}
-
 body {
     transition: opacity .3s ease
 }
